@@ -36,9 +36,8 @@ export default {
         password: '密码'
     },
     bottomBar: {
-        recent: '最近',
-        category: '分类',
-        settings: '设置'
+        plaza:'任务广场',
+        team:'团队任务'
     },
     category: {
         newCategory: '新建分类',

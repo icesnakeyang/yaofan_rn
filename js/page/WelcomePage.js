@@ -45,7 +45,7 @@ class WelcomePage extends Component {
                 alignItems: 'center'
             }}>
                 <Text style={{
-                    fontSize: 32, color: this.props.theme.color.THEME_BACK_TEXT
+                    fontSize: 32, color: this.props.theme.color.THEME_HEAD_TEXT
                 }}>{I18nJs.t('title')}</Text>
             </View>
         )

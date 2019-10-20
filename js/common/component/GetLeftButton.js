@@ -4,8 +4,9 @@ import {
 } from 'react-native'
 import NavigationUtil from "../../navigator/NavigationUtil";
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {connect} from "react-redux";
 
-export default class GetLeftButton extends Component {
+class GetLeftButton extends Component {
     render() {
         return (
             <TouchableOpacity
@@ -17,9 +18,15 @@ export default class GetLeftButton extends Component {
                 <Ionicons
                     name={'ios-arrow-back'}
                     size={26}
-                    style={{color: '#ff0000'}}
+                    style={{color: this.props.theme.color.THEME_HEAD_TEXT}}
                 />
             </TouchableOpacity>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    theme: state.theme
+})
+
+export default connect(mapStateToProps)(GetLeftButton)

@@ -1,8 +1,11 @@
 const defaultState = {
     color: {
         THEME_HEAD_COLOR: '#2d3741',
-        THEME_BACK_COLOR: '#f5f5f5',
-        THEME_BACK_TEXT: '#fff'
+        THEME_HEAD_TEXT: '#ddd',
+        THEME_BACK_COLOR: '#d3d3d3',
+        THEME_ROW_COLOR:'#2d3741',
+        THEME_ROW_TEXT: '#ddd',
+        THEME_TAB_ICON_COLOR:'#2d3741'
     }
 }
 

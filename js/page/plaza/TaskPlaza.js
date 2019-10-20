@@ -15,9 +15,9 @@ class TaskPlaza extends Component {
     }
 
     render() {
+        console.log(this.props.theme)
         let statusBar = {
             // backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-            backgroundColor: '#ffff00'
         }
         let navigationBar = (
             <NavigationBar
