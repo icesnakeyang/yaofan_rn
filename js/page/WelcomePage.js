@@ -5,31 +5,38 @@ import {
 } from 'react-native'
 import {connect} from "react-redux";
 import {I18nJs} from "../language/I18n";
+import actions from "../action";
+import NavigationUtil from "../navigator/NavigationUtil";
 
 class WelcomePage extends Component {
     constructor(props) {
         super(props);
-        I18nJs.locale = 'zh'
+        // I18nJs.locale = 'zh'
     }
 
     componentDidMount() {
-        this._init()
+        if (this._init()) {
+            this.timer = setTimeout(() => {
+                NavigationUtil.resetToHomePage({
+                    navigation: this.props.navigation
+                })
+            }, 1000)
+        }
     }
 
     _init() {
-        console.log(I18nJs.locale)
         I18nJs.locale = I18nJs.defaultLocale
-        console.log(I18nJs.locale)
 
         const {loadLanguage} = this.props
         loadLanguage((result) => {
-            I18nJs.local = result
+            if (result) {
+                return true
+            }
         })
+        return true
     }
 
     render() {
-        console.log(this.props)
-        console.log(I18nJs.defaultLocale)
         return (
             <View style={{
                 flex: 1,
@@ -49,6 +56,8 @@ const mapStateToProps = state => ({
     theme: state.theme
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    loadLanguage: (callback) => dispatch(actions.loadLanguage(callback))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)

@@ -12,8 +12,9 @@ export function loadLanguage(callback) {
                     type: Types.LANGUAGE_LOAD_SUCCESS,
                     locale: response.data
                 })
+                setTimeout(() => {
+                    callback(true)
+                }, 1)
             })
-
     }
-
 }
