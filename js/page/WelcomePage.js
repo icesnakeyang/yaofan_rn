@@ -15,11 +15,10 @@ class WelcomePage extends Component {
     }
 
     componentDidMount() {
+        NavigationUtil.navigation = this.props.navigation
         if (this._init()) {
             this.timer = setTimeout(() => {
-                NavigationUtil.resetToHomePage({
-                    navigation: this.props.navigation
-                })
+                NavigationUtil.goPage({}, 'Login')
             }, 1000)
         }
     }
@@ -30,9 +29,10 @@ class WelcomePage extends Component {
         const {loadLanguage} = this.props
         loadLanguage((result) => {
             if (result) {
-                return true
+
             }
         })
+
         return true
     }
 

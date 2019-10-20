@@ -8,6 +8,7 @@ import {createReactNavigationReduxMiddleware, createReduxContainer} from "react-
 import {connect} from "react-redux";
 import WelcomePage from "../page/WelcomePage";
 import HomePage from "../page/HomePage";
+import Login from "../page/login/Login";
 
 export const rootCam = 'Init'
 
@@ -23,6 +24,12 @@ const InitNavigator = createStackNavigator({
 const MainNavigator = createStackNavigator({
     HomePage: {
         screen: HomePage,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Login: {
+        screen: Login,
         navigationOptions: {
             header: null
         }

@@ -6,8 +6,13 @@ export default {
         myTasks: 'Tasks',
         reward: 'Reward'
     },
-
     slogan: 'Make your thoughts pass your future!',
+    login: {
+        login: 'Login',
+        phone: 'Phone',
+        password: 'Password',
+        register: 'Register'
+    },
     common: {
         dialogTitleOk: 'Confirm',
         cancel: 'Cancel',
@@ -33,48 +38,6 @@ export default {
         emailAddress: 'Email',
         saveEmailSuccess: 'Save email successful',
         saveEmailFail: 'save email failed',
-    },
-    myAccount: {
-        myAccount: 'My Account',
-        nickname: 'Nickname',
-        changeUser: 'Change user',
-        login: 'Login',
-        loginName: 'Login name',
-        password: 'Password'
-    },
-
-    category: {
-        newCategory: 'New Category',
-        category: 'Category'
-    },
-    noteList: {
-        headerName: 'New Notes'
-    },
-    note: {
-        selectCategory: 'Category',
-        newNote: 'New Note',
-        editNote: 'Edit Note'
-    },
-    trigger: {
-        trigger: 'Trigger',
-        tip1: 'Set a trigger to trigger. When the time come, the AI will send this note to the specified user who specified by yourself.',
-        tip2: 'Please select and set the trigger conditions. The note will be send to recipient when all conditions is true',
-        triggerName: 'Trigger name',
-        triggerRemark: 'Trigger remark',
-        recipient: 'Recipient',
-        selectPublicKey: 'Select Trigger',
-        userRemark: 'User remark',
-        gogoKeyHolder: 'Please select a trigger key',
-        settingRecipient: 'Setting Recipient',
-        addRecipient: 'Add Recipient',
-        btSaveRecipient: 'Save',
-        phone: 'Phone',
-        email: 'Email',
-        address: 'Address',
-        name: 'Name',
-        recipientRemark: 'Remark',
-        editRecipient: 'Edit Recipient',
-        deleteDialogTip: 'Are you sure to delete this trigger？'
     },
     syserr: {
         '10002': 'Username and password error'
