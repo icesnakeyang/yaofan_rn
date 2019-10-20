@@ -1,5 +1,11 @@
 export default {
     title: '次第乞食',
+    bottomBar: {
+        plaza: '任务广场',
+        team: '团队任务',
+        myTasks: '我的任务',
+        reward: '我的积分'
+    },
     slogan: '让思想穿越到未来！',
     common: {
         dialogTitleOk: '确认',
@@ -14,18 +20,18 @@ export default {
     },
     security: {
         security: '安全',
-        tip1:'设置密码，绑定手机，Email',
-        password:'密码',
-        phone:'手机号码绑定',
-        phoneNumber:'手机号码',
-        email:'邮箱绑定',
-        newPassword:'新密码',
-        savePasswordSuccess:'修改密码成功',
-        savePasswordFail:'修改密码失败',
-        phone1Fail:'提交电话号码失败',
-        emailAddress:'电子邮箱',
-        saveEmailSuccess:'修改Email成功',
-        saveEmailFail:'修改Email失败',
+        tip1: '设置密码，绑定手机，Email',
+        password: '密码',
+        phone: '手机号码绑定',
+        phoneNumber: '手机号码',
+        email: '邮箱绑定',
+        newPassword: '新密码',
+        savePasswordSuccess: '修改密码成功',
+        savePasswordFail: '修改密码失败',
+        phone1Fail: '提交电话号码失败',
+        emailAddress: '电子邮箱',
+        saveEmailSuccess: '修改Email成功',
+        saveEmailFail: '修改Email失败',
     },
     myAccount: {
         myAccount: '我的账户',
@@ -35,10 +41,7 @@ export default {
         loginName: '用户',
         password: '密码'
     },
-    bottomBar: {
-        plaza:'任务广场',
-        team:'团队任务'
-    },
+
     category: {
         newCategory: '新建分类',
         category: '分类'

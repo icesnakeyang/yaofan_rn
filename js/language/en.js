@@ -1,5 +1,12 @@
 export default {
     title: 'YAO FAN',
+    bottomBar: {
+        plaza: 'Plaza',
+        team: 'Team',
+        myTasks: 'Tasks',
+        reward: 'Reward'
+    },
+
     slogan: 'Make your thoughts pass your future!',
     common: {
         dialogTitleOk: 'Confirm',
@@ -35,11 +42,7 @@ export default {
         loginName: 'Login name',
         password: 'Password'
     },
-    bottomBar: {
-        recent: 'Recent',
-        category: 'Category',
-        settings: 'Settings'
-    },
+
     category: {
         newCategory: 'New Category',
         category: 'Category'

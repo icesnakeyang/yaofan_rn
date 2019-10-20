@@ -19,12 +19,16 @@ class HomePage extends Component {
         if (this.Tabs) {
             return this.Tabs
         }
+        const tintColor = this.props.theme.color.THEME_TAB_ICON_COLOR
         this.Tabs = createAppContainer(
             createBottomTabNavigator(
                 this.TABS, {
-                    tabBarComponent: props => {
+                    tabBarComponent: tintColor => {
                         return (
-                            <BottomTabBar {...props}/>
+                            <TabBarComponent
+                                {...tintColor}
+                                theme={this.props.theme}
+                            />
                         )
                     }
                 }
@@ -41,7 +45,19 @@ class HomePage extends Component {
     }
 }
 
-const
-    mapStateToProps = state => ({})
+class TabBarComponent extends Component {
+    render() {
+        return (
+            <BottomTabBar
+                {...this.props}
+                activeTintColor={this.props.theme.color.THEME_TAB_ICON_COLOR}
+            />
+        )
+    }
+}
+
+const mapStateToProps = state => ({
+    theme: state.theme
+})
 
 export default connect(mapStateToProps)(HomePage)

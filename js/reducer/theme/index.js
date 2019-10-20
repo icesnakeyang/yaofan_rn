@@ -5,7 +5,7 @@ const defaultState = {
         THEME_BACK_COLOR: '#d3d3d3',
         THEME_ROW_COLOR:'#2d3741',
         THEME_ROW_TEXT: '#ddd',
-        THEME_TAB_ICON_COLOR:'#2d3741'
+        THEME_TAB_ICON_COLOR:'#00924d'
     }
 }
 
