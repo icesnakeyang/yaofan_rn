@@ -1,7 +1,8 @@
 import {loadLanguage} from "./language";
-import login from "./user/login";
+import {autoLogin, login} from "./user/login";
 
 export default {
     loadLanguage,
-    login
+    login,
+    autoLogin
 }

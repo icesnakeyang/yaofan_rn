@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import {I18nJs} from "../language/I18n";
 import actions from "../action";
 import NavigationUtil from "../navigator/NavigationUtil";
+import {autoLogin} from "../action/user/login";
 
 class WelcomePage extends Component {
     constructor(props) {
@@ -16,11 +17,7 @@ class WelcomePage extends Component {
 
     componentDidMount() {
         NavigationUtil.navigation = this.props.navigation
-        if (this._init()) {
-            this.timer = setTimeout(() => {
-                NavigationUtil.goPage({}, 'Login')
-            }, 1000)
-        }
+        this._init()
     }
 
     _init() {
@@ -30,6 +27,15 @@ class WelcomePage extends Component {
         loadLanguage((result) => {
             if (result) {
 
+            }
+        })
+
+        const {autoLogin} = this.props
+
+        autoLogin((result) => {
+            if (this.props.user.userInfo) {
+                NavigationUtil.goPage({}, 'HomePage')
+            } else {
             }
         })
 
@@ -53,11 +59,13 @@ class WelcomePage extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadLanguage: (callback) => dispatch(actions.loadLanguage(callback))
+    loadLanguage: (callback) => dispatch(actions.loadLanguage(callback)),
+    autoLogin: (callback) => dispatch(actions.autoLogin(callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)

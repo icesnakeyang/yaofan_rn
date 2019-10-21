@@ -10,7 +10,7 @@ import {PropTypes} from 'prop-types'
 import {connect} from "react-redux";
 
 const NAV_BAR_HEIGHT_IOS = 50
-const NAV_BAR_HEIGHT_ANDROID = 0
+const NAV_BAR_HEIGHT_ANDROID = 50
 const NAV_BAR_HEIGHT = Platform.OS === 'ios' ? NAV_BAR_HEIGHT_IOS : NAV_BAR_HEIGHT_ANDROID
 const STATUS_BAR_HEIGHT = (Platform.OS === 'ios') ? 33 : 0
 const NAVIGATION_BAR_HEIGHT = NAV_BAR_HEIGHT

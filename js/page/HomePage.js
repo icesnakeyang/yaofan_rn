@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {
-    createAppContainer
+    createAppContainer,
+    NavigationActions
 } from 'react-navigation'
 import {
     createBottomTabNavigator,
@@ -8,12 +9,29 @@ import {
 } from 'react-navigation-tabs'
 import {connect} from "react-redux";
 import BottomTabs from './MainBottomBarPage'
+import {BackHandler} from "react-native";
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
         this.TABS = BottomTabs
     }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            const {nav, dispatch} = this.props
+            if (nav.routes[1].index === 0) {
+                return false
+            }
+            dispatch(NavigationActions.back())
+            return true
+        })
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress')
+    }
+
 
     _genBottomTab() {
         if (this.Tabs) {
@@ -57,7 +75,8 @@ class TabBarComponent extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    nav: state.nav
 })
 
 export default connect(mapStateToProps)(HomePage)

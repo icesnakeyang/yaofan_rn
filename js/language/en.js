@@ -39,6 +39,12 @@ export default {
         saveEmailSuccess: 'Save email successful',
         saveEmailFail: 'save email failed',
     },
+    plaza:{
+        title:'Task Plaza'
+    },
+    tasks: {
+        newTask: 'New Task'
+    },
     syserr: {
         '10002': 'Username and password error'
     }

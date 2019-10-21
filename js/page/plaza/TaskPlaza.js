@@ -6,25 +6,34 @@ import {
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {connect} from "react-redux";
+import {I18nJs} from "../../language/I18n";
+import NewTaskRightButton from "../../common/component/NewTaskRightButton";
 
 class TaskPlaza extends Component {
-    getLeftButton() {
+    componentDidMount() {
+        this._init()
+    }
+
+    _init() {
+        console.log(this.props)
+    }
+
+    getRightButton() {
         return (
-            <GetLeftButton {...this.props}/>
+            <NewTaskRightButton/>
         )
     }
 
     render() {
-        console.log(this.props.theme)
         let statusBar = {
-            // backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
+            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
         let navigationBar = (
             <NavigationBar
-                title={'次第要饭'}
+                title={I18nJs.t('plaza.title')}
                 style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
                 statusBar={statusBar}
-                leftButton={this.getLeftButton()}
+                rightButton={this.getRightButton()}
             />
         )
         return (
@@ -37,7 +46,8 @@ class TaskPlaza extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    user: state.user
 })
 
 export default connect(mapStateToProps)(TaskPlaza)

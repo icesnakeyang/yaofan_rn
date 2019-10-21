@@ -9,6 +9,7 @@ import {connect} from "react-redux";
 import actions from "../../action";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class Login extends Component {
     constructor(props) {
@@ -42,6 +43,21 @@ class Login extends Component {
         )
     }
 
+    loginUser() {
+        const {login} = this.props
+        let params = {
+            phone: this.state.phone,
+            password: this.state.password
+        }
+        login(params, (result) => {
+            if (result) {
+                if (this.props.user.userInfo) {
+                    NavigationUtil.goPage({}, "HomePage")
+                }
+            }
+        })
+    }
+
     render() {
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
@@ -55,66 +71,84 @@ class Login extends Component {
             />
         )
         return (
-            <View style={{backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
+            // 整页面
+            <View style={{flex: 1, backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
+                {/*Header*/}
                 {navigationBar}
-                <View style={{margin: 10, marginTop: 20}}>
+
+                {/*输入区域*/}
+                <View style={{margin: 10, marginTop: 20, backgroundColor: this.props.theme.color.THEME_ROW_COLOR}}>
+                    {/*电话*/}
                     <View style={{
                         marginTop: 20,
                         flexDirection: 'row',
                         height: 50,
-                        justifyContent: 'flex-end',
                         alignItems: 'flex-end'
                     }}>
                         <View style={{width: 75, alignItems: 'flex-end'}}>
-                            <Text>Phone</Text>
+                            <Text style={{color: this.props.theme.color.THEME_ROW_TEXT}}>Phone</Text>
                         </View>
                         <View style={{
                             flex: 1,
                             borderBottomWidth: 0.75,
+                            borderBottomColor: this.props.theme.color.THEME_ROW_TEXT,
                             height: 40,
                             marginLeft: 10,
+                            marginRight: 10,
                             justifyContent: 'flex-end'
                         }}>
                             <TextInput
-                                style={{fontSize: 20}}
+                                style={{fontSize: 20, padding: 0, color: this.props.theme.color.THEME_ROW_TEXT}}
                                 onChangeText={(phone) => this.setState({phone})}
                             />
                         </View>
                     </View>
+
+                    {/*密码*/}
                     <View style={{
                         marginTop: 20,
                         flexDirection: 'row',
                         height: 50,
-                        alignItems: 'flex-end',
-                        justifyContent: 'flex-end'
+                        alignItems: 'center'
                     }}>
                         <View style={{width: 75, alignItems: 'flex-end'}}>
-                            <Text>password</Text>
+                            <Text style={{color: this.props.theme.color.THEME_ROW_TEXT}}>password</Text>
                         </View>
                         <View style={{
                             flex: 1,
                             borderBottomWidth: 0.75,
-                            height: 40,
+                            borderBottomColor: this.props.theme.color.THEME_ROW_TEXT,
                             marginLeft: 10,
-                            justifyContent: 'flex-end'
+                            marginRight: 10
                         }}>
                             <TextInput
-                                style={{fontSize: 20}}
+                                style={{fontSize: 18, padding: 0, color: this.props.theme.color.THEME_ROW_TEXT}}
                                 onChangeText={(password) => this.setState({password})}
                             />
                         </View>
                     </View>
                 </View>
-                <View style={{backgroundColor:'#00ff00'}}>
-                    <View style={{backgroundColor:'#0000ff'}}>
-                        <TouchableOpacity
-                            style={{backgroundColor:'#ff0000'}}
-                            title={'save'}
-                            onPress={() => {
 
+                {/*提交按钮*/}
+                <View style={{
+                    margin: 10,
+                    height: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: this.props.theme.color.THEME_BUTTON_COLOR
+                }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.loginUser()
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                color: this.props.theme.color.THEME_BUTTON_TEXT
                             }}
-                        />
-                    </View>
+                        >login</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
@@ -122,7 +156,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

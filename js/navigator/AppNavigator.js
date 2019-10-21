@@ -9,6 +9,8 @@ import {connect} from "react-redux";
 import WelcomePage from "../page/WelcomePage";
 import HomePage from "../page/HomePage";
 import Login from "../page/login/Login";
+import NewTask from "../page/task/NewTask";
+import DateTimePicker from "../page/task/DateTimePicker";
 
 export const rootCam = 'Init'
 
@@ -32,6 +34,18 @@ const MainNavigator = createStackNavigator({
         screen: Login,
         navigationOptions: {
             header: null
+        }
+    },
+    NewTask: {
+        screen: NewTask,
+        navigationOptions: {
+            header: null
+        }
+    },
+    DateTimePicker:{
+        screen:DateTimePicker,
+        navigationOptions:{
+            header:null
         }
     }
 })

@@ -39,6 +39,12 @@ export default {
         saveEmailSuccess: '修改Email成功',
         saveEmailFail: '修改Email失败',
     },
+    plaza: {
+        title: '任务广场'
+    },
+    tasks: {
+        newTask: '创建任务'
+    },
     syserr: {
         '10002': '用户名或密码错误'
     }
