@@ -1,7 +1,7 @@
 export default {
     title: 'YAO FAN',
     bottomBar: {
-        plaza: 'Plaza2',
+        plaza: 'Plaza',
         team: 'Team',
         myTasks: 'Tasks',
         reward: 'Reward'
