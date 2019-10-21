@@ -17,6 +17,7 @@ export function autoLogin(callback) {
                                     type: Types.USER_LOGIN_SUCCESS,
                                     userInfo: response.data.userInfo
                                 })
+                                saveLocalStorageToken(response.data.userInfo.token)
                                 setTimeout(() => {
                                     callback(true)
                                 }, 100)
@@ -88,8 +89,7 @@ export function login(params, callback) {
 function loginUserByToken(token) {
     return new Promise((resolve, reject) => {
         const url = API.apiLoginByToken
-        let body = {
-        }
+        let body = {}
         let dataStore = new DataStore()
         dataStore.fetchPostData(url, body, token)
             .then((response) => {
@@ -108,7 +108,11 @@ function getLocalStorageToken() {
         let dataStore = new DataStore()
         dataStore.fetchLocalData(TOKEN_NAME)
             .then((response) => {
-                resolve(response.data)
+                if (response && response.data) {
+                    resolve(response.data)
+                } else {
+                    throw new Error('no token')
+                }
             })
             .catch((error) => {
                 reject(error)

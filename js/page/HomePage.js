@@ -8,16 +8,78 @@ import {
     BottomTabBar
 } from 'react-navigation-tabs'
 import {connect} from "react-redux";
-import BottomTabs from './MainBottomBarPage'
 import {BackHandler} from "react-native";
+import {I18nJs} from "../language/I18n";
+import TaskPlaza from "./plaza/TaskPlaza";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import TeamTasks from "./team/TeamTasks";
+import MyTasks from "./task/MyTasks";
+import Dashboard from "./reward/Dashboard";
+
+const BottomTabs={
+    Plaza: {
+        screen: TaskPlaza,
+        navigationOptions: {
+            tabBarLabel: I18nJs.t('bottomBar.plaza'),
+            tabBarIcon: ({tintColor, focused}) => (
+                <Ionicons
+                    name={'ios-globe'}
+                    size={26}
+                    style={{color: tintColor}}
+                />
+            )
+        }
+    },
+    Team: {
+        screen: TeamTasks,
+        navigationOptions: {
+            tabBarLabel: I18nJs.t('bottomBar.team'),
+            tabBarIcon: ({tintColor, focused}) => (
+                <Ionicons
+                    name={'ios-people'}
+                    size={26}
+                    style={{color: tintColor}}
+                />
+            )
+        }
+    },
+    MyTasks: {
+        screen: MyTasks,
+        navigationOptions: {
+            tabBarLabel: I18nJs.t('bottomBar.myTasks'),
+            tabBarIcon: ({tintColor, focused}) => (
+                <Ionicons
+                    name={'ios-checkbox-outline'}
+                    size={26}
+                    style={{color: tintColor}}
+                />
+            )
+        }
+    },
+    Dashboard: {
+        screen: Dashboard,
+        navigationOptions: {
+            tabBarLabel: I18nJs.t('bottomBar.reward'),
+            tabBarIcon: ({tintColor, focused}) => (
+                <Ionicons
+                    name={'logo-usd'}
+                    size={26}
+                    style={{color: tintColor}}
+                />
+            )
+        }
+    }
+}
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
         this.TABS = BottomTabs
+        I18nJs.locale='zh'
     }
 
     componentDidMount() {
+        console.log(I18nJs.locale)
         BackHandler.addEventListener('hardwareBackPress', () => {
             const {nav, dispatch} = this.props
             if (nav.routes[1].index === 0) {
@@ -56,6 +118,7 @@ class HomePage extends Component {
     }
 
     render() {
+        console.log(this.state)
         const Tab = this._genBottomTab()
         return (
             <Tab/>

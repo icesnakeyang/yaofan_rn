@@ -12,10 +12,11 @@ import NewTaskRightButton from "../../common/component/NewTaskRightButton";
 class TaskPlaza extends Component {
     componentDidMount() {
         this._init()
+        I18nJs.locale = 'zh'
     }
 
     _init() {
-        console.log(this.props)
+        console.log(I18nJs.locale)
     }
 
     getRightButton() {

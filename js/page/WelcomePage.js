@@ -12,13 +12,17 @@ import {autoLogin} from "../action/user/login";
 class WelcomePage extends Component {
     constructor(props) {
         super(props);
-        // I18nJs.locale = 'zh'
+        I18nJs.locale = 'zh'
     }
 
     componentDidMount() {
         NavigationUtil.navigation = this.props.navigation
         this._init()
     }
+
+    componentWillUnmount() {
+    }
+
 
     _init() {
         I18nJs.locale = I18nJs.defaultLocale
@@ -31,15 +35,15 @@ class WelcomePage extends Component {
         })
 
         const {autoLogin} = this.props
-
         autoLogin((result) => {
-            if (this.props.user.userInfo) {
-                NavigationUtil.goPage({}, 'HomePage')
-            } else {
-            }
+            this.timer = setTimeout(() => {
+                if (this.props.user.userInfo) {
+                    NavigationUtil.goPage({}, 'HomePage')
+                } else {
+                    NavigationUtil.goPage({}, 'Login')
+                }
+            }, 2000)
         })
-
-        return true
     }
 
     render() {
