@@ -1,8 +1,11 @@
 import {loadLanguage} from "./language";
-import {autoLogin, login} from "./user/login";
+import {autoLogin, login, updateUsername} from "./user/login";
+import {createTeam} from "./team";
 
 export default {
     loadLanguage,
     login,
-    autoLogin
+    autoLogin,
+    updateUsername,
+    createTeam
 }

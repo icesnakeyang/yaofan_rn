@@ -11,6 +11,14 @@ import HomePage from "../page/HomePage";
 import Login from "../page/login/Login";
 import NewTask from "../page/task/NewTask";
 import DateTimePicker from "../page/task/DateTimePicker";
+import MyAccount from "../page/settings/MyAccount";
+import Register from "../page/login/Register";
+import Username from "../page/settings/Username";
+import CreateTeam from "../page/team/CreateTeam";
+import MyTeam from "../page/team/MyTeam";
+import TeamLog from "../page/team/TeamLog";
+import TeamHome from "../page/team/TeamHome";
+import JoinTeam from "../page/team/JoinTeam";
 
 export const rootCam = 'Init'
 
@@ -42,10 +50,58 @@ const MainNavigator = createStackNavigator({
             header: null
         }
     },
-    DateTimePicker:{
-        screen:DateTimePicker,
-        navigationOptions:{
-            header:null
+    DateTimePicker: {
+        screen: DateTimePicker,
+        navigationOptions: {
+            header: null
+        }
+    },
+    MyAccount: {
+        screen: MyAccount,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Register: {
+        screen: Register,
+        navigationOptions: {
+            header: null
+        }
+    },
+    Username: {
+        screen: Username,
+        navigationOptions: {
+            header: null
+        }
+    },
+    CreateTeam: {
+        screen: CreateTeam,
+        navigationOptions: {
+            header: null
+        }
+    },
+    MyTeam: {
+        screen: MyTeam,
+        navigationOptions: {
+            header: null
+        }
+    },
+    TeamLog: {
+        screen: TeamLog,
+        navigationOptions: {
+            header: null
+        }
+    },
+    TeamHome: {
+        screen: TeamHome,
+        navigationOptions: {
+            header: null
+        }
+    },
+    JoinTeam: {
+        screen: JoinTeam,
+        navigationOptions: {
+            header: null
         }
     }
 })

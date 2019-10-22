@@ -86,6 +86,37 @@ export function login(params, callback) {
     }
 }
 
+export function updateUsername(params, callback) {
+    return dispatch => {
+        let url = API.apiUpdateUsername
+        let body = {
+            username: params.username
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.USER_UPDATE_NAME_SUCCESS,
+                        userInfo: response.data.userInfo
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.USER_UPDATE_NAME_FAIL,
+                    error: error
+                })
+            })
+    }
+}
+
 function loginUserByToken(token) {
     return new Promise((resolve, reject) => {
         const url = API.apiLoginByToken

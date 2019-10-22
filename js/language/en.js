@@ -4,7 +4,8 @@ export default {
         plaza: 'Plaza',
         team: 'Team',
         myTasks: 'Tasks',
-        reward: 'Reward'
+        reward: 'Reward',
+        me: 'Me',
     },
     slogan: 'Make your thoughts pass your future!',
     login: {
@@ -22,11 +23,17 @@ export default {
         language: 'Language',
         zh: 'Chinese',
         en: 'English',
-        settings: 'Settings'
+        settings: 'Settings',
+        guest: 'Guest',
+        myAccount: 'My Account'
+    },
+    myAccount: {
+        name: 'Name',
+        nameTip: 'Please input your name here'
     },
     security: {
         security: 'Security',
-        tip1: 'Password, Phone, Email',
+        tip1: 'Password, Phone',
         password: 'Change password',
         phone: 'Binding phone number',
         phoneNumber: 'Phone',
@@ -39,11 +46,18 @@ export default {
         saveEmailSuccess: 'Save email successful',
         saveEmailFail: 'save email failed',
     },
-    plaza:{
-        title:'Task Plaza'
+    plaza: {
+        title: 'Task Plaza'
     },
     tasks: {
         newTask: 'New Task'
+    },
+    team:{
+        teamTask:'Team Tasks',
+        createTeam:'New',
+        joinTeam:'Join',
+        teamLog:'Logs',
+        myTeam:'My Team'
     },
     syserr: {
         '10002': 'Username and password error'

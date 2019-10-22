@@ -42,7 +42,7 @@ class WelcomePage extends Component {
                 } else {
                     NavigationUtil.goPage({}, 'Login')
                 }
-            }, 2000)
+            }, 100)
         })
     }
 

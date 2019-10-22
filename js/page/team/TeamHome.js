@@ -1,29 +1,27 @@
 import React, {Component} from 'react'
 import {
-    createAppContainer
+    createAppContainer, NavigationActions
 } from 'react-navigation'
 import {
-    BottomTabBar,
-    createBottomTabNavigator
+    createBottomTabNavigator,
+    BottomTabBar
 } from 'react-navigation-tabs'
-import TaskPlaza from "../page/plaza/TaskPlaza";
-import {I18nJs} from "../language/I18n";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import MyTasks from "../page/task/MyTasks";
-import Dashboard from "../page/reward/Dashboard";
-import Settings from '../page/settings/Settings'
 import {connect} from "react-redux";
-import TeamHome from "../page/team/TeamHome";
-import TeamTasks from "../page/team/TeamTasks";
+import {I18nJs} from "../../language/I18n";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import CreateTeam from "./CreateTeam";
+import MyTeam from "./MyTeam";
+import TeamLog from "./TeamLog";
+import {BackHandler} from "react-native";
 
-class DynamicTabNavigator extends Component {
+class TeamHome extends Component {
     constructor(props) {
         super(props);
-        this.TABS = {
-            Plaza: {
-                screen: TaskPlaza,
+        this.TEAM_TABS = {
+            CreateTeam: {
+                screen: CreateTeam,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('bottomBar.plaza'),
+                    tabBarLabel: I18nJs.t('team.createTeam'),
                     tabBarIcon: ({tintColor, focused}) => (
                         <Ionicons
                             name={'ios-globe'}
@@ -33,58 +31,32 @@ class DynamicTabNavigator extends Component {
                     )
                 }
             },
-            Team: {
-                screen: TeamTasks,
+            MyTeam: {
+                screen: MyTeam,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('bottomBar.team'),
+                    tabBarLabel: I18nJs.t('team.joinTeam'),
                     tabBarIcon: ({tintColor, focused}) => (
                         <Ionicons
-                            name={'ios-people'}
+                            name={'ios-globe'}
                             size={26}
                             style={{color: tintColor}}
                         />
                     )
                 }
             },
-            MyTasks: {
-                screen: MyTasks,
+            TeamLog: {
+                screen: TeamLog,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('bottomBar.myTasks'),
+                    tabBarLabel: I18nJs.t('team.joinTeam'),
                     tabBarIcon: ({tintColor, focused}) => (
                         <Ionicons
-                            name={'ios-checkbox-outline'}
+                            name={'ios-globe'}
                             size={26}
                             style={{color: tintColor}}
                         />
                     )
                 }
             },
-            Dashboard: {
-                screen: Dashboard,
-                navigationOptions: {
-                    tabBarLabel: I18nJs.t('bottomBar.reward'),
-                    tabBarIcon: ({tintColor, focused}) => (
-                        <Ionicons
-                            name={'logo-usd'}
-                            size={26}
-                            style={{color: tintColor}}
-                        />
-                    )
-                }
-            },
-            Me: {
-                screen: Settings,
-                navigationOptions: {
-                    tabBarLabel: I18nJs.t('bottomBar.me'),
-                    tabBarIcon: ({tintColor, focused}) => (
-                        <Ionicons
-                            name={'ios-person'}
-                            size={26}
-                            style={{color: tintColor}}
-                        />
-                    )
-                }
-            }
         }
     }
 
@@ -93,7 +65,7 @@ class DynamicTabNavigator extends Component {
             return this.Tabs
         }
         this.Tabs = createAppContainer(
-            createBottomTabNavigator(this.TABS, {
+            createBottomTabNavigator(this.TEAM_TABS, {
                 tabBarComponent: props => {
                     return (
                         <TabBarComponent
@@ -131,10 +103,14 @@ class TabBarComponent extends Component {
             />
         )
     }
+
+
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    user: state.user,
+    team: state.team
 })
 
-export default connect(mapStateToProps)(DynamicTabNavigator)
+export default connect(mapStateToProps)(TeamHome)

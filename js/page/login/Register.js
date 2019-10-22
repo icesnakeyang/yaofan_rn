@@ -1,25 +1,12 @@
 import React, {Component} from 'react'
-import {
-    View,
-    Text,
-    TextInput,
-    TouchableOpacity
-} from 'react-native'
+import {Text, TextInput, TouchableOpacity, View} from "react-native";
 import {connect} from "react-redux";
-import actions from "../../action";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
-import NavigationUtil from "../../navigator/NavigationUtil";
 import GetLeftButton from "../../common/component/GetLeftButton";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            phone: '',
-            password: ''
-        }
-    }
+class Register extends Component {
 
     getLeftButton() {
         return (
@@ -36,7 +23,7 @@ class Login extends Component {
                         marginRight: 8
                     }}
                     onPress={() => {
-                        NavigationUtil.goPage({}, 'Register')
+                        NavigationUtil.goPage({}, 'Login')
                     }}
                 >
                     <Text
@@ -44,25 +31,10 @@ class Login extends Component {
                             fontSize: 20,
                             color: this.props.theme.color.THEME_HEAD_TEXT
                         }}
-                    >{I18nJs.t('login.register')}</Text>
+                    >{I18nJs.t('login.login')}</Text>
                 </TouchableOpacity>
             </View>
         )
-    }
-
-    loginUser() {
-        const {login} = this.props
-        let params = {
-            phone: this.state.phone,
-            password: this.state.password
-        }
-        login(params, (result) => {
-            if (result) {
-                if (this.props.user.userInfo) {
-                    NavigationUtil.goPage({}, "HomePage")
-                }
-            }
-        })
     }
 
     render() {
@@ -71,19 +43,16 @@ class Login extends Component {
         }
         let navigationBar = (
             <NavigationBar
-                title={I18nJs.t('login.login')}
+                title={I18nJs.t('login.register')}
                 statusBar={statusBar}
                 style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
-                rightButton={this.getRightButton()}
                 leftButton={this.getLeftButton()}
+                rightButton={this.getRightButton()}
             />
         )
         return (
-            // 整页面
             <View style={{flex: 1, backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
-                {/*Header*/}
                 {navigationBar}
-
                 {/*输入区域*/}
                 <View style={{margin: 10, marginTop: 20, backgroundColor: this.props.theme.color.THEME_ROW_COLOR}}>
                     {/*电话*/}
@@ -157,7 +126,7 @@ class Login extends Component {
                                 fontSize: 20,
                                 color: this.props.theme.color.THEME_BUTTON_TEXT
                             }}
-                        >{I18nJs.t('login.login')}</Text>
+                        >{I18nJs.t('login.register')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -166,12 +135,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme,
-    user: state.user
+    theme: state.theme
 })
-
-const mapDispatchToProps = dispatch => ({
-    login: (params, callback) => dispatch(actions.login(params, callback))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps)(Register)

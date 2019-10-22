@@ -4,7 +4,8 @@ export default {
         plaza: '任务广场',
         team: '团队任务',
         myTasks: '我的任务',
-        reward: '我的积分'
+        reward: '我的积分',
+        me: '我的衣钵'
     },
     login: {
         login: '登录',
@@ -22,11 +23,17 @@ export default {
         language: '语言',
         zh: '中文',
         en: '英文',
-        settings: '设置'
+        settings: '设置',
+        guest: '游客',
+        myAccount: '我的账户'
+    },
+    myAccount: {
+        name: '姓名',
+        nameTip:'请输入你的真实名字'
     },
     security: {
         security: '安全',
-        tip1: '设置密码，绑定手机，Email',
+        tip1: '设置密码，绑定手机',
         password: '密码',
         phone: '手机号码绑定',
         phoneNumber: '手机号码',
@@ -44,6 +51,13 @@ export default {
     },
     tasks: {
         newTask: '创建任务'
+    },
+    team:{
+        teamTask:'团队任务',
+        createTeam:'创建团队',
+        joinTeam:'加入团队',
+        teamLog:'团队日志',
+        myTeam:'我的团队'
     },
     syserr: {
         '10002': '用户名或密码错误'

@@ -16,6 +16,16 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Tyeps.USER_UPDATE_NAME_SUCCESS:
+            return {
+                ...state,
+                userInfo: action.userInfo
+            }
+        case Tyeps.USER_UPDATE_NAME_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state
     }
