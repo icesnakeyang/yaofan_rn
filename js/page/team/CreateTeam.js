@@ -3,7 +3,8 @@ import {
     View,
     TextInput,
     Dimensions,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
@@ -57,13 +58,13 @@ class CreateTeam extends Component {
     _createTeam() {
         console.log(this.state)
         console.log(this.props)
-        if (!this.state.user) {
+        if (!this.props.user) {
             return
         }
-        if (!this.state.user.userInfo) {
+        if (!this.props.user.userInfo) {
             return
         }
-        if (!this.state.user.userInfo.token) {
+        if (!this.props.user.userInfo.token) {
             return
         }
         if (!this.state.teamName) {
@@ -80,6 +81,7 @@ class CreateTeam extends Component {
         }
         createTeam(params, (result) => {
             if (result) {
+                DeviceEventEmitter.emit('Refresh_MyTeam')
                 NavigationUtil.goPage({}, 'MyTeam')
             }
         })
