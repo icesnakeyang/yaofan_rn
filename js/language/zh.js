@@ -57,7 +57,9 @@ export default {
         createTeam:'创建团队',
         joinTeam:'加入团队',
         teamLog:'团队日志',
-        myTeam:'我的团队'
+        myTeam:'我的团队',
+        teamNameHolder:'请输入团队名称',
+        teamDescriptionHolder:'请介绍你的团队'
     },
     syserr: {
         '10002': '用户名或密码错误'

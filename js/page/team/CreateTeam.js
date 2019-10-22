@@ -1,20 +1,28 @@
 import React, {Component} from 'react'
 import {
     View,
-    TextInput
+    TextInput,
+    Dimensions,
+    TouchableOpacity
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import Textarea from "react-native-textarea";
+import actions from "../../action";
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class CreateTeam extends Component {
     constructor(props) {
         super(props);
+        let {height, width} = Dimensions.get('window')
         this.state = {
             teamName: '',
-            teamDescription: ''
+            teamDescription: '',
+            height: height,
+            width: width
         }
     }
 
@@ -22,6 +30,59 @@ class CreateTeam extends Component {
         return (
             <GetLeftButton {...this.props}/>
         )
+    }
+
+    getRightButton() {
+        return (
+            <View>
+                <TouchableOpacity
+                    style={{
+                        margin: 5,
+                        marginRight: 8
+                    }}
+                    onPress={() => {
+                        this._createTeam()
+                    }}
+                >
+                    <Ionicons
+                        name={'ios-checkmark'}
+                        size={40}
+                        style={{color: this.props.theme.color.THEME_HEAD_TEXT}}
+                    />
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    _createTeam() {
+        console.log(this.state)
+        console.log(this.props)
+        if (!this.state.user) {
+            return
+        }
+        if (!this.state.user.userInfo) {
+            return
+        }
+        if (!this.state.user.userInfo.token) {
+            return
+        }
+        if (!this.state.teamName) {
+            return
+        }
+        if (!this.state.teamDescription) {
+            return
+        }
+        const {createTeam} = this.props
+        let params = {
+            name: this.state.teamName,
+            description: this.state.teamDescription,
+            token: this.props.user.userInfo.token
+        }
+        createTeam(params, (result) => {
+            if (result) {
+                NavigationUtil.goPage({}, 'MyTeam')
+            }
+        })
     }
 
     render() {
@@ -36,6 +97,7 @@ class CreateTeam extends Component {
                     backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
                 }}
                 leftButton={this.getLeftButton()}
+                rightButton={this.getRightButton()}
             />
         )
         return (
@@ -51,11 +113,10 @@ class CreateTeam extends Component {
                     <TextInput
                         style={{
                             height: 50,
-                            borderBottomWidth: 1,
                             padding: 0,
                             paddingLeft: 10
                         }}
-                        placeholder={'请输入团队名称'}
+                        placeholder={I18nJs.t('team.teamNameHolder')}
                         onChangeText={(teamName) => this.setState({teamName})}
                     />
                 </View>
@@ -64,6 +125,8 @@ class CreateTeam extends Component {
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR
                 }}>
                     <Textarea
+                        containerStyle={{height: this.state.height - 160, padding: 10}}
+                        placeholder={I18nJs.t('team.teamDescriptionHolder')}
                         onChangeText={(teamDescription) => this.setState({teamDescription})}
                     />
                 </View>
@@ -78,4 +141,8 @@ const mapStateToProps = state => ({
     team: state.team
 })
 
-export default connect(mapStateToProps)(CreateTeam)
+const mapDispatchToProps = dispatch => ({
+    createTeam: (params, callback) => dispatch(actions.createTeam(params, callback))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTeam)

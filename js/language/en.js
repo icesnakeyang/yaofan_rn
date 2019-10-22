@@ -57,7 +57,9 @@ export default {
         createTeam:'New',
         joinTeam:'Join',
         teamLog:'Logs',
-        myTeam:'My Team'
+        myTeam:'My Team',
+        teamNameHolder:'Please input team name',
+        teamDescriptionHolder:'Please input the description about your team'
     },
     syserr: {
         '10002': 'Username and password error'

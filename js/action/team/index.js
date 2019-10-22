@@ -5,7 +5,10 @@ import Types from "../types";
 export function createTeam(params, callback) {
     return dispatch => {
         let url = API.apiCreateTeam
-        let body = {}
+        let body = {
+            name:params.name,
+            description:params.description
+        }
         let token = params.token
         let dataStore = new DataStore()
         dataStore.fetchPostData(url, body, token)

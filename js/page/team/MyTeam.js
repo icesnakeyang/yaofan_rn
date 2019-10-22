@@ -10,10 +10,20 @@ import TouchButton from "../../common/component/TouchButton";
 import NavigationUtil from "../../navigator/NavigationUtil";
 
 class MyTeam extends Component {
+    componentDidMount() {
+        this._loadAllData()
+    }
+
+
     getLeftButton() {
         return (
             <GetLeftButton {...this.props}/>
         )
+    }
+
+    _loadAllData() {
+        console.log('myteam')
+        console.log(this.props)
     }
 
     render() {
@@ -35,13 +45,13 @@ class MyTeam extends Component {
                 {navigationBar}
                 <TouchButton
                     label={I18nJs.t('team.joinTeam')}
-                    touchFunction={()=>{
-                        NavigationUtil.goPage({},'JoinTeam')
+                    touchFunction={() => {
+                        NavigationUtil.goPage({}, 'JoinTeam')
                     }}
                 />
                 <TouchButton
                     label={I18nJs.t('team.createTeam')}
-                    touchFunction={()=>{
+                    touchFunction={() => {
                         NavigationUtil.goPage({}, 'CreateTeam')
                     }}
                 />
@@ -52,7 +62,8 @@ class MyTeam extends Component {
 
 const mapStateToProps = state => ({
     theme: state.theme,
-    user: state.user
+    user: state.user,
+    team: state.team
 })
 
 export default connect(mapStateToProps)(MyTeam)
