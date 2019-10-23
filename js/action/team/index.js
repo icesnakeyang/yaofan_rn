@@ -71,35 +71,35 @@ export function listTeam(params, callback) {
 }
 
 export function searchTeam(params, callback) {
-    return dispatch=>{
-        let url=API.apiSearchTeam
-        let body={
-
+    return dispatch => {
+        let url = API.apiSearchTeam
+        let body = {
+            name: params.name
         }
-        let token=params.token
-        let dataStore=new DataStore()
+        let token = params.token
+        let dataStore = new DataStore()
         dataStore.fetchPostData(url, body, token)
-            .then((response)=>{
-                if(response.code===0){
+            .then((response) => {
+                if (response.code === 0) {
                     dispatch({
-                        type:Types.TEAM_SEARCH_SUCCESS,
-                        teams:response.data.teams
+                        type: Types.TEAM_SEARCH_SUCCESS,
+                        teams: response.data.teams
                     })
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         callback(true)
-                    },100)
-                }else {
+                    }, 100)
+                } else {
                     throw new Error(response.code)
                 }
             })
-            .catch((error)=>{
+            .catch((error) => {
                 dispatch({
-                    type:Types.TEAM_SEARCH_FAIL,
-                    error:error
+                    type: Types.TEAM_SEARCH_FAIL,
+                    error: error
                 })
-                setTimeout(()=>{
+                setTimeout(() => {
                     callback(false)
-                },100)
+                }, 100)
             })
     }
 }
