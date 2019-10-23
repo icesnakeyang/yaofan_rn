@@ -3,7 +3,6 @@ import {
     View,
     Text
 } from 'react-native'
-import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {connect} from "react-redux";
 import {I18nJs} from "../../language/I18n";
@@ -16,7 +15,6 @@ class TaskPlaza extends Component {
     }
 
     _init() {
-
     }
 
     getRightButton() {

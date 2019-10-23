@@ -56,8 +56,6 @@ class CreateTeam extends Component {
     }
 
     _createTeam() {
-        console.log(this.state)
-        console.log(this.props)
         if (!this.props.user) {
             return
         }

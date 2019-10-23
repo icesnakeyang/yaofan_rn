@@ -29,7 +29,8 @@ export default {
     },
     myAccount: {
         name: 'Name',
-        nameTip: 'Please input your name here'
+        nameTip: 'Please input your name here',
+        changUser:'Change user'
     },
     security: {
         security: 'Security',
@@ -59,7 +60,8 @@ export default {
         teamLog:'Logs',
         myTeam:'My Team',
         teamNameHolder:'Please input team name',
-        teamDescriptionHolder:'Please input the description about your team'
+        teamDescriptionHolder:'Please input the description about your team',
+        searchHolder:'Please input the team name here'
     },
     syserr: {
         '10002': 'Username and password error'

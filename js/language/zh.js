@@ -29,7 +29,8 @@ export default {
     },
     myAccount: {
         name: '姓名',
-        nameTip:'请输入你的真实名字'
+        nameTip:'请输入你的真实名字',
+        changUser:'切换用户'
     },
     security: {
         security: '安全',
@@ -59,7 +60,8 @@ export default {
         teamLog:'团队日志',
         myTeam:'我的团队',
         teamNameHolder:'请输入团队名称',
-        teamDescriptionHolder:'请介绍你的团队'
+        teamDescriptionHolder:'请介绍你的团队',
+        searchHolder:'请输入要查询团队的名称关键字'
     },
     syserr: {
         '10002': '用户名或密码错误'

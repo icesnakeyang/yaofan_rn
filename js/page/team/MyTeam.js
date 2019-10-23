@@ -28,7 +28,6 @@ class MyTeam extends Component {
         })
     }
 
-
     getLeftButton() {
         return (
             <GetLeftButton {...this.props}/>
@@ -36,8 +35,6 @@ class MyTeam extends Component {
     }
 
     _loadAllData() {
-        console.log('myteam')
-        console.log(this.props)
         if (!this.props.user.userInfo) {
             return
         }
@@ -50,13 +47,11 @@ class MyTeam extends Component {
                 this.setState({
                     teamList: this.props.team.teams
                 })
-                console.log(this.state)
             }
         })
     }
 
     _renderItem(data) {
-        console.log(data)
         return (
             <InputRow
                 label={data.item.teamName}

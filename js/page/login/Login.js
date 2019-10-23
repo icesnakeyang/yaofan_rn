@@ -59,7 +59,7 @@ class Login extends Component {
         login(params, (result) => {
             if (result) {
                 if (this.props.user.userInfo) {
-                    NavigationUtil.goPage({}, "HomePage")
+                    NavigationUtil.goPage({}, "WelcomePage")
                 }
             }
         })

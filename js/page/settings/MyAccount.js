@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import InputRow from "../../common/component/InputRow";
 import NavigationUtil from "../../navigator/NavigationUtil";
 import GetLeftButton from "../../common/component/GetLeftButton";
+import TouchButton from "../../common/component/TouchButton";
 
 class MyAccount extends Component {
 
@@ -49,6 +50,12 @@ class MyAccount extends Component {
                     content={renderData.username}
                     touchFunction={() => {
                         NavigationUtil.goPage({}, 'Username')
+                    }}
+                />
+                <TouchButton
+                    label={I18nJs.t('myAccount.changUser')}
+                    touchFunction={() => {
+                        NavigationUtil.goPage({}, 'Login')
                     }}
                 />
             </View>

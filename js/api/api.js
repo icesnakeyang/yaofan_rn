@@ -6,5 +6,6 @@ export const API = {
     apiLoginByToken: `${host}/user/loginByToken`,
     apiUpdateUsername: `${host}/user/updateUsername`,
     apiCreateTeam: `${host}/team/createTeam`,
-    apiListTeam: `${host}/team/listTeam`
+    apiListTeam: `${host}/team/listTeam`,
+    apiSearchTeam: `${host}/team/searchTeam`
 }
