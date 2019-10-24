@@ -38,6 +38,16 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Tyeps.TEAM_GET_SUCCESS:
+            return {
+                ...state,
+                team: action.team
+            }
+        case Tyeps.TEAM_GET_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state
     }

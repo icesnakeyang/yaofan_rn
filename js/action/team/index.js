@@ -103,3 +103,37 @@ export function searchTeam(params, callback) {
             })
     }
 }
+
+export function getTeamByTeamId(params, callback) {
+    return dispatch => {
+        let url = API.apiGetTeamByTeamId
+        let body = {
+            teamId: params.teamId
+        }
+        let token = params.token
+        let dataStore = new DataStore
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TEAM_GET_SUCCESS,
+                        team: response.data.team
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TEAM_GET_FAIL,
+                    error: error
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+}
