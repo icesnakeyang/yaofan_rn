@@ -33,14 +33,12 @@ class JoinTeam extends Component {
     }
 
     _renderItem(data) {
-        console.log(data)
         return (
             <InputRow
                 label={data.item.teamName}
                 content={data.item.managerName}
                 showLabel={true}
                 touchFunction={() => {
-                    console.log(data.item.teamId)
                     NavigationUtil.goPage({teamId: data.item.teamId}, 'ApplyTeam')
                 }}
             />
@@ -92,16 +90,13 @@ class JoinTeam extends Component {
                             width: 50
                         }}
                         onPress={() => {
-                            console.log(this.state)
                             const {searchTeam} = this.props
                             let params = {
                                 name: this.state.searchKey,
                                 token: this.props.user.userInfo.token
                             }
                             searchTeam(params, (result) => {
-                                console.log(result)
                                 if (result) {
-                                    console.log(this.props)
                                     this.setState({
                                         teamList: this.props.team.teams
                                     })

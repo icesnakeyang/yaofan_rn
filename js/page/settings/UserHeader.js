@@ -16,12 +16,13 @@ class UserHeader extends Component {
     }
 
     _renderData() {
+        console.log(this.props)
         let renderData = {
             userName: I18nJs.t('settings.guest'),
             createTime: '-'
         }
-        if (this.props.user.userInfo && this.props.user.userInfo.userName) {
-            renderData.userName = this.props.user.userInfo.userName
+        if (this.props.user.userInfo && this.props.user.userInfo.name) {
+            renderData.userName = this.props.user.userInfo.name
         }
         if (this.props.user.userInfo && this.props.user.userInfo.createTime) {
             renderData.createTime = moment(this.props.user.userInfo.createTime).format('YYYY-MM-DD')
