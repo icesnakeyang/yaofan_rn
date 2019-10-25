@@ -41,7 +41,8 @@ class ApplyTeam extends Component {
                 if (result) {
                     console.log(this.props)
                     this.setState({
-                        team: this.props.team.team
+                        team: this.props.team.team,
+                        userName: this.props.user.userInfo.name
                     })
                 }
             })
@@ -82,6 +83,27 @@ class ApplyTeam extends Component {
 
     _submit() {
         console.log(this.state)
+        if (!this.props.user.userInfo) {
+            return
+        }
+        if (!this.props.team.team) {
+            return
+        }
+        if (!this.state.applyRemark) {
+            return
+        }
+        const {applyTeam} = this.props
+        let params = {
+            token: this.props.user.userInfo.token,
+            teamId: this.props.team.team.teamId,
+            remark: this.state.applyRemark
+        }
+        applyTeam(params, (result) => {
+            if (result) {
+                console.log(this.props)
+            }
+        })
+
     }
 
     render() {
@@ -108,10 +130,10 @@ class ApplyTeam extends Component {
                     marginTop: 10,
                     padding: 10
                 }}>
-                    <View>
-                        <Text>{this.state.team.teamName}</Text>
+                    <View style={{justifyContent: 'center', alignItems: 'center', borderBottomWidth: 0.5}}>
+                        <Text style={{fontSize: 24}}>{this.state.team.teamName}</Text>
                     </View>
-                    <View>
+                    <View style={{margin: 10}}>
                         <Text>{this.state.team.description}</Text>
                     </View>
                 </View>
@@ -122,19 +144,18 @@ class ApplyTeam extends Component {
                 }}>
                     <View style={{
                         flexDirection: 'row',
-                        alignItems: 'flex-end',
-                        height:50
+                        alignItems: 'flex-end'
                     }}>
                         <View>
-                            <Text style={{padding:5}}>申请人：</Text>
+                            <Text style={{padding: 5}}>{I18nJs.t('team.applyUser')}</Text>
                         </View>
                         <View style={{
-                            flex:1,
-                            borderBottomWidth:1,
-                            justifyContent:'flex-end'
+                            flex: 1,
+                            borderBottomWidth: 1,
+                            justifyContent: 'flex-end'
                         }}>
                             <TextInput
-                                style={{padding:0}}
+                                style={{padding: 0}}
                                 defaultValue={this.state.userName}
                                 onChangeText={(editUserName) => this.setState({editUserName})}
                             />
@@ -148,7 +169,7 @@ class ApplyTeam extends Component {
                                 borderWidth: 1,
                                 borderColor: this.props.theme.color.THEME_TAB_ICON_COLOR
                             }}
-                            placeholder={'请说明申请理由'}
+                            placeholder={I18nJs.t('team.applyRemarkHolder')}
                             onChangeText={(applyRemark) => this.setState({applyRemark})}
                         />
                     </View>
@@ -158,7 +179,7 @@ class ApplyTeam extends Component {
                         touchFunction={() => {
                             this._submit()
                         }}
-                        label={'提交'}
+                        label={I18nJs.t('team.btApplyTeam')}
                     />
                 </View>
             </View>
@@ -173,7 +194,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getTeamByTeamId: (params, callback) => dispatch(actions.getTeamByTeamId(params, callback))
+    getTeamByTeamId: (params, callback) => dispatch(actions.getTeamByTeamId(params, callback)),
+    applyTeam: (params, callback) => dispatch(actions.applyTeam(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApplyTeam)

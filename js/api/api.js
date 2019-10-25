@@ -9,5 +9,6 @@ export const API = {
     apiCreateTeam: `${host}/team/createTeam`,
     apiListTeam: `${host}/team/listTeam`,
     apiSearchTeam: `${host}/team/searchTeam`,
-    apiGetTeamByTeamId: `${host}/team/getTeamByTeamId`
+    apiGetTeamByTeamId: `${host}/team/getTeamByTeamId`,
+    apiApplyTeam: `${host}/team/applyTeam`
 }

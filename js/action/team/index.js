@@ -137,3 +137,39 @@ export function getTeamByTeamId(params, callback) {
             })
     }
 }
+
+export function applyTeam(params, callback) {
+    return dispatch => {
+        let url = API.apiApplyTeam
+        let body = {
+            teamId: params.teamId,
+            remark: params.remark
+        }
+        let token = params.token
+        let dataStore = new DataStore();
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TEAM_APPLY_TEAM_SUCCESS,
+                        applyTeam: response.data.applyTeam
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TEAM_APPLY_TEAM_FAIL,
+                    error: error
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+
+}

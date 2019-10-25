@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import {
     View,
     DeviceEventEmitter,
-    FlatList
+    FlatList,
+    Text
 } from 'react-native'
+import {createAppContainer} from 'react-navigation'
+import {createMaterialTopTabNavigator} from 'react-navigation-tabs'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
@@ -12,6 +15,9 @@ import TouchButton from "../../common/component/TouchButton";
 import NavigationUtil from "../../navigator/NavigationUtil";
 import actions from "../../action";
 import InputRow from "../../common/component/InputRow";
+import CreateTeam from "./CreateTeam";
+import JoinTeam from "./JoinTeam";
+import TeamLog from "./TeamLog";
 
 class MyTeam extends Component {
     constructor(props) {
@@ -34,7 +40,13 @@ class MyTeam extends Component {
         )
     }
 
+    _genHeadTabs() {
+
+    }
+
+
     _loadAllData() {
+        console.log(this.props)
         if (!this.props.user.userInfo) {
             return
         }
@@ -62,6 +74,9 @@ class MyTeam extends Component {
     }
 
     render() {
+        const TabTopNavigator = createAppContainer(
+            createMaterialTopTabNavigator(this._genHeadTabs(),)
+        )
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
@@ -77,7 +92,8 @@ class MyTeam extends Component {
         )
         return (
             <View>
-                {navigationBar}
+                {/*{navigationBar}*/}
+                <TabTopNavigator/>
                 <FlatList
                     data={this.state.teamList}
                     renderItem={(item) => (this._renderItem(item))}
@@ -94,6 +110,16 @@ class MyTeam extends Component {
                         NavigationUtil.goPage({}, 'CreateTeam')
                     }}
                 />
+            </View>
+        )
+    }
+}
+
+class TeamTopTab extends Component{
+    render(){
+        return(
+            <View>
+                <Text>hello</Text>
             </View>
         )
     }

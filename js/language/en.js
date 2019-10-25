@@ -61,7 +61,10 @@ export default {
         myTeam:'My Team',
         teamNameHolder:'Please input team name',
         teamDescriptionHolder:'Please input the description about your team',
-        searchHolder:'Please input the team name here'
+        searchHolder:'Please input the team name here',
+        applyUser:'Your name',
+        applyRemarkHolder:'Please describe your application',
+        btApplyTeam:'Join'
     },
     syserr: {
         '10002': 'Username and password error'
