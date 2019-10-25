@@ -23,12 +23,15 @@ class UserHeader extends Component {
         }
         if (this.props.user.userInfo && this.props.user.userInfo.name) {
             renderData.userName = this.props.user.userInfo.name
+        } else {
+            if (this.props.user.userInfo && this.props.user.userInfo.phone) {
+                renderData.userName = this.props.user.userInfo.phone
+            }
         }
         if (this.props.user.userInfo && this.props.user.userInfo.createTime) {
             renderData.createTime = moment(this.props.user.userInfo.createTime).format('YYYY-MM-DD')
         }
         return renderData
-
     }
 
     render() {
