@@ -36,7 +36,6 @@ class MyTeam extends Component {
     }
 
     _loadAllData() {
-        console.log(this.props)
         if (!this.props.user.userInfo) {
             return
         }
@@ -54,7 +53,6 @@ class MyTeam extends Component {
     }
 
     _renderItem(data) {
-        console.log(data)
         let teamName = ''
         let managerName = ''
         if (data && data.item) {

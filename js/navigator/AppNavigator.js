@@ -20,6 +20,7 @@ import TeamLog from "../page/team/TeamLog";
 import TeamHome from "../page/team/TeamHome";
 import JoinTeam from "../page/team/JoinTeam";
 import ApplyTeam from "../page/team/ApplyTeam";
+import TeamLogDetail from "../page/team/TeamLogDetail";
 
 export const rootCam = 'Init'
 
@@ -107,6 +108,12 @@ const MainNavigator = createStackNavigator({
     },
     ApplyTeam: {
         screen: ApplyTeam,
+        navigationOptions: {
+            header: null
+        }
+    },
+    TeamLogDetail: {
+        screen: TeamLogDetail,
         navigationOptions: {
             header: null
         }

@@ -58,6 +58,16 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Tyeps.TEAM_LIST_APPLY_TEAM_SUCCESS:
+            return {
+                ...state,
+                applyTeamList: action.applyTeamList
+            }
+        case Tyeps.TEAM_LIST_APPLY_TEAM_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state
     }

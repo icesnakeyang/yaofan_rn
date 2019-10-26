@@ -1,15 +1,73 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text
+    Text,
+    FlatList
 } from 'react-native'
 import {connect} from "react-redux";
+import actions from "../../action";
+import InputRow from "../../common/component/InputRow";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class TeamLog extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            applyTeamList: []
+        }
+    }
+
+    componentDidMount() {
+        this._loadAllData()
+    }
+
+    _loadAllData() {
+        if (!(this.props.user && this.props.user.userInfo)) {
+            return
+        }
+        let params = {
+            token: this.props.user.userInfo.token
+        }
+        const {listApplyTeam} = this.props
+        listApplyTeam(params, (result) => {
+            if (result) {
+                this.setState({
+                    applyTeamList: this.props.team.applyTeamList
+                })
+            }
+        })
+    }
+
+    _renderItem(data) {
+        let teamName = ''
+        let managerName = ''
+        if (data && data.item) {
+            if (data.item.applyTeamName) {
+                teamName = data.item.applyTeamName
+            }
+            if (data.item.managerName) {
+                managerName = data.item.managerName
+            }
+        }
+        return (
+            <InputRow
+                label={teamName}
+                content={managerName}
+                showLabel={true}
+                touchFunction={() => {
+                    NavigationUtil.goPage({}, 'TeamLogDetail')
+                }}
+            />
+        )
+    }
+
     render() {
         return (
-            <View>
-                <Text>team logs</Text>
+            <View style={{flex: 1, backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
+                <FlatList
+                    data={this.state.applyTeamList}
+                    renderItem={(item) => (this._renderItem(item))}
+                />
             </View>
         )
     }
@@ -17,7 +75,12 @@ class TeamLog extends Component {
 
 const mapStateToProps = state => ({
     theme: state.theme,
-    user: state.user
+    user: state.user,
+    team: state.team
 })
 
-export default connect(mapStateToProps)(TeamLog)
+const mapDispatchToProps = dispatch => ({
+    listApplyTeam: (params, callback) => dispatch(actions.listApplyTeam(params, callback))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamLog)

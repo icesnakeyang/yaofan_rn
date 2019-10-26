@@ -173,3 +173,35 @@ export function applyTeam(params, callback) {
     }
 
 }
+
+export function listApplyTeam(params, callback) {
+    return dispatch => {
+        let url = API.apiListApplyTeam
+        let body = {}
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TEAM_LIST_APPLY_TEAM_SUCCESS,
+                        applyTeamList: response.data.applyTeams
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TEAM_LIST_APPLY_TEAM_FAIL,
+                    error: error
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+}

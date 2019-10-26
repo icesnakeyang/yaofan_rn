@@ -16,7 +16,6 @@ class UserHeader extends Component {
     }
 
     _renderData() {
-        console.log(this.props)
         let renderData = {
             userName: I18nJs.t('settings.guest'),
             createTime: '-'

@@ -39,7 +39,6 @@ class ApplyTeam extends Component {
             }
             getTeamByTeamId(params, (result) => {
                 if (result) {
-                    console.log(this.props)
                     this.setState({
                         team: this.props.team.team,
                         userName: this.props.user.userInfo.name
@@ -82,7 +81,6 @@ class ApplyTeam extends Component {
     }
 
     _submit() {
-        console.log(this.state)
         if (!this.props.user.userInfo) {
             return
         }
@@ -100,7 +98,6 @@ class ApplyTeam extends Component {
         }
         applyTeam(params, (result) => {
             if (result) {
-                console.log(this.props)
             }
         })
 
