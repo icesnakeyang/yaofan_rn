@@ -65,7 +65,10 @@ export default {
         applyUser:'申请人',
         applyRemarkHolder:'请说明申请理由',
         btApplyTeam:'申请加入团队',
-        btCreateTeam:'创建团队'
+        btCreateTeam:'创建团队',
+        applyTime:'申请时间',
+        processResult:'处理结果',
+        processTime:'处理时间'
     },
     syserr: {
         '10002': '用户名或密码错误'

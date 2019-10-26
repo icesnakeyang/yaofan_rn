@@ -1,6 +1,6 @@
 import {loadLanguage} from "./language";
 import {autoLogin, login, updateUsername} from "./user/login";
-import {applyTeam, createTeam, getTeamByTeamId, listApplyTeam, listTeam, searchTeam} from "./team";
+import {applyTeam, createTeam, getApplyTeam, getTeamByTeamId, listApplyTeam, listTeam, searchTeam} from "./team";
 
 export default {
     loadLanguage,
@@ -12,5 +12,6 @@ export default {
     searchTeam,
     getTeamByTeamId,
     applyTeam,
-    listApplyTeam
+    listApplyTeam,
+    getApplyTeam
 }

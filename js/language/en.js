@@ -30,7 +30,7 @@ export default {
     myAccount: {
         name: 'Name',
         nameTip: 'Please input your name here',
-        changUser:'Change user'
+        changUser: 'Change user'
     },
     security: {
         security: 'Security',
@@ -53,19 +53,22 @@ export default {
     tasks: {
         newTask: 'New Task'
     },
-    team:{
-        teamTask:'Team Tasks',
-        createTeam:'New',
-        joinTeam:'Join',
-        teamLog:'Logs',
-        myTeam:'My Team',
-        teamNameHolder:'Please input team name',
-        teamDescriptionHolder:'Please input the description about your team',
-        searchHolder:'Please input the team name here',
-        applyUser:'Your name',
-        applyRemarkHolder:'Please describe your application',
-        btApplyTeam:'Join',
-        btCreateTeam:'Create Team'
+    team: {
+        teamTask: 'Team Tasks',
+        createTeam: 'New',
+        joinTeam: 'Join',
+        teamLog: 'Logs',
+        myTeam: 'My Team',
+        teamNameHolder: 'Please input team name',
+        teamDescriptionHolder: 'Please input the description about your team',
+        searchHolder: 'Please input the team name here',
+        applyUser: 'Your name',
+        applyRemarkHolder: 'Please describe your application',
+        btApplyTeam: 'Join',
+        btCreateTeam: 'Create Team',
+        applyTime: 'Apply time',
+        processResult: 'Result',
+        processTime: 'Process time'
     },
     syserr: {
         '10002': 'Username and password error'

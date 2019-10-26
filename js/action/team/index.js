@@ -205,3 +205,38 @@ export function listApplyTeam(params, callback) {
             })
     }
 }
+
+export function getApplyTeam(params, callback) {
+    return dispatch => {
+        let url = API.apiGetApplyTeam
+        let body = {
+            teamId: params.teamId
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TEAM_GET_APPLY_TEAM_SUCCESS,
+                        applyTeam: response.data.applyTeamView
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TEAM_GET_APPLY_TEAM_FAIL,
+                    error: error
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+
+}

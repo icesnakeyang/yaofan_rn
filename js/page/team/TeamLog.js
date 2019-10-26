@@ -41,6 +41,7 @@ class TeamLog extends Component {
     _renderItem(data) {
         let teamName = ''
         let managerName = ''
+        console.log(data)
         if (data && data.item) {
             if (data.item.applyTeamName) {
                 teamName = data.item.applyTeamName
@@ -55,7 +56,9 @@ class TeamLog extends Component {
                 content={managerName}
                 showLabel={true}
                 touchFunction={() => {
-                    NavigationUtil.goPage({}, 'TeamLogDetail')
+                    NavigationUtil.goPage({
+                        teamId: data.item.applyTeamId
+                    }, 'TeamLogDetail')
                 }}
             />
         )
