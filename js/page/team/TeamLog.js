@@ -9,7 +9,7 @@ class TeamLog extends Component {
     render() {
         return (
             <View>
-                <Text>join team</Text>
+                <Text>team logs</Text>
             </View>
         )
     }

@@ -1,116 +1,91 @@
 import React, {Component} from 'react'
 import {
-    createAppContainer, NavigationActions
-} from 'react-navigation'
-import {
-    createBottomTabNavigator,
-    BottomTabBar
-} from 'react-navigation-tabs'
+    View,
+} from 'react-native'
+import {createAppContainer} from 'react-navigation'
+import {createMaterialTopTabNavigator} from 'react-navigation-tabs'
 import {connect} from "react-redux";
-import {I18nJs} from "../../language/I18n";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import CreateTeam from "./CreateTeam";
-import MyTeam from "./MyTeam";
+import JoinTeam from "./JoinTeam";
 import TeamLog from "./TeamLog";
-import {BackHandler} from "react-native";
+import {I18nJs} from "../../language/I18n";
+import GetLeftButton from "../../common/component/GetLeftButton";
+import NavigationBar from "../../common/component/NavigationBar";
+import MyTeam from "./MyTeam";
 
 class TeamHome extends Component {
     constructor(props) {
         super(props);
-        this.TEAM_TABS = {
-            CreateTeam: {
+        this.state = {
+            listTeam: []
+        }
+        this.TopTab = {
+            MyTeam:{
+                screen:MyTeam,
+                navigationOptions:{
+                    title:I18nJs.t('team.myTeam')
+                }
+            },
+            Tab1: {
                 screen: CreateTeam,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('team.createTeam'),
-                    tabBarIcon: ({tintColor, focused}) => (
-                        <Ionicons
-                            name={'ios-globe'}
-                            size={26}
-                            style={{color: tintColor}}
-                        />
-                    )
+                    title: I18nJs.t('team.createTeam')
                 }
             },
-            MyTeam: {
-                screen: MyTeam,
+            Tab2: {
+                screen: JoinTeam,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('team.joinTeam'),
-                    tabBarIcon: ({tintColor, focused}) => (
-                        <Ionicons
-                            name={'ios-globe'}
-                            size={26}
-                            style={{color: tintColor}}
-                        />
-                    )
+                    title: I18nJs.t('team.joinTeam')
                 }
             },
-            TeamLog: {
+            Tab3: {
                 screen: TeamLog,
                 navigationOptions: {
-                    tabBarLabel: I18nJs.t('team.joinTeam'),
-                    tabBarIcon: ({tintColor, focused}) => (
-                        <Ionicons
-                            name={'ios-globe'}
-                            size={26}
-                            style={{color: tintColor}}
-                        />
-                    )
+                    title: I18nJs.t('team.teamLog')
                 }
-            },
+            }
         }
     }
 
-    _genBottomTab() {
-        if (this.Tabs) {
-            return this.Tabs
-        }
-        this.Tabs = createAppContainer(
-            createBottomTabNavigator(this.TEAM_TABS, {
-                tabBarComponent: props => {
-                    return (
-                        <TabBarComponent
-                            {...props}
-                            theme={this.props.theme}
-                        />
-                    )
-                }
-            })
+    getLeftButton() {
+        return (
+            <GetLeftButton {...this.props}/>
         )
-        return this.Tabs
     }
 
     render() {
-        const Tab = this._genBottomTab()
-        return (
-            <Tab/>
-        )
-    }
-}
-
-class TabBarComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.theme = {
-            tintColor: props.activeTintColor
+        let statusBar = {
+            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
-    }
-
-    render() {
-        return (
-            <BottomTabBar
-                {...this.props}
-                activeTintColor={this.props.theme.color.THEME_TAB_ICON_COLOR}
+        let navigationBar = (
+            <NavigationBar
+                title={I18nJs.t('team.myTeam')}
+                statusBar={statusBar}
+                style={{
+                    backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
+                }}
+                leftButton={this.getLeftButton()}
             />
         )
+        const TopTab = createAppContainer(
+            createMaterialTopTabNavigator(
+                this.TopTab
+            )
+        )
+        return (
+            <View style={{
+                flex: 1,
+                backgroundColor: '#ffff00',
+            }}>
+                {navigationBar}
+                <TopTab/>
+            </View>
+        )
     }
-
-
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme,
-    user: state.user,
-    team: state.team
+    theme: state.theme
 })
 
 export default connect(mapStateToProps)(TeamHome)

@@ -56,7 +56,8 @@ class JoinTeam extends Component {
                                 width: this.state.width - 70,
                                 borderWidth: 1,
                                 borderColor: this.props.theme.color.THEME_BUTTON_COLOR,
-                                paddingLeft: 10
+                                paddingLeft: 10,
+                                height: 50
                             }}
                             placeholder={I18nJs.t('team.searchHolder')}
                             onChangeText={(searchKey) => this.setState({searchKey})}

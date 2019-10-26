@@ -79,7 +79,7 @@ class CreateTeam extends Component {
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR
                 }}>
                     <Textarea
-                        containerStyle={{height: this.state.height-280, padding: 10}}
+                        containerStyle={{height: this.state.height-350, padding: 10}}
                         placeholder={I18nJs.t('team.teamDescriptionHolder')}
                         onChangeText={(teamDescription) => this.setState({teamDescription})}
                     />

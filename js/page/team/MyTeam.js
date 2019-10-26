@@ -4,42 +4,16 @@ import {
     Text,
     DeviceEventEmitter
 } from 'react-native'
-import {createAppContainer} from 'react-navigation'
-import {createMaterialTopTabNavigator} from 'react-navigation-tabs'
 import {connect} from "react-redux";
-import CreateTeam from "./CreateTeam";
-import JoinTeam from "./JoinTeam";
-import TeamLog from "./TeamLog";
-import {I18nJs} from "../../language/I18n";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import actions from "../../action";
-import NavigationBar from "../../common/component/NavigationBar";
+import InputRow from "../../common/component/InputRow";
 
 class MyTeam extends Component {
     constructor(props) {
         super(props);
         this.state = {
             listTeam: []
-        }
-        this.TopTab = {
-            Tab1: {
-                screen: CreateTeam,
-                navigationOptions: {
-                    title: I18nJs.t('team.createTeam')
-                }
-            },
-            Tab2: {
-                screen: JoinTeam,
-                navigationOptions: {
-                    title: I18nJs.t('team.joinTeam')
-                }
-            },
-            Tab3: {
-                screen: TeamLog,
-                navigationOptions: {
-                    title: I18nJs.t('team.teamLog')
-                }
-            }
         }
     }
 
@@ -49,6 +23,11 @@ class MyTeam extends Component {
             this._loadAllData()
         })
     }
+
+    componentWillUnmount() {
+        this.listener.remove()
+    }
+
 
     getLeftButton() {
         return (
@@ -96,42 +75,12 @@ class MyTeam extends Component {
     }
 
     render() {
-        let statusBar = {
-            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-        }
-        let navigationBar = (
-            <NavigationBar
-                title={I18nJs.t('team.myTeam')}
-                statusBar={statusBar}
-                style={{
-                    backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-                }}
-                leftButton={this.getLeftButton()}
-            />
-        )
-        console.log(5)
-        const TopTab = createAppContainer(
-            createMaterialTopTabNavigator(
-                this.TopTab
-            )
-        )
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: '#ffff00',
             }}>
-                {navigationBar}
-                <TopTab/>
-            </View>
-        )
-    }
-}
-
-class TeamTab extends Component {
-    render() {
-        return (
-            <View style={{backgroundColor: '#ff00ff'}}>
-                <Text>my tab</Text>
+                <Text>my teams</Text>
             </View>
         )
     }
