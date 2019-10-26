@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
 import {
-    View
+    View,
+    Text
 } from 'react-native'
 import {connect} from "react-redux";
 
 class TeamLog extends Component {
     render() {
         return (
-            <View></View>
+            <View>
+                <Text>join team</Text>
+            </View>
         )
     }
 }

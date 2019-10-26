@@ -3,17 +3,14 @@ import {
     View,
     TextInput,
     Dimensions,
-    TouchableOpacity,
     DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
-import GetLeftButton from "../../common/component/GetLeftButton";
-import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import Textarea from "react-native-textarea";
 import actions from "../../action";
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import NavigationUtil from "../../navigator/NavigationUtil";
+import TouchButton from "../../common/component/TouchButton";
 
 class CreateTeam extends Component {
     constructor(props) {
@@ -25,34 +22,6 @@ class CreateTeam extends Component {
             height: height,
             width: width
         }
-    }
-
-    getLeftButton() {
-        return (
-            <GetLeftButton {...this.props}/>
-        )
-    }
-
-    getRightButton() {
-        return (
-            <View>
-                <TouchableOpacity
-                    style={{
-                        margin: 5,
-                        marginRight: 8
-                    }}
-                    onPress={() => {
-                        this._createTeam()
-                    }}
-                >
-                    <Ionicons
-                        name={'ios-checkmark'}
-                        size={40}
-                        style={{color: this.props.theme.color.THEME_HEAD_TEXT}}
-                    />
-                </TouchableOpacity>
-            </View>
-        )
     }
 
     _createTeam() {
@@ -86,26 +55,11 @@ class CreateTeam extends Component {
     }
 
     render() {
-        let statusBar = {
-            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-        }
-        let navigationBar = (
-            <NavigationBar
-                title={I18nJs.t('team.createTeam')}
-                statusBar={statusBar}
-                style={{
-                    backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-                }}
-                leftButton={this.getLeftButton()}
-                rightButton={this.getRightButton()}
-            />
-        )
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
-                {navigationBar}
                 <View style={{
                     marginTop: 20,
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR
@@ -125,11 +79,17 @@ class CreateTeam extends Component {
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR
                 }}>
                     <Textarea
-                        containerStyle={{height: this.state.height - 160, padding: 10}}
+                        containerStyle={{height: this.state.height-280, padding: 10}}
                         placeholder={I18nJs.t('team.teamDescriptionHolder')}
                         onChangeText={(teamDescription) => this.setState({teamDescription})}
                     />
                 </View>
+                <TouchButton
+                    label={I18nJs.t('team.btCreateTeam')}
+                    touchFunction={()=>{
+                        this._createTeam()
+                    }}
+                />
             </View>
         )
     }

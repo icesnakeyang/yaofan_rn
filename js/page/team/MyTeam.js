@@ -1,29 +1,45 @@
 import React, {Component} from 'react'
 import {
     View,
-    DeviceEventEmitter,
-    FlatList,
-    Text
+    Text,
+    DeviceEventEmitter
 } from 'react-native'
 import {createAppContainer} from 'react-navigation'
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs'
 import {connect} from "react-redux";
-import GetLeftButton from "../../common/component/GetLeftButton";
-import NavigationBar from "../../common/component/NavigationBar";
-import {I18nJs} from "../../language/I18n";
-import TouchButton from "../../common/component/TouchButton";
-import NavigationUtil from "../../navigator/NavigationUtil";
-import actions from "../../action";
-import InputRow from "../../common/component/InputRow";
 import CreateTeam from "./CreateTeam";
 import JoinTeam from "./JoinTeam";
 import TeamLog from "./TeamLog";
+import {I18nJs} from "../../language/I18n";
+import GetLeftButton from "../../common/component/GetLeftButton";
+import actions from "../../action";
+import NavigationBar from "../../common/component/NavigationBar";
 
 class MyTeam extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            teamList: []
+            listTeam: []
+        }
+        this.TopTab = {
+            Tab1: {
+                screen: CreateTeam,
+                navigationOptions: {
+                    title: I18nJs.t('team.createTeam')
+                }
+            },
+            Tab2: {
+                screen: JoinTeam,
+                navigationOptions: {
+                    title: I18nJs.t('team.joinTeam')
+                }
+            },
+            Tab3: {
+                screen: TeamLog,
+                navigationOptions: {
+                    title: I18nJs.t('team.teamLog')
+                }
+            }
         }
     }
 
@@ -39,11 +55,6 @@ class MyTeam extends Component {
             <GetLeftButton {...this.props}/>
         )
     }
-
-    _genHeadTabs() {
-
-    }
-
 
     _loadAllData() {
         console.log(this.props)
@@ -64,19 +75,27 @@ class MyTeam extends Component {
     }
 
     _renderItem(data) {
+        console.log(data)
+        let teamName = ''
+        let managerName = ''
+        if (data && data.item) {
+            if (data.item.teamName) {
+                teamName = data.item.teamName
+            }
+            if (data.item.managerName) {
+                managerName = data.item.managerName
+            }
+        }
         return (
             <InputRow
-                label={data.item.teamName}
-                content={data.item.managerName}
+                label={teamName}
+                content={managerName}
                 showLabel={true}
             />
         )
     }
 
     render() {
-        const TabTopNavigator = createAppContainer(
-            createMaterialTopTabNavigator(this._genHeadTabs(),)
-        )
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
@@ -90,36 +109,29 @@ class MyTeam extends Component {
                 leftButton={this.getLeftButton()}
             />
         )
+        console.log(5)
+        const TopTab = createAppContainer(
+            createMaterialTopTabNavigator(
+                this.TopTab
+            )
+        )
         return (
-            <View>
-                {/*{navigationBar}*/}
-                <TabTopNavigator/>
-                <FlatList
-                    data={this.state.teamList}
-                    renderItem={(item) => (this._renderItem(item))}
-                />
-                <TouchButton
-                    label={I18nJs.t('team.joinTeam')}
-                    touchFunction={() => {
-                        NavigationUtil.goPage({}, 'JoinTeam')
-                    }}
-                />
-                <TouchButton
-                    label={I18nJs.t('team.createTeam')}
-                    touchFunction={() => {
-                        NavigationUtil.goPage({}, 'CreateTeam')
-                    }}
-                />
+            <View style={{
+                flex: 1,
+                backgroundColor: '#ffff00',
+            }}>
+                {navigationBar}
+                <TopTab/>
             </View>
         )
     }
 }
 
-class TeamTopTab extends Component{
-    render(){
-        return(
-            <View>
-                <Text>hello</Text>
+class TeamTab extends Component {
+    render() {
+        return (
+            <View style={{backgroundColor: '#ff00ff'}}>
+                <Text>my tab</Text>
             </View>
         )
     }
@@ -127,12 +139,11 @@ class TeamTopTab extends Component{
 
 const mapStateToProps = state => ({
     theme: state.theme,
-    user: state.user,
-    team: state.team
+    user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-    listTeam: (params, callback) => dispatch(actions.listTeam(params, callback))
+    listTeam: (params, callback) => dispatch => (actions.listTeam(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyTeam)

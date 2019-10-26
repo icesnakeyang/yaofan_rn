@@ -64,7 +64,8 @@ export default {
         searchHolder:'请输入要查询团队的名称关键字',
         applyUser:'申请人',
         applyRemarkHolder:'请说明申请理由',
-        btApplyTeam:'申请加入团队'
+        btApplyTeam:'申请加入团队',
+        btCreateTeam:'创建团队'
     },
     syserr: {
         '10002': '用户名或密码错误'

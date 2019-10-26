@@ -26,12 +26,6 @@ class JoinTeam extends Component {
         }
     }
 
-    getLeftButton() {
-        return (
-            <GetLeftButton {...this.props}/>
-        )
-    }
-
     _renderItem(data) {
         return (
             <InputRow
@@ -46,25 +40,11 @@ class JoinTeam extends Component {
     }
 
     render() {
-        let statusBar = {
-            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-        }
-        let navigationBar = (
-            <NavigationBar
-                title={I18nJs.t('team.joinTeam')}
-                statusBar={statusBar}
-                style={{
-                    backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
-                }}
-                leftButton={this.getLeftButton()}
-            />
-        )
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
-                {navigationBar}
                 <View style={{
                     flexDirection: 'row',
                     margin: 10
