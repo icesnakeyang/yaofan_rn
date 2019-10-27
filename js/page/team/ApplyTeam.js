@@ -13,7 +13,8 @@ import {I18nJs} from "../../language/I18n";
 import actions from "../../action";
 import TouchButton from "../../common/component/TouchButton";
 import Ionicons from 'react-native-vector-icons/Ionicons'
-
+import Toast from 'react-native-easy-toast'
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class ApplyTeam extends Component {
     constructor(props) {
@@ -98,6 +99,9 @@ class ApplyTeam extends Component {
         }
         applyTeam(params, (result) => {
             if (result) {
+                NavigationUtil.goPage({}, 'TeamHome')
+            } else {
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.team.error))
             }
         })
 
@@ -179,6 +183,9 @@ class ApplyTeam extends Component {
                         label={I18nJs.t('team.btApplyTeam')}
                     />
                 </View>
+                <Toast ref={'toast'}
+                       position={'center'}
+                />
             </View>
         )
     }

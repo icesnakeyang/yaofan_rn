@@ -17,7 +17,6 @@ class TeamTasks extends Component {
                 <TouchableOpacity
                     style={{margin: 5, marginRight: 8}}
                     onPress={() => {
-                        console.log(1)
                         NavigationUtil.goPage({}, 'TeamHome')
                     }}
                 >

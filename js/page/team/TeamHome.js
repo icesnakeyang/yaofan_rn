@@ -75,7 +75,6 @@ class TeamHome extends Component {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: '#ffff00',
             }}>
                 {navigationBar}
                 <TopTab/>

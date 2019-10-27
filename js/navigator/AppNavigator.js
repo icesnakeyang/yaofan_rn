@@ -21,6 +21,8 @@ import TeamHome from "../page/team/TeamHome";
 import JoinTeam from "../page/team/JoinTeam";
 import ApplyTeam from "../page/team/ApplyTeam";
 import TeamLogDetail from "../page/team/TeamLogDetail";
+import ApplyUserList from "../page/team/ApplyUserList";
+import ApproveTeamApply from "../page/team/ApproveTeamApply";
 
 export const rootCam = 'Init'
 
@@ -114,6 +116,18 @@ const MainNavigator = createStackNavigator({
     },
     TeamLogDetail: {
         screen: TeamLogDetail,
+        navigationOptions: {
+            header: null
+        }
+    },
+    ApplyUserList: {
+        screen: ApplyUserList,
+        navigationOptions: {
+            header: null
+        }
+    },
+    ApproveTeamApply: {
+        screen: ApproveTeamApply,
         navigationOptions: {
             header: null
         }

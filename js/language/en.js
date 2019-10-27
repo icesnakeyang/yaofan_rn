@@ -68,9 +68,11 @@ export default {
         btCreateTeam: 'Create Team',
         applyTime: 'Apply time',
         processResult: 'Result',
-        processTime: 'Process time'
+        processTime: 'Process time',
+        Approve:'Approve Candidate'
     },
     syserr: {
-        '10002': 'Username and password error'
+        '10002': 'Username and password error',
+        '10007': 'You have applied this team already, please wait for procedure'
     }
 }

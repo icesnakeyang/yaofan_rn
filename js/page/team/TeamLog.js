@@ -41,13 +41,12 @@ class TeamLog extends Component {
     _renderItem(data) {
         let teamName = ''
         let managerName = ''
-        console.log(data)
         if (data && data.item) {
             if (data.item.applyTeamName) {
                 teamName = data.item.applyTeamName
             }
-            if (data.item.managerName) {
-                managerName = data.item.managerName
+            if (data.item.applyUserName) {
+                managerName = data.item.applyUserName
             }
         }
         return (
@@ -56,9 +55,16 @@ class TeamLog extends Component {
                 content={managerName}
                 showLabel={true}
                 touchFunction={() => {
-                    NavigationUtil.goPage({
-                        teamId: data.item.applyTeamId
-                    }, 'TeamLogDetail')
+                    if (data.item.applyUserId === this.props.user.userInfo.userId) {
+                        NavigationUtil.goPage({
+                            teamId: data.item.applyTeamId
+                        }, 'TeamLogDetail')
+                    }
+                    if (data.item.managerId === this.props.user.userInfo.userId) {
+                        NavigationUtil.goPage({
+                            teamId: data.item.applyTeamId
+                        }, 'ApproveTeamApply')
+                    }
                 }}
             />
         )

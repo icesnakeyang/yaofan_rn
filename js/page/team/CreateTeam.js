@@ -49,7 +49,7 @@ class CreateTeam extends Component {
         createTeam(params, (result) => {
             if (result) {
                 DeviceEventEmitter.emit('Refresh_MyTeam')
-                NavigationUtil.goPage({}, 'MyTeam')
+                NavigationUtil.goPage({}, 'TeamHome')
             }
         })
     }

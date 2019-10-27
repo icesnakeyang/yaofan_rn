@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    FlatList
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
@@ -13,7 +13,7 @@ class MyTeam extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listTeam: []
+            teamList: []
         }
     }
 
@@ -55,12 +55,12 @@ class MyTeam extends Component {
     _renderItem(data) {
         let teamName = ''
         let managerName = ''
-        if (data && data.item) {
-            if (data.item.teamName) {
-                teamName = data.item.teamName
+        if (data) {
+            if (data.teamName) {
+                teamName = data.teamName
             }
-            if (data.item.managerName) {
-                managerName = data.item.managerName
+            if (data.managerName) {
+                managerName = data.managerName
             }
         }
         return (
@@ -76,9 +76,12 @@ class MyTeam extends Component {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: '#ffff00',
+                backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
-                <Text>my teams</Text>
+                <FlatList
+                    data={this.state.teamList}
+                    renderItem={({item}) => this._renderItem(item)}
+                />
             </View>
         )
     }
@@ -86,11 +89,12 @@ class MyTeam extends Component {
 
 const mapStateToProps = state => ({
     theme: state.theme,
-    user: state.user
+    user: state.user,
+    team: state.team
 })
 
 const mapDispatchToProps = dispatch => ({
-    listTeam: (params, callback) => dispatch => (actions.listTeam(params, callback))
+    listTeam: (params, callback) => dispatch(actions.listTeam(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyTeam)

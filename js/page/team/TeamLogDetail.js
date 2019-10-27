@@ -47,10 +47,16 @@ class TeamLogDetail extends Component {
 
     _showData() {
         let showData = {
-            teamName: ''
+            teamName: '',
+            applyRemark: ''
         }
         if (this.props.team && this.props.team.applyTeam) {
-            showData.teamName = this.props.team.applyTeam.applyTeamName
+            if (this.props.team.applyTeam.applyTeamName) {
+                showData.teamName = this.props.team.applyTeam.applyTeamName
+            }
+            if (this.props.team.applyTeam.applyRemark) {
+                showData.applyRemark = this.props.team.applyTeam.applyRemark
+            }
         }
         return showData
     }
@@ -67,7 +73,7 @@ class TeamLogDetail extends Component {
                 leftButton={this.getLeftButton()}
             />
         )
-        const showData=this._showData()
+        const showData = this._showData()
         return (
             <View style={{
                 flex: 1,
@@ -99,7 +105,7 @@ class TeamLogDetail extends Component {
                         margin: 10,
                         padding: 10,
                     }}>
-                        <Text style={{fontSize: 12, flex: 1}}>行行好吧，给口饭吃</Text>
+                        <Text style={{fontSize: 12, flex: 1}}>{showData.applyRemark}</Text>
                     </View>
                 </View>
                 <View style={{marginTop: 20, backgroundColor: this.props.theme.color.THEME_ROW_COLOR}}>

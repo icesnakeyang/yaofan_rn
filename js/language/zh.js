@@ -68,9 +68,11 @@ export default {
         btCreateTeam:'创建团队',
         applyTime:'申请时间',
         processResult:'处理结果',
-        processTime:'处理时间'
+        processTime:'处理时间',
+        Approve:'审核团队申请'
     },
     syserr: {
-        '10002': '用户名或密码错误'
+        '10002': '用户名或密码错误',
+        10007: '该用户已经申请过该团队了，请等待团队管理员处理'
     }
 }

@@ -151,8 +151,7 @@ export function applyTeam(params, callback) {
             .then((response) => {
                 if (response.code === 0) {
                     dispatch({
-                        type: Types.TEAM_APPLY_TEAM_SUCCESS,
-                        applyTeam: response.data.applyTeam
+                        type: Types.TEAM_APPLY_TEAM_SUCCESS
                     })
                     setTimeout(() => {
                         callback(true)
@@ -164,7 +163,7 @@ export function applyTeam(params, callback) {
             .catch((error) => {
                 dispatch({
                     type: Types.TEAM_APPLY_TEAM_FAIL,
-                    error: error
+                    error: error.message
                 })
                 setTimeout(() => {
                     callback(false)
