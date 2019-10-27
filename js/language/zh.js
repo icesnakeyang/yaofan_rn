@@ -1,5 +1,10 @@
 export default {
     title: '次第乞食',
+    status:{
+        reject:'已拒绝',
+        unProcess:'未处理',
+        agree:'已同意'
+    },
     bottomBar: {
         plaza: '任务广场',
         team: '团队任务',
@@ -72,10 +77,14 @@ export default {
         Approve:'审核团队申请',
         processRemark:'处理意见',
         btAgree:'同意',
-        btReject:'拒绝'
+        tipAgreeSuccess:'已同意该用户加入团队',
+        btReject:'拒绝',
+        tipRejectSuccess:'已拒绝该用户加入团队'
     },
     syserr: {
         '10002': '用户名或密码错误',
-        10007: '该用户已经申请过该团队了，请等待团队管理员处理'
+        10007: '该用户已经申请过该团队了，请等待团队管理员处理',
+        10011:'当前处理的申请已经被处理过了'
+
     }
 }

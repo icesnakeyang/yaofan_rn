@@ -9,6 +9,7 @@ import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import actions from "../../action";
 import {connect} from "react-redux";
+import moment from "moment";
 
 class TeamLogDetail extends Component {
     constructor(props) {
@@ -28,10 +29,11 @@ class TeamLogDetail extends Component {
         const {getApplyTeam} = this.props
         let params = {
             token: this.props.user.userInfo.token,
-            teamId: this.props.navigation.state.params.teamId
+            applyId: this.props.navigation.state.params.applyId
         }
         getApplyTeam(params, (result) => {
             if (result) {
+                console.log(this.props)
             }
         })
 
@@ -46,14 +48,38 @@ class TeamLogDetail extends Component {
     _showData() {
         let showData = {
             teamName: '',
-            applyRemark: ''
+            applyUserName: '',
+            applyTime: '',
+            applyRemark: '',
+            processResult: I18nJs.t('status.unProcess'),
+            processTime: '',
+            processRemark: ''
         }
         if (this.props.team && this.props.team.applyTeam) {
             if (this.props.team.applyTeam.applyTeamName) {
                 showData.teamName = this.props.team.applyTeam.applyTeamName
             }
+            if (this.props.team.applyTeam.applyUserName) {
+                showData.applyUserName = this.props.team.applyTeam.applyUserName
+            }
+            if (this.props.team.applyTeam.applyTime) {
+                showData.applyTime = moment(this.props.team.applyTeam.applyTime).format('YYYY-MM-DD HH:mm:ss')
+            }
             if (this.props.team.applyTeam.applyRemark) {
                 showData.applyRemark = this.props.team.applyTeam.applyRemark
+            }
+            if (this.props.team.applyTeam.processResult === 'REJECT') {
+                showData.processResult = I18nJs.t('status.reject')
+            } else {
+                if (this.props.team.applyTeam.processResult === 'AGREE') {
+                    showData.processResult = I18nJs.t('status.agree')
+                }
+            }
+            if (this.props.team.applyTeam.processTime) {
+                showData.processTime = moment(this.props.team.applyTeam.processTime).format('YYYY-MM-DD HH:mm:ss')
+            }
+            if (this.props.team.applyTeam.processRemark) {
+                showData.processRemark = this.props.team.applyTeam.processRemark
             }
         }
         return showData
@@ -93,8 +119,11 @@ class TeamLogDetail extends Component {
                             {showData.teamName}
                         </Text>
                     </View>
+                    <View>
+                        <Text>{showData.applyUserName}</Text>
+                    </View>
                     <View style={{marginTop: 10}}>
-                        <Text>{I18nJs.t('team.applyTime')}：2012-12-12</Text>
+                        <Text>{I18nJs.t('team.applyTime')}：{showData.applyTime}</Text>
                     </View>
                     <View style={{
                         flexDirection: 'row',
@@ -112,7 +141,7 @@ class TeamLogDetail extends Component {
                             {I18nJs.t('team.processResult')}
                         </Text>
                         <Text style={{marginLeft: 10}}>
-                            已拒绝
+                            {showData.processResult}
                         </Text>
                     </View>
                     <View style={{flexDirection: 'row', padding: 10}}>
@@ -120,7 +149,7 @@ class TeamLogDetail extends Component {
                             {I18nJs.t('team.processTime')}
                         </Text>
                         <Text style={{marginLeft: 10}}>
-                            2019-12-11
+                            {showData.processTime}
                         </Text>
                     </View>
                     <View style={{
@@ -130,7 +159,7 @@ class TeamLogDetail extends Component {
                         padding: 10
 
                     }}>
-                        <Text style={{fontSize: 12}}>抱歉，你不适合我公司</Text>
+                        <Text style={{fontSize: 12}}>{showData.processRemark}</Text>
                     </View>
                 </View>
             </View>

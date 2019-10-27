@@ -1,7 +1,8 @@
 import {loadLanguage} from "./language";
 import {autoLogin, login, updateUsername} from "./user/login";
 import {
-    applyTeam,
+    agreeApplyTeam,
+    applyTeam, clearTeam,
     createTeam,
     getApplyTeam,
     getTeamByTeamId,
@@ -23,5 +24,7 @@ export default {
     applyTeam,
     listApplyTeam,
     getApplyTeam,
-    rejectApplyTeam
+    rejectApplyTeam,
+    agreeApplyTeam,
+    clearTeam
 }

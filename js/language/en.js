@@ -1,5 +1,10 @@
 export default {
     title: 'YAO FAN',
+    status: {
+        reject: 'Rejected',
+        unProcess: 'Un-Process',
+        agree: 'Agreed'
+    },
     bottomBar: {
         plaza: 'Plaza',
         team: 'Team',
@@ -72,10 +77,13 @@ export default {
         Approve: 'Approve Candidate',
         processRemark: 'Please describe procession',
         btAgree: 'Agree',
-        btReject: 'Reject'
+        tipAgreeSuccess: 'This user has joined the team',
+        btReject: 'Reject',
+        tipRejectSuccess: 'Rejected this user to join the team'
     },
     syserr: {
         '10002': 'Username and password error',
-        '10007': 'You have applied this team already, please wait for procedure'
+        '10007': 'You have applied this team already, please wait for procedure',
+        10011: 'This application has been processed already'
     }
 }

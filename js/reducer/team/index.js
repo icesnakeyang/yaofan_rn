@@ -87,6 +87,12 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Tyeps.TEAM_CLEAR:
+            return {
+                ...state,
+                applyTeam: null,
+                team: null
+            }
         default:
             return state
     }

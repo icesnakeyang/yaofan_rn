@@ -11,7 +11,7 @@ import {I18nJs} from "../../language/I18n";
 import actions from "../../action";
 import TouchButton from "../../common/component/TouchButton";
 import moment from "moment";
-import {rejectApplyTeam} from "../../action/team";
+import Toast from 'react-native-easy-toast'
 
 class ApproveTeamApply extends Component {
     constructor(props) {
@@ -51,21 +51,49 @@ class ApproveTeamApply extends Component {
     _reject() {
         const {rejectApplyTeam} = this.props
         let params = {
+            token:this.props.user.userInfo.token,
             remark: this.state.processRemark,
             applyId: this.props.team.applyTeam.applyTeamLogId
         }
         rejectApplyTeam(params, (result) => {
+            console.log(result)
             if (result) {
-
+                this.refs.toast.show(I18nJs.t('team.tipRejectSuccess'))
+            }else{
+                this.refs.toast.show(I18nJs.t('syserr.'+this.props.team.error))
             }
         })
     }
 
     _agree() {
+        const {agreeApplyTeam} = this.props
+        let params = {
+            token:this.props.user.userInfo.token,
+            remark: this.state.processRemark,
+            applyId: this.props.team.applyTeam.applyTeamLogId
+        }
+        agreeApplyTeam(params, (result) => {
+            console.log(result)
+            if (result) {
+                this.refs.toast.show(I18nJs.t('team.tipAgreeSuccess'))
+            }else{
+                this.refs.toast.show(I18nJs.t('syserr.'+this.props.team.error))
+            }
+        })
+    }
 
+    _showData(){
+        let showData={
+            applyTime:''
+        }
+        if(this.state.applyTeam.applyTime){
+            showData.applyTime=moment(this.state.applyTeam.applyTime).format('YYYY-MM-DD HH:mm:ss')
+        }
+        return showData
     }
 
     render() {
+        const showData=this._showData()
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
@@ -96,7 +124,7 @@ class ApproveTeamApply extends Component {
                         <Text style={{fontSize: 20}}>{this.state.applyTeam.applyUserName}</Text>
                     </View>
                     <View style={{marginTop: 10}}>
-                        <Text>{moment(this.state.applyTeam.applyTime).format('YYYY-MM-DD')}</Text>
+                        <Text>{showData.applyTime}</Text>
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <View style={{
@@ -143,6 +171,9 @@ class ApproveTeamApply extends Component {
                         </View>
                     </View>
                 </View>
+                <Toast ref={'toast'}
+                       position={'center'}
+                />
             </View>
         )
     }
@@ -156,7 +187,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     getApplyTeam: (params, callback) => dispatch(actions.getApplyTeam(params, callback)),
-    rejectApplyTeam: (params, callback) => dispatch(actions.rejectApplyTeam(params, callback))
+    rejectApplyTeam: (params, callback) => dispatch(actions.rejectApplyTeam(params, callback)),
+    agreeApplyTeam: (params, callback) => dispatch(actions.agreeApplyTeam(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApproveTeamApply)

@@ -55,16 +55,27 @@ class TeamLog extends Component {
                 content={managerName}
                 showLabel={true}
                 touchFunction={() => {
-                    if (data.item.applyUserId === this.props.user.userInfo.userId) {
-                        NavigationUtil.goPage({
-                            teamId: data.item.applyTeamId
-                        }, 'TeamLogDetail')
-                    }
-                    if (data.item.managerId === this.props.user.userInfo.userId) {
-                        NavigationUtil.goPage({
-                            applyId: data.item.applyTeamLogId
-                        }, 'ApproveTeamApply')
-                    }
+                    console.log(data)
+                    const {clearTeam} = this.props
+                    clearTeam(() => {
+                        if (data.item.applyUserId === this.props.user.userInfo.userId) {
+                            NavigationUtil.goPage({
+                                applyId: data.item.applyTeamLogId
+                            }, 'TeamLogDetail')
+                            return
+                        }
+                        if (data.item.processResult) {
+                            NavigationUtil.goPage({
+                                applyId: data.item.applyTeamLogId
+                            }, 'TeamLogDetail')
+                            return
+                        }
+                        if (data.item.managerId === this.props.user.userInfo.userId) {
+                            NavigationUtil.goPage({
+                                applyId: data.item.applyTeamLogId
+                            }, 'ApproveTeamApply')
+                        }
+                    })
                 }}
             />
         )
@@ -89,7 +100,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    listApplyTeam: (params, callback) => dispatch(actions.listApplyTeam(params, callback))
+    listApplyTeam: (params, callback) => dispatch(actions.listApplyTeam(params, callback)),
+    clearTeam: (callback) => dispatch(actions.clearTeam(callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TeamLog)
