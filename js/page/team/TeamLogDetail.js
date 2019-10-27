@@ -32,7 +32,6 @@ class TeamLogDetail extends Component {
         }
         getApplyTeam(params, (result) => {
             if (result) {
-                console.log(this.props)
             }
         })
 

@@ -69,7 +69,10 @@ export default {
         applyTime: 'Apply time',
         processResult: 'Result',
         processTime: 'Process time',
-        Approve:'Approve Candidate'
+        Approve: 'Approve Candidate',
+        processRemark: 'Please describe procession',
+        btAgree: 'Agree',
+        btReject: 'Reject'
     },
     syserr: {
         '10002': 'Username and password error',

@@ -39,7 +39,6 @@ class TeamLog extends Component {
     }
 
     _renderItem(data) {
-        console.log(data)
         let teamName = ''
         let managerName = ''
         if (data && data.item) {

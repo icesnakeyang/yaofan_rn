@@ -239,3 +239,38 @@ export function getApplyTeam(params, callback) {
     }
 
 }
+
+export function rejectApplyTeam(params, callback) {
+    return dispatch => {
+        let url = API.apiRejectApplyTeam
+        let body = {
+            remark: params.remark,
+            applyId: params.applyId
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TEAM_PROCESS_APPLY_TEAM_SUCCESS
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TEAM_PROCESS_APPLY_TEAM_FAIL,
+                    error: error.message
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+
+}

@@ -25,13 +25,13 @@ class TouchButton extends Component {
         // if (this.props.showLabel) {
         return (
             <TouchableOpacity
-                style={{
+                style={[{
                     backgroundColor: this.props.theme.color.THEME_BUTTON_COLOR,
                     height: 35,
                     justifyContent:'center',
                     alignItems:'center',
                     margin:10
-                }}
+                },this.props.style]}
                 onPress={this.props.touchFunction}
             >
                 <View>

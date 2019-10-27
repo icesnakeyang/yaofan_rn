@@ -69,7 +69,10 @@ export default {
         applyTime:'申请时间',
         processResult:'处理结果',
         processTime:'处理时间',
-        Approve:'审核团队申请'
+        Approve:'审核团队申请',
+        processRemark:'处理意见',
+        btAgree:'同意',
+        btReject:'拒绝'
     },
     syserr: {
         '10002': '用户名或密码错误',
