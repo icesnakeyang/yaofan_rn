@@ -25,7 +25,6 @@ class TeamLogDetail extends Component {
     }
 
     _loadAllData() {
-        console.log(this.props)
         const {getApplyTeam} = this.props
         let params = {
             token: this.props.user.userInfo.token,

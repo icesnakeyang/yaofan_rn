@@ -209,7 +209,7 @@ export function getApplyTeam(params, callback) {
     return dispatch => {
         let url = API.apiGetApplyTeam
         let body = {
-            teamId: params.teamId
+            applyId: params.applyId
         }
         let token = params.token
         let dataStore = new DataStore()

@@ -39,6 +39,7 @@ class TeamLog extends Component {
     }
 
     _renderItem(data) {
+        console.log(data)
         let teamName = ''
         let managerName = ''
         if (data && data.item) {
@@ -62,7 +63,7 @@ class TeamLog extends Component {
                     }
                     if (data.item.managerId === this.props.user.userInfo.userId) {
                         NavigationUtil.goPage({
-                            teamId: data.item.applyTeamId
+                            applyId: data.item.applyTeamLogId
                         }, 'ApproveTeamApply')
                     }
                 }}

@@ -7,13 +7,26 @@ import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
+import actions from "../../action";
 
 class ApproveTeamApply extends Component {
-    componentDidMount(){
+    componentDidMount() {
         this._loadAllData()
     }
 
-    _loadAllData(){
+    _loadAllData() {
+        console.log(this.props.navigation.state.params)
+        let applyTeamId = this.props.navigation.state.params.applyId
+        const {getApplyTeam} = this.props
+        let params = {
+            applyId:applyTeamId,
+            token:this.props.user.userInfo.token
+        }
+        getApplyTeam(params, (result) => {
+            if (result) {
+                console.log(this.props)
+            }
+        })
     }
 
 
@@ -50,6 +63,10 @@ const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
     team: state.team
+})
+
+const mapDispatchToProps = dispatch => ({
+    getApplyTeam: (params, callback) => dispatch(actions.getApplyTeam(params, callback))
 })
 
 export default connect(mapStateToProps)(ApproveTeamApply)
