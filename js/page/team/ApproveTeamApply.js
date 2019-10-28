@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text
+    Text,
+    DeviceEventEmitter
 } from 'react-native'
 import Textarea from 'react-native-textarea'
 import {connect} from "react-redux";
@@ -12,6 +13,7 @@ import actions from "../../action";
 import TouchButton from "../../common/component/TouchButton";
 import moment from "moment";
 import Toast from 'react-native-easy-toast'
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class ApproveTeamApply extends Component {
     constructor(props) {
@@ -51,16 +53,17 @@ class ApproveTeamApply extends Component {
     _reject() {
         const {rejectApplyTeam} = this.props
         let params = {
-            token:this.props.user.userInfo.token,
+            token: this.props.user.userInfo.token,
             remark: this.state.processRemark,
             applyId: this.props.team.applyTeam.applyTeamLogId
         }
         rejectApplyTeam(params, (result) => {
-            console.log(result)
             if (result) {
                 this.refs.toast.show(I18nJs.t('team.tipRejectSuccess'))
-            }else{
-                this.refs.toast.show(I18nJs.t('syserr.'+this.props.team.error))
+                DeviceEventEmitter.emit('Refresh_TeamLog')
+                NavigationUtil.goPage({}, 'TeamHome')
+            } else {
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.team.error))
             }
         })
     }
@@ -68,32 +71,34 @@ class ApproveTeamApply extends Component {
     _agree() {
         const {agreeApplyTeam} = this.props
         let params = {
-            token:this.props.user.userInfo.token,
+            token: this.props.user.userInfo.token,
             remark: this.state.processRemark,
             applyId: this.props.team.applyTeam.applyTeamLogId
         }
         agreeApplyTeam(params, (result) => {
-            console.log(result)
             if (result) {
                 this.refs.toast.show(I18nJs.t('team.tipAgreeSuccess'))
-            }else{
-                this.refs.toast.show(I18nJs.t('syserr.'+this.props.team.error))
+                DeviceEventEmitter.emit('Refresh_TeamLog')
+                NavigationUtil.goPage({}, 'TeamHome')
+
+            } else {
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.team.error))
             }
         })
     }
 
-    _showData(){
-        let showData={
-            applyTime:''
+    _showData() {
+        let showData = {
+            applyTime: ''
         }
-        if(this.state.applyTeam.applyTime){
-            showData.applyTime=moment(this.state.applyTeam.applyTime).format('YYYY-MM-DD HH:mm:ss')
+        if (this.state.applyTeam.applyTime) {
+            showData.applyTime = moment(this.state.applyTeam.applyTime).format('YYYY-MM-DD HH:mm:ss')
         }
         return showData
     }
 
     render() {
-        const showData=this._showData()
+        const showData = this._showData()
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }

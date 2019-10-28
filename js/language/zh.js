@@ -3,7 +3,8 @@ export default {
     status:{
         reject:'已拒绝',
         unProcess:'未处理',
-        agree:'已同意'
+        agree:'已同意',
+        unRead:'未阅读'
     },
     bottomBar: {
         plaza: '任务广场',
@@ -79,12 +80,17 @@ export default {
         btAgree:'同意',
         tipAgreeSuccess:'已同意该用户加入团队',
         btReject:'拒绝',
-        tipRejectSuccess:'已拒绝该用户加入团队'
+        tipRejectSuccess:'已拒绝该用户加入团队',
+        applyReadTime:'申请阅读时间',
+        teamDetail:'团队详情',
+        teamCreateDate:'团队创建时间',
+        teamManager:'团队管理员'
     },
     syserr: {
         '10002': '用户名或密码错误',
-        10007: '该用户已经申请过该团队了，请等待团队管理员处理',
-        10011:'当前处理的申请已经被处理过了'
+        10007: '您已经申请过该团队了，请等待团队管理员处理',
+        10011:'当前处理的申请已经被处理过了',
+        10012:'您已经是该团队成员了'
 
     }
 }

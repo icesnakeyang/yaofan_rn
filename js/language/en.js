@@ -3,7 +3,8 @@ export default {
     status: {
         reject: 'Rejected',
         unProcess: 'Un-Process',
-        agree: 'Agreed'
+        agree: 'Agreed',
+        unRead: 'Un-Read'
     },
     bottomBar: {
         plaza: 'Plaza',
@@ -79,11 +80,16 @@ export default {
         btAgree: 'Agree',
         tipAgreeSuccess: 'This user has joined the team',
         btReject: 'Reject',
-        tipRejectSuccess: 'Rejected this user to join the team'
+        tipRejectSuccess: 'Rejected this user to join the team',
+        applyReadTime: 'Read time',
+        teamDetail:'Team Detail',
+        teamCreateDate:'Create time',
+        teamManager:'Manager'
     },
     syserr: {
         '10002': 'Username and password error',
         '10007': 'You have applied this team already, please wait for procedure',
-        10011: 'This application has been processed already'
+        10011: 'This application has been processed already',
+        10012:'You are in the team already'
     }
 }

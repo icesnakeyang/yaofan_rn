@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {
     View,
     Text,
-    FlatList
+    FlatList,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -19,7 +20,16 @@ class TeamLog extends Component {
 
     componentDidMount() {
         this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_TeamLog', (params) => {
+            console.log('refresh has been called')
+            this._loadAllData()
+        })
     }
+
+    componentWillUnmount(){
+        this.listener.remove()
+    }
+
 
     _loadAllData() {
         if (!(this.props.user && this.props.user.userInfo)) {

@@ -8,6 +8,8 @@ import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import actions from "../../action";
 import InputRow from "../../common/component/InputRow";
+import NavigationUtil from "../../navigator/NavigationUtil";
+import {clearTeam} from "../../action/team";
 
 class MyTeam extends Component {
     constructor(props) {
@@ -65,6 +67,13 @@ class MyTeam extends Component {
         }
         return (
             <InputRow
+                touchFunction={() => {
+                    console.log(data)
+                    const {clearTeam} = this.props
+                    clearTeam(() => {
+                        NavigationUtil.goPage({teamId: data.teamId}, 'TeamDetail')
+                    })
+                }}
                 label={teamName}
                 content={managerName}
                 showLabel={true}
@@ -94,7 +103,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    listTeam: (params, callback) => dispatch(actions.listTeam(params, callback))
+    listTeam: (params, callback) => dispatch(actions.listTeam(params, callback)),
+    clearTeam: (callback) => dispatch(actions.clearTeam(callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyTeam)

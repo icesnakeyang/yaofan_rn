@@ -46,14 +46,16 @@ class TeamLogDetail extends Component {
     }
 
     _showData() {
+        console.log(this.props.team)
         let showData = {
             teamName: '',
             applyUserName: '',
             applyTime: '',
             applyRemark: '',
-            processResult: I18nJs.t('status.unProcess'),
+            processResult: '',
             processTime: '',
-            processRemark: ''
+            processRemark: '',
+            readTime: ''
         }
         if (this.props.team && this.props.team.applyTeam) {
             if (this.props.team.applyTeam.applyTeamName) {
@@ -68,18 +70,27 @@ class TeamLogDetail extends Component {
             if (this.props.team.applyTeam.applyRemark) {
                 showData.applyRemark = this.props.team.applyTeam.applyRemark
             }
-            if (this.props.team.applyTeam.processResult === 'REJECT') {
-                showData.processResult = I18nJs.t('status.reject')
-            } else {
-                if (this.props.team.applyTeam.processResult === 'AGREE') {
-                    showData.processResult = I18nJs.t('status.agree')
+            if (this.props.team.applyTeam.processResult) {
+                if (this.props.team.applyTeam.processResult === 'REJECT') {
+                    showData.processResult = I18nJs.t('status.reject')
+                } else {
+                    if (this.props.team.applyTeam.processResult === 'AGREE') {
+                        showData.processResult = I18nJs.t('status.agree')
+                    }
                 }
+            } else {
+                showData.processResult = I18nJs.t('status.unProcess')
             }
             if (this.props.team.applyTeam.processTime) {
                 showData.processTime = moment(this.props.team.applyTeam.processTime).format('YYYY-MM-DD HH:mm:ss')
             }
             if (this.props.team.applyTeam.processRemark) {
                 showData.processRemark = this.props.team.applyTeam.processRemark
+            }
+            if (this.props.team.applyTeam.readTime) {
+                showData.readTime = moment(this.props.team.applyTeam.readTime).format('YYYY-MM-DD HH:mm:ss')
+            } else {
+                showData.readTime = I18nJs.t('status.unRead')
             }
         }
         return showData
@@ -136,6 +147,10 @@ class TeamLogDetail extends Component {
                     </View>
                 </View>
                 <View style={{marginTop: 20, backgroundColor: this.props.theme.color.THEME_ROW_COLOR}}>
+                    <View style={{flexDirection: 'row', padding: 10}}>
+                        <Text>{I18nJs.t('team.applyReadTime')}：</Text>
+                        <Text>{showData.readTime}</Text>
+                    </View>
                     <View style={{flexDirection: 'row', padding: 10}}>
                         <Text>
                             {I18nJs.t('team.processResult')}
