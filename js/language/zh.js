@@ -57,7 +57,12 @@ export default {
         title: '任务广场'
     },
     tasks: {
-        newTask: '创建任务'
+        newTask: '创建任务',
+        myTasks:'我的任务',
+        setEndTime:'设置完成时间',
+        setEndTimeHolder:'设置任务完成时间',
+        taskTitleHolder:'任务标题',
+        taskDetailHolder:'任务详情',
     },
     team:{
         teamTask:'团队任务',

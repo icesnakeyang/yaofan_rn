@@ -57,7 +57,12 @@ export default {
         title: 'Task Plaza'
     },
     tasks: {
-        newTask: 'New Task'
+        newTask: 'New Task',
+        myTasks:'My Tasks',
+        setEndTime:'Set Time',
+        setEndTimeHolder:'Set task end time',
+        taskTitleHolder:'Title',
+        taskDetailHolder:'Description',
     },
     team: {
         teamTask: 'Team Tasks',

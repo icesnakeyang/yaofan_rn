@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text,
     Dimensions,
     TouchableOpacity,
     DeviceEventEmitter
@@ -13,6 +12,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationUtil from "../../navigator/NavigationUtil";
 import NavigationBar from "../../common/component/NavigationBar";
+import {I18nJs} from "../../language/I18n";
 
 class DateTimePicker extends Component {
     constructor(props) {
@@ -30,10 +30,7 @@ class DateTimePicker extends Component {
     }
 
     loadAllData() {
-        this.setState({
-            param: this.props.navigation.state.params.param,
-            value: this.props.navigation.state.params.value
-        })
+
     }
 
 
@@ -49,13 +46,13 @@ class DateTimePicker extends Component {
                 <View style={{padding: 5, paddingRight: 8}}>
                     <TouchableOpacity
                         onPress={() => {
-                            this.saveTheTrigger()
+                            this._setTime()
                         }}
                     >
                         <Ionicons
-                            name={'md-checkmark'}
+                            name={'ios-checkmark'}
                             size={26}
-                            style={{color: this.props.theme.THEME_HEAD_TEXT}}
+                            style={{color: this.props.theme.color.THEME_HEAD_TEXT}}
                         />
                     </TouchableOpacity>
                 </View>
@@ -63,41 +60,28 @@ class DateTimePicker extends Component {
         )
     }
 
-    saveTheTrigger() {
-        const {saveTrigger} = this.props
-        let trigger = this.props.trigger.trigger
-        if (trigger.gogoKey.keyParams.length > 0) {
-            trigger.gogoKey.keyParams.forEach((item, index) => {
-                if (item.param === this.state.param) {
-                    item.value = this.state.value
-                }
-            })
+    _setTime() {
+        console.log(this.state.value)
+        if (this.state.value) {
+            console.log('有')
+            NavigationUtil.goPage({endTime: this.state.value}, 'NewTask')
         } else {
-            trigger.gogoKey.keyParams = [
-                {
-                    param: this.state.param,
-                    value: this.state.value
-                }
-            ]
+            console.log('没有')
         }
+        return
+        DeviceEventEmitter.emit('refresh_key_detail')
 
-        saveTrigger(trigger, (result) => {
-            if (result) {
-                DeviceEventEmitter.emit('refresh_key_detail')
-                NavigationUtil.goPage({}, 'KeyDetail')
-            }
-        })
     }
 
     render() {
         let statusBar = {
-            backgroundColor: this.props.theme.THEME_HEAD_COLOR
+            backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
         let navigationBar = (
             <NavigationBar
                 statusBar={statusBar}
-                title={'设置时间'}
-                style={{backgroundColor: this.props.theme.THEME_HEAD_COLOR}}
+                title={I18nJs.t('tasks.setEndTime')}
+                style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
                 leftButton={this.getLeftButton()}
                 rightButton={this.GetRightButton()}
             />
@@ -110,7 +94,7 @@ class DateTimePicker extends Component {
                         style={{width: this.state.width}}
                         date={this.state.value}
                         mode='datetime'
-                        placeholder="select date"
+                        placeholder={I18nJs.t('tasks.setEndTimeHolder')}
                         format="YYYY-MM-DD HH:mm"
                         confirmBtnText="confirm"
                         cancelBtnText="cancel"
@@ -125,12 +109,9 @@ class DateTimePicker extends Component {
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme.theme,
-    trigger: state.trigger
+    theme: state.theme
 })
 
-const mapDispatchToProps = dispatch => ({
-    saveTrigger: (params, callback) => dispatch(actions.saveTrigger(params, callback))
-})
+const mapDispatchToProps = dispatch => ({})
 
 export default connect(mapStateToProps, mapDispatchToProps)(DateTimePicker)
