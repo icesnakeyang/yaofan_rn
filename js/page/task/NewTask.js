@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text,
     Dimensions,
-    TextInput
+    TextInput,
+    TouchableOpacity
 } from 'react-native'
 import Textarea from 'react-native-textarea'
 import {connect} from "react-redux";
@@ -12,6 +12,8 @@ import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import InputRow from "../../common/component/InputRow";
 import NavigationUtil from "../../navigator/NavigationUtil";
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import actions from "../../action";
 
 class NewTask extends Component {
     constructor(props) {
@@ -22,7 +24,8 @@ class NewTask extends Component {
             title: '',
             height: height,
             width: width,
-            endTime: ''
+            endTime: '',
+            point: ''
         }
     }
 
@@ -32,17 +35,52 @@ class NewTask extends Component {
         )
     }
 
-    _showData() {
-        console.log('show')
-        let showData = {
-            endTime: ''
+    getRightButton() {
+        return (
+            <View>
+                <TouchableOpacity
+                    style={{margin: 5, marginRight: 8}}
+                    onPress={() => {
+                        this._createTask()
+                    }}
+                >
+                    <Ionicons
+                        name={'ios-checkmark'}
+                        size={36}
+                        style={{color: this.props.theme.color.THEME_HEAD_TEXT}}
+                    />
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    _createTask() {
+        console.log(this.state)
+        console.log(this.props)
+
+        let task = {
+            endTime: this.props.navigation.state.params.endTime,
+            title: this.state.title,
+            detail: this.state.editDetail
         }
-        if (this.props.navigation.state.params && this.props.navigation.state.params.endTime) {
-            this.setState({
-                endTime: this.props.navigation.state.params.endTime
-            })
+
+        console.log(task)
+
+        const {createTask} = this.props
+        let params = {
+            token: this.props.user.userInfo.token,
+            detail: task.detail,
+            title: task.title,
+            endTime: task.endTime,
+            point: this.props.navigation.state.params.point
         }
-        return showData
+        console.log(params)
+        createTask(params, (result) => {
+            console.log(result)
+            if(result){
+
+            }
+        })
     }
 
     render() {
@@ -57,6 +95,7 @@ class NewTask extends Component {
                 statusBar={statusBar}
                 style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
                 leftButton={this.getLeftButton()}
+                rightButton={this.getRightButton()}
             />
         )
         return (
@@ -75,6 +114,16 @@ class NewTask extends Component {
                         onChangeText={(title) => this.setState({title})}
                     />
                 </View>
+                <View>
+                    <InputRow
+                        label={I18nJs.t('tasks.point')}
+                        content={this.props.navigation.state.params.point}
+                        showLabel={true}
+                        touchFunction={() => {
+                            NavigationUtil.goPage({point: this.props.navigation.state.params.point}, 'TaskPoint')
+                        }}
+                    />
+                </View>
                 <View style={{
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
                     marginTop: 20,
@@ -89,7 +138,7 @@ class NewTask extends Component {
                 <View>
                     <InputRow
                         touchFunction={() => {
-                            NavigationUtil.goPage({}, 'DateTimePicker')
+                            NavigationUtil.goPage({endTime: this.props.navigation.state.params.endTime}, 'DateTimePicker')
                         }}
                         label={I18nJs.t('tasks.setEndTime')}
                         content={this.props.navigation.state.params.endTime}
@@ -106,4 +155,7 @@ const mapStateToProps = state => ({
     user: state.user
 })
 
-export default connect(mapStateToProps)(NewTask)
+const mapDispatchToProps = dispatch => ({
+    createTask: (params, callback) => dispatch(actions.createTask(params, callback))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(NewTask)

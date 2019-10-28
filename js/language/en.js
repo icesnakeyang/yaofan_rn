@@ -63,6 +63,7 @@ export default {
         setEndTimeHolder:'Set task end time',
         taskTitleHolder:'Title',
         taskDetailHolder:'Description',
+        point:'Task point',
     },
     team: {
         teamTask: 'Team Tasks',

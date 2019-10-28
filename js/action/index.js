@@ -11,6 +11,7 @@ import {
     rejectApplyTeam,
     searchTeam
 } from "./team";
+import {createTask} from "./task";
 
 export default {
     loadLanguage,
@@ -26,5 +27,6 @@ export default {
     getApplyTeam,
     rejectApplyTeam,
     agreeApplyTeam,
-    clearTeam
+    clearTeam,
+    createTask
 }
