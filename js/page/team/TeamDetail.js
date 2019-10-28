@@ -89,31 +89,60 @@ class TeamDetail extends Component {
         )
         return (
             <View style={{
-                flex:1,
+                flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 {navigationBar}
                 <View style={{
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    marginTop:20,
-                    justifyContent:'center',
-                    alignItems:'center',
-                    height:50
+                    marginTop: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: 50
                 }}>
-                    <Text style={{fontSize:20}}>{showData.teamName}</Text>
+                    <Text style={{fontSize: 20}}>{showData.teamName}</Text>
                 </View>
                 <View style={{
-                    flexDirection:'row',
-                    justifyContent:'flex-end'
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: 20
                 }}>
-                    <Text>{I18nJs.t('team.teamCreateDate')}</Text>
-                    <Text>{showData.createTime}</Text>
+                    <View style={{
+                        alignItems: 'flex-end',
+                        flex: 1,
+                    }}>
+                        <Text style={{fontSize: 16}}>{I18nJs.t('team.teamCreateDate')}:</Text>
+                    </View>
+                    <View style={{
+                        flex: 1,
+                        marginLeft:10
+                    }}>
+                        <Text style={{fontSize: 16}}>{showData.createTime}</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text>{I18nJs.t('team.teamManager')}</Text>
-                    <Text>{showData.managerName}</Text>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    marginTop: 20
+                }}>
+                    <View style={{
+                        flex:1,
+                        alignItems:'flex-end'
+                    }}>
+                        <Text style={{fontSize: 16}}>{I18nJs.t('team.teamManager')}:</Text>
+                    </View>
+                    <View style={{
+                        flex:1,
+                        marginLeft:10
+                    }}>
+                        <Text style={{fontSize: 16}}>{showData.managerName}</Text>
+                    </View>
                 </View>
-                <View>
+                <View style={{
+                    backgroundColor:this.props.theme.color.THEME_ROW_COLOR,
+                    marginTop:20,
+                    padding:20
+                }}>
                     <Text>{showData.description}</Text>
                 </View>
             </View>
