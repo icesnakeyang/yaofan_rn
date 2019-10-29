@@ -39,16 +39,12 @@ class MyTasks extends Component {
 
 
     _loadAllData() {
-        console.log('load')
         const {listTasks} = this.props
         let params = {
             token: this.props.user.userInfo.token
         }
-        console.log(2)
         listTasks(params, (result) => {
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     tasks: this.props.task.tasks
                 })
@@ -129,7 +125,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    listTasks: (params, callback) => dispatch(actions.listTasks(params, callback))
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyTasks)

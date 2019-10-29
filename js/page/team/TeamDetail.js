@@ -23,7 +23,6 @@ class TeamDetail extends Component {
     }
 
     _loadAllData() {
-        console.log(this.props)
         if (!(this.props.navigation.state.params && this.props.navigation.state.params.teamId)) {
             return
         }
@@ -33,9 +32,7 @@ class TeamDetail extends Component {
             token: this.props.user.userInfo.token
         }
         getTeamByTeamId(params, (result) => {
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     team: this.props.team.team
                 })

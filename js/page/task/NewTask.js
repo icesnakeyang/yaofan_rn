@@ -40,7 +40,6 @@ class NewTask extends Component {
 
 
     _loadAllData() {
-        console.log(this.props)
         if (this.props.navigation.state.params && this.props.navigation.state.params.teamId) {
             this.setState({
                 teamId: this.props.navigation.state.params.teamId,
@@ -81,16 +80,11 @@ class NewTask extends Component {
     }
 
     _createTask() {
-        console.log(this.state)
-        console.log(this.props)
-
         let task = {
             endTime: this.props.navigation.state.params.endTime,
             title: this.state.title,
             detail: this.state.editDetail
         }
-
-        console.log(task)
 
         const {createTask} = this.props
         let params = {
@@ -103,10 +97,7 @@ class NewTask extends Component {
         if (this.props.navigation.state.params.teamId) {
             params.teamId = this.props.navigation.state.params.teamId
         }
-        console.log(params)
         createTask(params, (result) => {
-            console.log(result)
-            console.log(this.props)
             if (result) {
                 DeviceEventEmitter.emit('Refresh_MyTasks')
                 NavigationUtil.goPage({}, 'HomePage')
@@ -117,8 +108,6 @@ class NewTask extends Component {
     }
 
     render() {
-        console.log(this.props)
-
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }

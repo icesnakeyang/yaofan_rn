@@ -33,7 +33,6 @@ class TeamLogDetail extends Component {
         }
         getApplyTeam(params, (result) => {
             if (result) {
-                console.log(this.props)
             }
         })
 
@@ -46,7 +45,6 @@ class TeamLogDetail extends Component {
     }
 
     _showData() {
-        console.log(this.props.team)
         let showData = {
             teamName: '',
             applyUserName: '',

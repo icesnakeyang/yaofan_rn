@@ -31,7 +31,6 @@ class SelectTeam extends Component {
         }
         listTeam(params, (result) => {
             if (result) {
-                console.log(this.props)
                 this.setState({
                     teams: this.props.team.teams
                 })

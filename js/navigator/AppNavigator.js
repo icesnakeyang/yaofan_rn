@@ -26,6 +26,7 @@ import ApproveTeamApply from "../page/team/ApproveTeamApply";
 import TeamDetail from "../page/team/TeamDetail";
 import TaskPoint from "../page/task/TaskPoint";
 import SelectTeam from "../page/task/SelectTeam";
+import TaskDetail from "../page/task/TaskDetail";
 
 export const rootCam = 'Init'
 
@@ -149,6 +150,12 @@ const MainNavigator = createStackNavigator({
     },
     SelectTeam: {
         screen: SelectTeam,
+        navigationOptions: {
+            header: null
+        }
+    },
+    TaskDetail: {
+        screen: TaskDetail,
         navigationOptions: {
             header: null
         }

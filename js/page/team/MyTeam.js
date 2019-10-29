@@ -68,7 +68,6 @@ class MyTeam extends Component {
         return (
             <InputRow
                 touchFunction={() => {
-                    console.log(data)
                     const {clearTeam} = this.props
                     clearTeam(() => {
                         NavigationUtil.goPage({teamId: data.teamId}, 'TeamDetail')

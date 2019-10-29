@@ -61,12 +61,9 @@ class DateTimePicker extends Component {
     }
 
     _setTime() {
-        console.log(this.state.value)
         if (this.state.value) {
-            console.log('有')
             NavigationUtil.goPage({endTime: this.state.value}, 'NewTask')
         } else {
-            console.log('没有')
         }
         return
         DeviceEventEmitter.emit('refresh_key_detail')

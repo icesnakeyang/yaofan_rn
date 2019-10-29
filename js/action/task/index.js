@@ -39,14 +39,12 @@ export function createTask(params, callback) {
     }
 }
 
-export function listTasks(params, callback) {
-    console.log(1)
+export function listBiddingTasks(params, callback) {
     return dispatch => {
-        let url = API.apiListTasks
+        let url = API.apiListBiddingTasks
         let body = {}
         let token = params.token
         let dataStore = new DataStore()
-        console.log(url)
         dataStore.fetchPostData(url, body, token)
             .then((response) => {
                 if (response.code === 0) {

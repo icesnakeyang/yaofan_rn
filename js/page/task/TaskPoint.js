@@ -21,13 +21,10 @@ class TaskPoint extends Component {
     }
 
     componentDidMount() {
-        console.log('mount')
         this._loadAllData()
     }
 
     _loadAllData() {
-        console.log('load data')
-        console.log(this.props)
         if (this.props.navigation.state.params.point) {
             this.setState({
                 point: this.props.navigation.state.params.point,
@@ -48,7 +45,6 @@ class TaskPoint extends Component {
                 <TouchableOpacity
                     style={{margin: 5, marginRight: 8}}
                     onPress={() => {
-                        console.log(this.state)
                         NavigationUtil.goPage({point: this.state.editPoint}, 'NewTask')
                     }}
                 >
@@ -63,7 +59,6 @@ class TaskPoint extends Component {
     }
 
     render() {
-        console.log(this.state)
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }

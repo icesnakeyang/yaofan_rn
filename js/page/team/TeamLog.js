@@ -21,7 +21,6 @@ class TeamLog extends Component {
     componentDidMount() {
         this._loadAllData()
         this.listener = DeviceEventEmitter.addListener('Refresh_TeamLog', (params) => {
-            console.log('refresh has been called')
             this._loadAllData()
         })
     }
@@ -65,7 +64,6 @@ class TeamLog extends Component {
                 content={managerName}
                 showLabel={true}
                 touchFunction={() => {
-                    console.log(data)
                     const {clearTeam} = this.props
                     clearTeam(() => {
                         if (data.item.applyUserId === this.props.user.userInfo.userId) {
