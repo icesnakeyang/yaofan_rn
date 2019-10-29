@@ -2,15 +2,61 @@ import React, {Component} from 'react'
 import {
     View,
     Text,
-    TouchableOpacity
+    TouchableOpacity,
+    FlatList,
+    Dimensions,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import NavigationUtil from "../../navigator/NavigationUtil";
+import actions from "../../action";
+import TaskRow from "../../common/component/TaskRow";
+import moment from "moment";
 
 class MyTasks extends Component {
+    constructor(props) {
+        super(props);
+        const {height, width} = Dimensions.get('window')
+        this.state = {
+            tasks: [],
+            height: height,
+            width: width
+        }
+    }
+
+    componentDidMount() {
+        this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_MyTasks', (params) => {
+            this._loadAllData()
+        })
+    }
+
+    componentWillUnmount(){
+        this.listener.remove()
+    }
+
+
+    _loadAllData() {
+        console.log('load')
+        const {listTasks} = this.props
+        let params = {
+            token: this.props.user.userInfo.token
+        }
+        console.log(2)
+        listTasks(params, (result) => {
+            console.log(result)
+            if (result) {
+                console.log(this.props)
+                this.setState({
+                    tasks: this.props.task.tasks
+                })
+            }
+        })
+    }
+
     getRightButton() {
         return (
             <View>
@@ -30,6 +76,24 @@ class MyTasks extends Component {
         )
     }
 
+    _renderItem(item) {
+        let endTime = ''
+        if (item.endTime) {
+            endTime = moment(item.endTime).format('YYYY-MM-DD H:mm')
+        }
+        return (
+            <TaskRow
+                touchFunction={() => {
+
+                }}
+                title={item.title}
+                point={item.point}
+                endTime={endTime}
+                status={item.status}
+            />
+        )
+    }
+
     render() {
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
@@ -44,11 +108,15 @@ class MyTasks extends Component {
         )
 
         return (
-            <View>
+            <View style={{
+                flex: 1,
+                backgroundColor: this.props.theme.color.THEME_BACK_COLOR
+            }}>
                 {navigationBar}
-                <Text>
-                    Girls get job down
-                </Text>
+                <FlatList
+                    data={this.state.tasks}
+                    renderItem={({item}) => this._renderItem(item)}
+                />
             </View>
         )
     }
@@ -57,8 +125,13 @@ class MyTasks extends Component {
 const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
-    team: state.team
+    team: state.team,
+    task: state.task
 })
 
-export default connect(mapStateToProps)(MyTasks)
+const mapDispatchToProps = dispatch => ({
+    listTasks: (params, callback) => dispatch(actions.listTasks(params, callback))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyTasks)
 

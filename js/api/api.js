@@ -1,7 +1,7 @@
 // const host = 'http://192.168.0.105:8089'
-// const host = 'http://192.168.1.247:8089'
+const host = 'http://192.168.1.247:8089'
 // const host = 'http://192.168.1.214:8089'
-const host = 'http://192.168.43.29:8089'
+// const host = 'http://192.168.43.29:8089'
 // const host = 'http://192.168.0.106:8089'
 
 export const API = {
@@ -17,5 +17,6 @@ export const API = {
     apiGetApplyTeam: `${host}/team/getApplyTeam`,
     apiRejectApplyTeam: `${host}/team/rejectApplyTeam`,
     apiAgreeApplyTeam: `${host}/team/agreeApplyTeam`,
-    apiCreateTask: `${host}/task/createTask`
+    apiCreateTask: `${host}/task/createTask`,
+    apiListTasks: `${host}/task/listTasks`
 }

@@ -4,7 +4,8 @@ export default {
         reject: 'Rejected',
         unProcess: 'Un-Process',
         agree: 'Agreed',
-        unRead: 'Un-Read'
+        unRead: 'Un-Read',
+        BIDDING: 'Bidding'
     },
     bottomBar: {
         plaza: 'Plaza',
@@ -58,12 +59,12 @@ export default {
     },
     tasks: {
         newTask: 'New Task',
-        myTasks:'My Tasks',
-        setEndTime:'Set Time',
-        setEndTimeHolder:'Set task end time',
-        taskTitleHolder:'Title',
-        taskDetailHolder:'Description',
-        point:'Task point',
+        myTasks: 'My Tasks',
+        setEndTime: 'Set Time',
+        setEndTimeHolder: 'Set task end time',
+        taskTitleHolder: 'Title',
+        taskDetailHolder: 'Description',
+        point: 'Task point',
     },
     team: {
         teamTask: 'Team Tasks',
@@ -88,14 +89,16 @@ export default {
         btReject: 'Reject',
         tipRejectSuccess: 'Rejected this user to join the team',
         applyReadTime: 'Read time',
-        teamDetail:'Team Detail',
-        teamCreateDate:'Create time',
-        teamManager:'Manager'
+        teamDetail: 'Team Detail',
+        teamCreateDate: 'Create time',
+        teamManager: 'Manager'
     },
     syserr: {
-        '10002': 'Username and password error',
-        '10007': 'You have applied this team already, please wait for procedure',
+        10001: 'Some network error',
+        10002: 'Username and password error',
+        10007: 'You have applied this team already, please wait for procedure',
         10011: 'This application has been processed already',
-        10012:'You are in the team already'
+        10012: 'You are in the team already',
+        10013: 'The task duplicated'
     }
 }

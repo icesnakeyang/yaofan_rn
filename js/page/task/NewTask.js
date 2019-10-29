@@ -3,7 +3,8 @@ import {
     View,
     Dimensions,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter
 } from 'react-native'
 import Textarea from 'react-native-textarea'
 import {connect} from "react-redux";
@@ -14,6 +15,7 @@ import InputRow from "../../common/component/InputRow";
 import NavigationUtil from "../../navigator/NavigationUtil";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import actions from "../../action";
+import Toast from 'react-native-easy-toast'
 
 class NewTask extends Component {
     constructor(props) {
@@ -77,8 +79,12 @@ class NewTask extends Component {
         console.log(params)
         createTask(params, (result) => {
             console.log(result)
-            if(result){
-                NavigationUtil.goPage({}, 'MyTasks')
+            console.log(this.props)
+            if (result) {
+                DeviceEventEmitter.emit('Refresh_MyTasks')
+                NavigationUtil.goPage({}, 'HomePage')
+            } else {
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.task.error))
             }
         })
     }
@@ -145,6 +151,10 @@ class NewTask extends Component {
                         showLabel={true}
                     />
                 </View>
+                <Toast
+                    ref={'toast'}
+                    position={'center'}
+                />
             </View>
         )
     }
@@ -152,7 +162,8 @@ class NewTask extends Component {
 
 const mapStateToProps = state => ({
     theme: state.theme,
-    user: state.user
+    user: state.user,
+    task: state.task
 })
 
 const mapDispatchToProps = dispatch => ({
