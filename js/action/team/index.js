@@ -67,7 +67,6 @@ export function listTeam(params, callback) {
                 }, 100)
             })
     }
-
 }
 
 export function searchTeam(params, callback) {

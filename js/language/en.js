@@ -65,6 +65,8 @@ export default {
         taskTitleHolder: 'Title',
         taskDetailHolder: 'Description',
         point: 'Task point',
+        selectTeam:'Select Team',
+        publicTask:'Public task'
     },
     team: {
         teamTask: 'Team Tasks',

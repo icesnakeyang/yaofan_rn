@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {
     View,
+    Text,
     Dimensions,
     TextInput,
     TouchableOpacity,
@@ -27,8 +28,31 @@ class NewTask extends Component {
             height: height,
             width: width,
             endTime: '',
-            point: ''
+            point: '',
+            teamId: '',
+            teamName: ''
         }
+    }
+
+    componentDidMount() {
+        this._loadAllData()
+    }
+
+
+    _loadAllData() {
+        console.log(this.props)
+        if (this.props.navigation.state.params && this.props.navigation.state.params.teamId) {
+            this.setState({
+                teamId: this.props.navigation.state.params.teamId,
+                teamName: this.props.navigation.state.params.teamName
+            })
+        } else {
+            this.setState({
+                teamId: null,
+                teamName: I18nJs.t('tasks.publicTask')
+            })
+        }
+
     }
 
     getLeftButton() {
@@ -76,6 +100,9 @@ class NewTask extends Component {
             endTime: task.endTime,
             point: this.props.navigation.state.params.point
         }
+        if (this.props.navigation.state.params.teamId) {
+            params.teamId = this.props.navigation.state.params.teamId
+        }
         console.log(params)
         createTask(params, (result) => {
             console.log(result)
@@ -107,6 +134,15 @@ class NewTask extends Component {
         return (
             <View style={{flex: 1, backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
                 {navigationBar}
+                <View style={{
+                    marginTop: 20,
+                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                    height: 50,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Text style={{fontSize: 14}}>{this.state.teamName}</Text>
+                </View>
                 <View style={{
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
                     marginTop: 20,

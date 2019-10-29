@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text,
     TouchableOpacity,
     FlatList,
     Dimensions,
@@ -63,7 +62,7 @@ class MyTasks extends Component {
                 <TouchableOpacity
                     style={{margin: 5, marginRight: 8}}
                     onPress={() => {
-                        NavigationUtil.goPage({}, 'NewTask')
+                        NavigationUtil.goPage({}, 'SelectTeam')
                     }}
                 >
                     <Ionicons

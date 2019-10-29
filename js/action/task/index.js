@@ -9,7 +9,8 @@ export function createTask(params, callback) {
             detail: params.detail,
             title: params.title,
             endTime: params.endTime,
-            point: params.point
+            point: params.point,
+            teamId: params.teamId
         }
         let token = params.token
         let dataStore = new DataStore()

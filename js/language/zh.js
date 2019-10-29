@@ -65,6 +65,8 @@ export default {
         taskTitleHolder:'任务标题',
         taskDetailHolder:'任务详情',
         point:'任务积分',
+        selectTeam:'选择团队',
+        publicTask:'公开任务'
     },
     team:{
         teamTask:'团队任务',
