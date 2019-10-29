@@ -78,7 +78,7 @@ class NewTask extends Component {
         createTask(params, (result) => {
             console.log(result)
             if(result){
-
+                NavigationUtil.goPage({}, 'MyTasks')
             }
         })
     }
