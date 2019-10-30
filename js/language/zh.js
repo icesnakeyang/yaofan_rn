@@ -63,10 +63,15 @@ export default {
         setEndTime:'设置完成时间',
         setEndTimeHolder:'设置任务完成时间',
         taskTitleHolder:'任务标题',
+        taskDetail:'任务详情',
         taskDetailHolder:'任务详情',
         point:'任务积分',
         selectTeam:'选择团队',
-        publicTask:'公开任务'
+        publicTask:'公开任务',
+        createTime:'创建时间',
+        endTime:'完成截止时间',
+        partyA:'甲方',
+        status:'当前状态',
     },
     team:{
         teamTask:'团队任务',

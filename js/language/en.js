@@ -63,10 +63,15 @@ export default {
         setEndTime: 'Set Time',
         setEndTimeHolder: 'Set task end time',
         taskTitleHolder: 'Title',
+        taskDetail:'Task Detail',
         taskDetailHolder: 'Description',
         point: 'Task point',
         selectTeam:'Select Team',
-        publicTask:'Public task'
+        publicTask:'Public task',
+        createTime:'Create time',
+        endTime:'End time',
+        partyA:'Party A',
+        status:'Status',
     },
     team: {
         teamTask: 'Team Tasks',
