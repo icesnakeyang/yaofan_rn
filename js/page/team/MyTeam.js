@@ -81,12 +81,14 @@ class MyTeam extends Component {
     }
 
     render() {
+        console.log(this.state)
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 <FlatList
+                    keyExtractor={(item, index) => index.toString()}
                     data={this.state.teamList}
                     renderItem={({item}) => this._renderItem(item)}
                 />

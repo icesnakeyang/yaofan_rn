@@ -19,5 +19,6 @@ export const API = {
     apiAgreeApplyTeam: `${host}/team/agreeApplyTeam`,
     apiCreateTask: `${host}/task/createTask`,
     apiListBiddingTasks: `${host}/task/listBiddingTasks`,
-    apiGetTaskByTaskId: `${host}/task/getTaskByTaskId`
+    apiGetTaskByTaskId: `${host}/task/getTaskByTaskId`,
+    apiListMyTasks: `${host}/task/listMyTasks`
 }

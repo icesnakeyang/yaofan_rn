@@ -22,16 +22,15 @@ class TaskPlaza extends Component {
     }
 
     _loadAllData() {
-        console.log('ok')
+        if (!(this.props.user && this.props.user.userInfo)) {
+            return
+        }
         let params = {
             token: this.props.user.userInfo.token
         }
         const {listBiddingTasks} = this.props
         listBiddingTasks(params, (result) => {
-            console.log(result)
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     tasks: this.props.task.tasks
                 })

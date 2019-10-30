@@ -104,3 +104,37 @@ export function getTaskByTaskId(params, callback) {
             })
     }
 }
+
+export function listMyTasks(params, callback) {
+    return dispatch => {
+        let url = API.apiListMyTasks
+        let body = {
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        console.log(2)
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TASK_LIST_MY_TASKS_SUCCESS,
+                        tasks: response.data.tasks
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TASK_LIST_MY_TASKS_FAIL,
+                    error: error.message
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+}

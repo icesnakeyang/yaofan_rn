@@ -24,7 +24,6 @@ class TaskDetail extends Component {
     }
 
     _loadAllData() {
-        console.log(this.props)
         if (this.props.navigation.state.params.taskId) {
             const {getTaskByTaskId} = this.props
             let params = {
@@ -32,13 +31,10 @@ class TaskDetail extends Component {
                 taskId: this.props.navigation.state.params.taskId
             }
             getTaskByTaskId(params, (result) => {
-                console.log(result)
                 if (result) {
-                    console.log(this.props)
                     this.setState({
                         task: this.props.task.task
                     })
-                    console.log(this.state)
                 }
             })
         }

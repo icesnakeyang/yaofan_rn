@@ -93,6 +93,7 @@ class TeamLog extends Component {
         return (
             <View style={{flex: 1, backgroundColor: this.props.theme.color.THEME_BACK_COLOR}}>
                 <FlatList
+                    keyExtractor={(item, index) => index.toString()}
                     data={this.state.applyTeamList}
                     renderItem={(item) => (this._renderItem(item))}
                 />

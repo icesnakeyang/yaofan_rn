@@ -97,7 +97,7 @@ class SelectTeam extends Component {
                     <Text style={{fontSize: 20}}>{I18nJs.t('tasks.publicTask')}</Text>
                 </TouchableOpacity>
                 <FlatList
-
+                    keyExtractor={(item, index) => index.toString()}
                     data={this.state.teams}
                     renderItem={({item}) => this._renderItem(item)}
                 />

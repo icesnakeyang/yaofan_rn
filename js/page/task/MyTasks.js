@@ -33,18 +33,21 @@ class MyTasks extends Component {
         })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.listener.remove()
     }
 
 
     _loadAllData() {
-        const {listTasks} = this.props
+        const {listMyTasks} = this.props
         let params = {
             token: this.props.user.userInfo.token
         }
-        listTasks(params, (result) => {
+        console.log(1)
+        listMyTasks(params, (result) => {
+            console.log(result)
             if (result) {
+                console.log(this.props)
                 this.setState({
                     tasks: this.props.task.tasks
                 })
@@ -125,7 +128,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    listMyTasks: (params, callback) => dispatch(actions.listMyTasks(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyTasks)
