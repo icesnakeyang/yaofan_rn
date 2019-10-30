@@ -190,6 +190,7 @@ class TaskDetail extends Component {
                 {/*抢单按钮*/}
                 <View>
                     <TouchButton
+                        style={{height:50}}
                         label={'抢单'}
                     />
                 </View>

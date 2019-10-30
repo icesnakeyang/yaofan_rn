@@ -72,6 +72,7 @@ export default {
         endTime:'End time',
         partyA:'Party A',
         status:'Status',
+        btBid:'Bid'
     },
     team: {
         teamTask: 'Team Tasks',

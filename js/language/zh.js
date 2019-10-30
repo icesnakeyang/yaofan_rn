@@ -72,6 +72,7 @@ export default {
         endTime:'完成截止时间',
         partyA:'甲方',
         status:'当前状态',
+        btBid:'抢单'
     },
     team:{
         teamTask:'团队任务',
