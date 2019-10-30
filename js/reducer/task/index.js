@@ -21,6 +21,16 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Tyeps.TASK_GET_SUCCESS:
+            return {
+                ...state,
+                task: action.task
+            }
+        case Tyeps.TASK_GET_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state
     }
