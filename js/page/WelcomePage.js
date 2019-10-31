@@ -17,7 +17,7 @@ class WelcomePage extends Component {
 
     componentDidMount() {
         NavigationUtil.navigation = this.props.navigation
-        this._init()
+        // this._init()
     }
 
     componentWillUnmount() {
@@ -25,51 +25,55 @@ class WelcomePage extends Component {
 
 
     _init() {
-        I18nJs.locale = I18nJs.defaultLocale
+        // I18nJs.locale = I18nJs.defaultLocale
 
-        const {loadLanguage} = this.props
-        loadLanguage((result) => {
-            if (result) {
+        // const {loadLanguage} = this.props
+        // loadLanguage((result) => {
+        //     if (result) {
+        //
+        //     }
+        // })
 
-            }
-        })
-
-        const {autoLogin} = this.props
-        autoLogin((result) => {
-            this.timer = setTimeout(() => {
-                if (this.props.user.userInfo) {
-                    NavigationUtil.goPage({}, 'HomePage')
-                } else {
-                    NavigationUtil.goPage({}, 'Login')
-                }
-            }, 100)
-        })
+        // const {autoLogin} = this.props
+        // autoLogin((result) => {
+        //     this.timer = setTimeout(() => {
+        //         if (this.props.user.userInfo) {
+        //             NavigationUtil.goPage({}, 'HomePage')
+        //         } else {
+        //             NavigationUtil.goPage({}, 'Login')
+        //         }
+        //     }, 100)
+        // })
     }
 
     render() {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: this.props.theme.color.THEME_HEAD_COLOR,
+                // backgroundColor: this.props.theme.color.THEME_HEAD_COLOR,
                 justifyContent: 'center',
                 alignItems: 'center'
             }}>
                 <Text style={{
-                    fontSize: 32, color: this.props.theme.color.THEME_HEAD_TEXT
-                }}>{I18nJs.t('title')}</Text>
+                    fontSize: 32,
+                    // color: this.props.theme.color.THEME_HEAD_TEXT
+                }}
+                >
+                    {I18nJs.t('title')}
+                </Text>
             </View>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme,
-    user: state.user
+    // theme: state.theme,
+    // user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadLanguage: (callback) => dispatch(actions.loadLanguage(callback)),
-    autoLogin: (callback) => dispatch(actions.autoLogin(callback))
+    // loadLanguage: (callback) => dispatch(actions.loadLanguage(callback)),
+    // autoLogin: (callback) => dispatch(actions.autoLogin(callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage)
