@@ -8,13 +8,26 @@ export function loadLanguage(callback) {
         let dataStore = new DataStore()
         dataStore.fetchLocalData(LAN_KEY)
             .then((response) => {
+                if (response) {
+                    dispatch({
+                        type: Types.LANGUAGE_LOAD_SUCCESS,
+                        locale: response.data
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error('load language error')
+                }
+            })
+            .catch((error) => {
                 dispatch({
-                    type: Types.LANGUAGE_LOAD_SUCCESS,
-                    locale: response.data
+                    type: Types.LANGUAGE_LOAD_FAIL,
+                    error
                 })
                 setTimeout(() => {
-                    callback(true)
-                }, 1)
+                    callback(false)
+                }, 100)
             })
     }
 }

@@ -42,7 +42,6 @@ export function autoLogin(callback) {
                 }, 100)
             })
     }
-
 }
 
 export function login(params, callback) {

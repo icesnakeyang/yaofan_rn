@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text
+    Text,
+    RefreshControl
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -44,6 +45,11 @@ class TaskDetail extends Component {
         return (
             <GetLeftButton {...this.props}/>
         )
+    }
+
+    _bidding() {
+        console.log(this.state)
+        console.log(this.props)
     }
 
     _showData() {
@@ -98,10 +104,10 @@ class TaskDetail extends Component {
                     alignItems: 'center',
                     height: 50
                 }}>
-                    <View style={{flex: 1, alignItems:'flex-end'}}>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
                         <Text>{I18nJs.t('tasks.createTime')}:</Text>
                     </View>
-                    <View style={{flex:1, paddingLeft:10}}>
+                    <View style={{flex: 1, paddingLeft: 10}}>
                         <Text>{showData.createTime}</Text>
                     </View>
                 </View>
@@ -114,10 +120,10 @@ class TaskDetail extends Component {
                     alignItems: 'center',
                     height: 50
                 }}>
-                    <View style={{flex: 1, alignItems:'flex-end'}}>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
                         <Text>{I18nJs.t('tasks.endTime')}:</Text>
                     </View>
-                    <View style={{flex:1, paddingLeft:10}}>
+                    <View style={{flex: 1, paddingLeft: 10}}>
                         <Text>{showData.endTime}</Text>
                     </View>
                 </View>
@@ -151,10 +157,10 @@ class TaskDetail extends Component {
                     alignItems: 'center',
                     height: 50
                 }}>
-                    <View style={{flex: 1, alignItems:'flex-end'}}>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
                         <Text>{I18nJs.t('tasks.status')}：</Text>
                     </View>
-                    <View style={{flex:1}}>
+                    <View style={{flex: 1}}>
                         <Text>{this.state.task.status}</Text>
                     </View>
                 </View>
@@ -167,10 +173,10 @@ class TaskDetail extends Component {
                     alignItems: 'center',
                     height: 50
                 }}>
-                    <View style={{flex: 1, alignItems:'flex-end'}}>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
                         <Text>积分：</Text>
                     </View>
-                    <View style={{flex:1}}>
+                    <View style={{flex: 1}}>
                         <Text>{this.state.task.point}</Text>
                     </View>
                 </View>
@@ -179,17 +185,23 @@ class TaskDetail extends Component {
                 <View style={{
                     marginTop: 10,
                     backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    padding:20
+                    padding: 20
                 }}>
                     <Text>{this.state.task.detail}</Text>
                 </View>
                 {/*抢单按钮*/}
-                <View>
-                    <TouchButton
-                        style={{height:50}}
-                        label={'抢单'}
-                    />
-                </View>
+                {this.state.task.taskId ?
+                    <View>
+                        <TouchButton
+                            touchFunction={() => {
+                                this._bidding()
+                            }}
+                            style={{height: 50}}
+                            label={'抢单'}
+                        />
+                    </View>
+                    : null
+                }
             </View>
         )
     }

@@ -78,6 +78,7 @@ class TaskPlaza extends Component {
             <View>
                 {navigationBar}
                 <FlatList
+                    keyExtractor={(item, index) => index.toString()}
                     data={this.state.tasks}
                     renderItem={({item}) => this._renderItem(item)}
                 />
