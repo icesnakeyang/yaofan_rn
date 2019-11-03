@@ -1,11 +1,13 @@
 export default {
     title: 'YAO FAN',
+    loading: 'Loading...',
     status: {
         reject: 'Rejected',
         unProcess: 'Un-Process',
         agree: 'Agreed',
         unRead: 'Un-Read',
-        BIDDING: 'Bidding'
+        BIDDING: 'Bidding',
+        PROGRESS: 'Progress'
     },
     bottomBar: {
         plaza: 'Plaza',
@@ -63,17 +65,17 @@ export default {
         setEndTime: 'Set Time',
         setEndTimeHolder: 'Set task end time',
         taskTitleHolder: 'Title',
-        taskDetail:'Task Detail',
+        taskDetail: 'Task Detail',
         taskDetailHolder: 'Description',
         point: 'Task point',
-        selectTeam:'Select Team',
-        publicTask:'Public task',
-        createTime:'Create time',
-        endTime:'End time',
-        partyA:'Party A',
-        status:'Status',
-        btBid:'Bid',
-        tipBidSuccess:'Congratulation! Grab this task successful.'
+        selectTeam: 'Select Team',
+        publicTask: 'Public task',
+        createTime: 'Create time',
+        endTime: 'End time',
+        partyA: 'Party A',
+        status: 'Status',
+        btBid: 'Bid',
+        tipBidSuccess: 'Congratulation! Grab this task successful.'
     },
     team: {
         teamTask: 'Team Tasks',

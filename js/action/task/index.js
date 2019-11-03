@@ -111,7 +111,6 @@ export function listMyTasks(params, callback) {
         let body = {}
         let token = params.token
         let dataStore = new DataStore()
-        console.log(2)
         dataStore.fetchPostData(url, body, token)
             .then((response) => {
                 if (response.code === 0) {

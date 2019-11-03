@@ -90,11 +90,17 @@ class TaskPlaza extends Component {
         return (
             <View>
                 {navigationBar}
-                <FlatList
-                    keyExtractor={(item, index) => index.toString()}
-                    data={this.state.tasks}
-                    renderItem={({item}) => this._renderItem(item)}
-                />
+                {this.state.tasks ?
+                    <FlatList
+                        keyExtractor={(item, index) => index.toString()}
+                        data={this.state.tasks}
+                        renderItem={({item}) => this._renderItem(item)}
+                    />
+                    :
+                    <View>
+                        <Text>{I18nJs.t('loading')}</Text>
+                    </View>
+                }
             </View>
         )
     }

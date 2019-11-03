@@ -1,15 +1,54 @@
 import React, {Component} from 'react'
 import {
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter,
+    FlatList
 } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import {connect} from "react-redux";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import NavigationUtil from "../../navigator/NavigationUtil";
+import actions from "../../action";
+import TaskRow from "../../common/component/TaskRow";
+import moment from "moment";
 
 class TeamTasks extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tasks: []
+        }
+    }
+
+    componentDidMount() {
+        this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_TeamTasks', (params) => {
+            this._loadAllData()
+        })
+    }
+
+    componentWillUnmount() {
+        this.listener.remove()
+    }
+
+    _loadAllData() {
+        if (!(this.props.user && this.props.user.userInfo)) {
+            return
+        }
+        let params = {
+            token: this.props.user.userInfo.token
+        }
+        const {listBiddingTasks} = this.props
+        listBiddingTasks(params, (result) => {
+            if (result) {
+                this.setState({
+                    tasks: this.props.task.tasks
+                })
+            }
+        })
+    }
 
     getRightButton() {
         return (
@@ -30,27 +69,62 @@ class TeamTasks extends Component {
         )
     }
 
+    _renderItem(item) {
+        let endTime = ''
+        if (item.endTime) {
+            endTime = moment(item.endTime).format('YYYY-MM-DD H:mm')
+        }
+        return (
+            <TaskRow
+                touchFunction={() => {
+                    NavigationUtil.goPage({taskId: item.taskId}, 'TaskDetail')
+                }}
+                title={item.title}
+                point={item.point}
+                endTime={endTime}
+                status={item.status}
+            />
+        )
+    }
+
     render() {
         let statusBar = {
             backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
         }
         let navigationBar = (
-            <NavigationBar
+            <
+                NavigationBar
                 title={I18nJs.t('team.teamTask')}
                 statusBar={statusBar}
-                style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
+                style={
+                    {
+                        backgroundColor: this.props.theme.color.THEME_HEAD_COLOR
+                    }
+                }
                 rightButton={this.getRightButton()}
             />
         )
         return (
             <View>
                 {navigationBar}
+                <FlatList
+                    keyExtractor={(item, index) => index.toString()}
+                    data={this.state.tasks}
+                    renderItem={({item}) => this._renderItem(item)}
+                />
             </View>
         )
     }
 }
 
 const mapStateToProps = state => ({
-    theme: state.theme
+    theme: state.theme,
+    user: state.user,
+    task: state.task
 })
-export default connect(mapStateToProps)(TeamTasks)
+
+const mapDispatchToProps = dispatch => ({
+    listBiddingTasks: (params, callback) => dispatch(actions.listBiddingTasks(params, callback))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamTasks)

@@ -1,11 +1,13 @@
 export default {
     title: '次第乞食',
+    loading:'加载中...',
     status:{
         reject:'已拒绝',
         unProcess:'未处理',
         agree:'已同意',
         unRead:'未阅读',
-        BIDDING:'等待抢单'
+        BIDDING:'等待抢单',
+        PROGRESS:'进行中'
     },
     bottomBar: {
         plaza: '任务广场',

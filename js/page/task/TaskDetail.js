@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {
     View,
     Text,
-    DeviceEventEmitter
+    DeviceEventEmitter,
+    Dimensions
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -17,8 +18,11 @@ import NavigationUtil from "../../navigator/NavigationUtil";
 class TaskDetail extends Component {
     constructor(props) {
         super(props);
+        const {height, width} = Dimensions.get('window')
         this.state = {
-            task: {}
+            task: {},
+            height: height,
+            width: width
         }
     }
 
@@ -50,8 +54,6 @@ class TaskDetail extends Component {
     }
 
     _bidding() {
-        console.log(this.state)
-        console.log(this.props)
         if (!(this.props.user && this.props.user.userInfo)) {
             return
         }
@@ -61,10 +63,10 @@ class TaskDetail extends Component {
             taskId: this.state.task.taskId
         }
         grabTask(params, (result) => {
-            console.log(result)
             if (result) {
                 this.refs.toast.show(I18nJs.t('tasks.tipBidSuccess'))
                 DeviceEventEmitter.emit('Refresh_TaskPlaza')
+                DeviceEventEmitter.emit('Refresh_TeamTasks')
                 NavigationUtil.goPage({}, 'HomePage')
             }
         })
@@ -103,122 +105,129 @@ class TaskDetail extends Component {
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 {navigationBar}
-                {/*标题*/}
-                <View style={{
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    marginTop: 20,
-                    height: 50,
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Text style={{fontSize: 20}}>{this.state.task.title}</Text>
-                </View>
-
-                {/*发布时间*/}
-                <View style={{
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    height: 50
-                }}>
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                        <Text>{I18nJs.t('tasks.createTime')}:</Text>
-                    </View>
-                    <View style={{flex: 1, paddingLeft: 10}}>
-                        <Text>{showData.createTime}</Text>
-                    </View>
-                </View>
-
-                {/*完成时间*/}
-                <View style={{
-                    flexDirection: 'row',
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    alignItems: 'center',
-                    height: 50
-                }}>
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                        <Text>{I18nJs.t('tasks.endTime')}:</Text>
-                    </View>
-                    <View style={{flex: 1, paddingLeft: 10}}>
-                        <Text>{showData.endTime}</Text>
-                    </View>
-                </View>
-
-                {/*甲方*/}
-                <View style={{
-                    flexDirection: 'row',
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    height: 50,
-                    alignItems: 'center',
-                }}>
-                    <View style={{
-                        flex: 1,
-                        alignItems: 'flex-end'
-                    }}>
-                        <Text>{I18nJs.t('tasks.partyA')}：</Text>
-                    </View>
-                    <View style={{
-                        flex: 1
-                    }}>
-                        <Text>{this.state.task.createUserName}</Text>
-                    </View>
-                </View>
-
-                {/*状态*/}
-                <View style={{
-                    flexDirection: 'row',
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    alignItems: 'center',
-                    height: 50
-                }}>
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                        <Text>{I18nJs.t('tasks.status')}：</Text>
-                    </View>
-                    <View style={{flex: 1}}>
-                        <Text>{this.state.task.status}</Text>
-                    </View>
-                </View>
-
-                {/*积分*/}
-                <View style={{
-                    flexDirection: 'row',
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    alignItems: 'center',
-                    height: 50
-                }}>
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                        <Text>积分：</Text>
-                    </View>
-                    <View style={{flex: 1}}>
-                        <Text>{this.state.task.point}</Text>
-                    </View>
-                </View>
-
-                {/*详情*/}
-                <View style={{
-                    marginTop: 10,
-                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
-                    padding: 20
-                }}>
-                    <Text>{this.state.task.detail}</Text>
-                </View>
-                {/*抢单按钮*/}
                 {this.state.task.taskId ?
                     <View>
-                        <TouchButton
-                            touchFunction={() => {
-                                this._bidding()
-                            }}
-                            style={{height: 50}}
-                            label={'抢单'}
-                        />
+                        <View style={{
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            marginTop: 20,
+                            height: 50,
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}>
+                            <Text style={{fontSize: 20}}>{this.state.task.title}</Text>
+                        </View>
+
+
+                        <View style={{
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            height: 50
+                        }}>
+                            <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                <Text>{I18nJs.t('tasks.createTime')}:</Text>
+                            </View>
+                            <View style={{flex: 1, paddingLeft: 10}}>
+                                <Text>{showData.createTime}</Text>
+                            </View>
+                        </View>
+
+                        {/*完成时间*/}
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            alignItems: 'center',
+                            height: 50
+                        }}>
+                            <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                <Text>{I18nJs.t('tasks.endTime')}:</Text>
+                            </View>
+                            <View style={{flex: 1, paddingLeft: 10}}>
+                                <Text>{showData.endTime}</Text>
+                            </View>
+                        </View>
+
+                        {/*甲方*/}
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            height: 50,
+                            alignItems: 'center',
+                        }}>
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'flex-end'
+                            }}>
+                                <Text>{I18nJs.t('tasks.partyA')}：</Text>
+                            </View>
+                            <View style={{
+                                flex: 1
+                            }}>
+                                <Text>{this.state.task.createUserName}</Text>
+                            </View>
+                        </View>
+
+                        {/*状态*/}
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            alignItems: 'center',
+                            height: 50
+                        }}>
+                            <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                <Text>{I18nJs.t('tasks.status')}：</Text>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Text>{this.state.task.status}</Text>
+                            </View>
+                        </View>
+
+                        {/*积分*/}
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            alignItems: 'center',
+                            height: 50
+                        }}>
+                            <View style={{flex: 1, alignItems: 'flex-end'}}>
+                                <Text>积分：</Text>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Text>{this.state.task.point}</Text>
+                            </View>
+                        </View>
+
+                        {/*详情*/}
+                        <View style={{
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            padding: 20
+                        }}>
+                            <Text>{this.state.task.detail}</Text>
+                        </View>
+                        {/*抢单按钮*/}
+                        {this.state.task.taskId ?
+                            <View>
+                                <TouchButton
+                                    touchFunction={() => {
+                                        this._bidding()
+                                    }}
+                                    style={{height: 50}}
+                                    label={'抢单'}
+                                />
+                            </View>
+                            : null
+                        }
                     </View>
-                    : null
+                    :
+                    <View style={{justifyContent: 'center', alignItems: 'center', height: this.state.height}}>
+                        <Text>{I18nJs.t('loading')}</Text>
+                    </View>
                 }
                 <Toast
                     ref={'toast'}

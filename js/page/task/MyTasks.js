@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {
     View,
+    Text,
     TouchableOpacity,
     FlatList,
     Dimensions,
@@ -22,7 +23,8 @@ class MyTasks extends Component {
         this.state = {
             tasks: [],
             height: height,
-            width: width
+            width: width,
+            loading: true
         }
     }
 
@@ -43,13 +45,13 @@ class MyTasks extends Component {
         let params = {
             token: this.props.user.userInfo.token
         }
-        console.log(1)
         listMyTasks(params, (result) => {
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     tasks: this.props.task.tasks
+                })
+                this.setState({
+                    loading: false
                 })
             }
         })
@@ -82,7 +84,7 @@ class MyTasks extends Component {
         return (
             <TaskRow
                 touchFunction={() => {
-
+                    NavigationUtil.goPage({taskId: item.taskId}, 'TaskDetail')
                 }}
                 title={item.title}
                 point={item.point}
@@ -104,17 +106,19 @@ class MyTasks extends Component {
                 rightButton={this.getRightButton()}
             />
         )
-
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 {navigationBar}
-                <FlatList
-                    data={this.state.tasks}
-                    renderItem={({item}) => this._renderItem(item)}
-                />
+                {this.state.loading ?
+                    <Text>{I18nJs.t('loading')}</Text> :
+                    <FlatList
+                        data={this.state.tasks}
+                        renderItem={({item}) => this._renderItem(item)}
+                    />
+                }
             </View>
         )
     }
