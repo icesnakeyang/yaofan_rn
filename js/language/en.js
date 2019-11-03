@@ -72,7 +72,8 @@ export default {
         endTime:'End time',
         partyA:'Party A',
         status:'Status',
-        btBid:'Bid'
+        btBid:'Bid',
+        tipBidSuccess:'Congratulation! Grab this task successful.'
     },
     team: {
         teamTask: 'Team Tasks',

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {
     View,
     Text,
-    RefreshControl
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -11,6 +11,8 @@ import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import moment from "moment";
 import TouchButton from "../../common/component/TouchButton";
+import Toast from "react-native-easy-toast";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class TaskDetail extends Component {
     constructor(props) {
@@ -50,6 +52,22 @@ class TaskDetail extends Component {
     _bidding() {
         console.log(this.state)
         console.log(this.props)
+        if (!(this.props.user && this.props.user.userInfo)) {
+            return
+        }
+        const {grabTask} = this.props
+        let params = {
+            token: this.props.user.userInfo.token,
+            taskId: this.state.task.taskId
+        }
+        grabTask(params, (result) => {
+            console.log(result)
+            if (result) {
+                this.refs.toast.show(I18nJs.t('tasks.tipBidSuccess'))
+                DeviceEventEmitter.emit('Refresh_TaskPlaza')
+                NavigationUtil.goPage({}, 'HomePage')
+            }
+        })
     }
 
     _showData() {
@@ -202,6 +220,10 @@ class TaskDetail extends Component {
                     </View>
                     : null
                 }
+                <Toast
+                    ref={'toast'}
+                    position={'center'}
+                />
             </View>
         )
     }
@@ -214,7 +236,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    getTaskByTaskId: (params, callback) => dispatch(actions.getTaskByTaskId(params, callback))
+    getTaskByTaskId: (params, callback) => dispatch(actions.getTaskByTaskId(params, callback)),
+    grabTask: (params, callback) => dispatch(actions.grabTask(params, callback))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskDetail)

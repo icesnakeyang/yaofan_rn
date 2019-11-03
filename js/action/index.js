@@ -11,7 +11,7 @@ import {
     rejectApplyTeam,
     searchTeam
 } from "./team";
-import {createTask, getTaskByTaskId, listBiddingTasks, listMyTasks} from "./task";
+import {createTask, getTaskByTaskId, grabTask, listBiddingTasks, listMyTasks} from "./task";
 
 export default {
     loadLanguage,
@@ -31,5 +31,6 @@ export default {
     createTask,
     listBiddingTasks,
     getTaskByTaskId,
-    listMyTasks
+    listMyTasks,
+    grabTask
 }

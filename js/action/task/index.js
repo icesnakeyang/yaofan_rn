@@ -75,7 +75,7 @@ export function getTaskByTaskId(params, callback) {
     return dispatch => {
         let url = API.apiGetTaskByTaskId
         let body = {
-            taskId:params.taskId
+            taskId: params.taskId
         }
         let token = params.token
         let dataStore = new DataStore()
@@ -108,8 +108,7 @@ export function getTaskByTaskId(params, callback) {
 export function listMyTasks(params, callback) {
     return dispatch => {
         let url = API.apiListMyTasks
-        let body = {
-        }
+        let body = {}
         let token = params.token
         let dataStore = new DataStore()
         console.log(2)
@@ -137,4 +136,38 @@ export function listMyTasks(params, callback) {
                 }, 100)
             })
     }
+}
+
+export function grabTask(params, callback) {
+    return dispatch => {
+        let url = API.apiGrab
+        let body = {
+            taskId: params.taskId
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    dispatch({
+                        type: Types.TASK_GRAB_SUCCESS
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TASK_GRAB_FAIL,
+                    error: error.message
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+
 }

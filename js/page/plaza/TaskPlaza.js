@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
-import {FlatList, Text, View} from 'react-native'
+import {
+    FlatList,
+    Text,
+    View,
+    DeviceEventEmitter
+} from 'react-native'
 import NavigationBar from "../../common/component/NavigationBar";
 import {connect} from "react-redux";
 import {I18nJs} from "../../language/I18n";
@@ -19,7 +24,15 @@ class TaskPlaza extends Component {
 
     componentDidMount() {
         this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_TaskPlaza', (params) => {
+            this._loadAllData()
+        })
     }
+
+    componentWillUnmount() {
+        this.listener.remove()
+    }
+
 
     _loadAllData() {
         if (!(this.props.user && this.props.user.userInfo)) {
