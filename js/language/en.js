@@ -110,6 +110,7 @@ export default {
         10007: 'You have applied this team already, please wait for procedure',
         10011: 'This application has been processed already',
         10012: 'You are in the team already',
-        10013: 'The task duplicated'
+        10013: 'The task duplicated',
+        10017: 'You are not the team member'
     }
 }

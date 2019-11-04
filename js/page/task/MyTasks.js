@@ -113,7 +113,9 @@ class MyTasks extends Component {
             }}>
                 {navigationBar}
                 {this.state.loading ?
-                    <Text>{I18nJs.t('loading')}</Text> :
+                    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                        <Text>{I18nJs.t('loading')}</Text>
+                    </View> :
                     <FlatList
                         data={this.state.tasks}
                         renderItem={({item}) => this._renderItem(item)}

@@ -42,6 +42,8 @@ class TaskDetail extends Component {
                     this.setState({
                         task: this.props.task.task
                     })
+                } else {
+                    this.refs.toast.show(I18nJs.t('syserr.' + this.props.task.error))
                 }
             })
         }

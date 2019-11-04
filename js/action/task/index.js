@@ -95,7 +95,7 @@ export function getTaskByTaskId(params, callback) {
             })
             .catch((error) => {
                 dispatch({
-                    type: Types.TASK_GET_FAIL,
+                    type:Types.TASK_GET_FAIL,
                     error: error.message
                 })
                 setTimeout(() => {
