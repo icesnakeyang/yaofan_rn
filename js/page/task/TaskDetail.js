@@ -90,9 +90,11 @@ class TaskDetail extends Component {
     }
 
     _showData() {
+        console.log(this.state)
         let showData = {
             createTime: '',
-            endTime: ''
+            endTime: '',
+            contractTime: ''
         }
         if (this.state.task) {
             if (this.state.task.createTime) {
@@ -100,6 +102,9 @@ class TaskDetail extends Component {
             }
             if (this.state.task.endTime) {
                 showData.endTime = moment(this.state.task.endTime).format('YYYY-MM-DD HH:mm')
+            }
+            if (this.state.task.contractTime) {
+                showData.contractTime = moment(this.state.task.contractTime).format('YYYY-MM-DD HH:mm')
             }
         }
         return showData
@@ -133,7 +138,6 @@ class TaskDetail extends Component {
                         }}>
                             <Text style={{fontSize: 20}}>{this.state.task.title}</Text>
                         </View>
-
 
                         <View style={{
                             marginTop: 10,
@@ -184,6 +188,43 @@ class TaskDetail extends Component {
                                 flex: 1
                             }}>
                                 <Text>{this.state.task.createUserName}</Text>
+                            </View>
+                        </View>
+
+                        {/*乙方*/}
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            height: 50,
+                            alignItems: 'center',
+                        }}>
+                            <View style={{
+                                flex: 1,
+                                alignItems: 'flex-end'
+                            }}>
+                                <Text>{I18nJs.t('tasks.partyB')}：</Text>
+                            </View>
+                            <View style={{
+                                flex: 1
+                            }}>
+                                <Text>{this.state.task.partyBName}</Text>
+                            </View>
+                        </View>
+
+                        <View style={{
+                            flexDirection: 'row',
+                            backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                            height: 50,
+                            marginTop: 10,
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}>
+                            <View>
+                                <Text>{I18nJs.t('tasks.grabTime')}:</Text>
+                            </View>
+                            <View style={{marginLeft: 10}}>
+                                <Text>{showData.contractTime}</Text>
                             </View>
                         </View>
 

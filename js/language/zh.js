@@ -73,10 +73,12 @@ export default {
         createTime:'创建时间',
         endTime:'完成截止时间',
         partyA:'甲方',
+        partyB:'乙方',
         status:'当前状态',
         btBid:'抢单',
         tipBidSuccess:'恭喜您，抢单成功！',
-        btFeedback:'任务日志'
+        btFeedback:'任务日志',
+        grabTime:'抢单时间'
     },
     taskLog:{
         title:'任务日志'

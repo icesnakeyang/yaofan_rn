@@ -73,10 +73,12 @@ export default {
         createTime: 'Create time',
         endTime: 'End time',
         partyA: 'Party A',
+        partyB: 'Party B',
         status: 'Status',
         btBid: 'Bid',
         tipBidSuccess: 'Congratulation! Grab this task successful.',
-        btFeedback:'Task log'
+        btFeedback:'Task log',
+        grabTime:'Contract time'
     },
     taskLog:{
         title:'Task Log'
