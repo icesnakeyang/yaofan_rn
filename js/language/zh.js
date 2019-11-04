@@ -75,7 +75,11 @@ export default {
         partyA:'甲方',
         status:'当前状态',
         btBid:'抢单',
-        tipBidSuccess:'恭喜您，抢单成功！'
+        tipBidSuccess:'恭喜您，抢单成功！',
+        btFeedback:'任务日志'
+    },
+    taskLog:{
+        title:'任务日志'
     },
     team:{
         teamTask:'团队任务',

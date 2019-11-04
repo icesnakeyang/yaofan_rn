@@ -22,7 +22,9 @@ class TaskDetail extends Component {
         this.state = {
             task: {},
             height: height,
-            width: width
+            width: width,
+            grab: false,
+            feedback: false
         }
     }
 
@@ -42,6 +44,19 @@ class TaskDetail extends Component {
                     this.setState({
                         task: this.props.task.task
                     })
+                    if (this.state.task.status === 'BIDDING') {
+                        if (this.state.task.createUserId !== this.props.user.userInfo.userId) {
+                            this.setState({
+                                grab: true
+                            })
+                        }
+                    }
+                    if (this.state.task.status === 'PROGRESS') {
+                        this.setState({
+                            feedback: true
+                        })
+
+                    }
                 } else {
                     this.refs.toast.show(I18nJs.t('syserr.' + this.props.task.error))
                 }
@@ -213,14 +228,26 @@ class TaskDetail extends Component {
                             <Text>{this.state.task.detail}</Text>
                         </View>
                         {/*抢单按钮*/}
-                        {this.state.task.taskId ?
+                        {this.state.grab ?
                             <View>
                                 <TouchButton
                                     touchFunction={() => {
                                         this._bidding()
                                     }}
                                     style={{height: 50}}
-                                    label={'抢单'}
+                                    label={I18nJs.t('tasks.btBid')}
+                                />
+                            </View>
+                            : null
+                        }
+                        {this.state.feedback ?
+                            <View>
+                                <TouchButton
+                                    touchFunction={() => {
+                                        NavigationUtil.goPage({taskId: this.state.task.taskId}, 'TaskLogPage')
+                                    }}
+                                    style={{height: 50}}
+                                    label={I18nJs.t('tasks.btFeedback')}
                                 />
                             </View>
                             : null

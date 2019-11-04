@@ -75,7 +75,11 @@ export default {
         partyA: 'Party A',
         status: 'Status',
         btBid: 'Bid',
-        tipBidSuccess: 'Congratulation! Grab this task successful.'
+        tipBidSuccess: 'Congratulation! Grab this task successful.',
+        btFeedback:'Task log'
+    },
+    taskLog:{
+        title:'Task Log'
     },
     team: {
         teamTask: 'Team Tasks',
