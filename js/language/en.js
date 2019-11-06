@@ -81,7 +81,8 @@ export default {
         grabTime:'Contract time'
     },
     taskLog:{
-        title:'Task Log'
+        title:'Task Log',
+        createTaskLog:'Create Task Log'
     },
     team: {
         teamTask: 'Team Tasks',

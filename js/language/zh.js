@@ -81,7 +81,8 @@ export default {
         grabTime:'抢单时间'
     },
     taskLog:{
-        title:'任务日志'
+        title:'任务日志',
+        createTaskLog:'创建任务日志'
     },
     team:{
         teamTask:'团队任务',

@@ -27,7 +27,8 @@ import TeamDetail from "../page/team/TeamDetail";
 import TaskPoint from "../page/task/TaskPoint";
 import SelectTeam from "../page/task/SelectTeam";
 import TaskDetail from "../page/task/TaskDetail";
-import TaskLogPage from "../page/task/taskLog/TaskLogPage";
+import TaskLogPage from "../page/taskLog/TaskLogPage";
+import NewTaskLog from "../page/taskLog/NewTaskLog";
 
 export const rootCam = 'Init'
 
@@ -163,6 +164,12 @@ const MainNavigator = createStackNavigator({
     },
     TaskLogPage: {
         screen: TaskLogPage,
+        navigationOptions: {
+            header: null
+        }
+    },
+    NewTaskLog: {
+        screen: NewTaskLog,
         navigationOptions: {
             header: null
         }

@@ -4,6 +4,7 @@ import theme from './theme'
 import user from './user'
 import team from './team'
 import task from './task'
+import taskLog from './taskLog'
 
 const navState = RootNavigator.router.getStateForAction(
     RootNavigator.router.getActionForPathAndParams(rootCam)
@@ -19,7 +20,8 @@ const index = combineReducers({
     theme,
     user,
     team,
-    task
+    task,
+    taskLog
 })
 
 export default index

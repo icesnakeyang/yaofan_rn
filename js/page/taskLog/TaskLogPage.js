@@ -6,11 +6,11 @@ import {
     TouchableOpacity
 } from 'react-native'
 import {connect} from "react-redux";
-import GetLeftButton from "../../../common/component/GetLeftButton";
-import NavigationBar from "../../../common/component/NavigationBar";
-import {I18nJs} from "../../../language/I18n";
+import GetLeftButton from "../../common/component/GetLeftButton";
+import NavigationBar from "../../common/component/NavigationBar";
+import {I18nJs} from "../../language/I18n";
 import Ionicons from 'react-native-vector-icons/Ionicons'
-import TouchButton from "../../../common/component/TouchButton";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 
 class TaskLogPage extends Component {
@@ -40,6 +40,9 @@ class TaskLogPage extends Component {
             <View>
                 <TouchableOpacity
                     style={{margin: 5, marginRight: 8}}
+                    onPress={() => {
+                        NavigationUtil.goPage({}, 'NewTaskLog')
+                    }}
                 >
                     <Ionicons
                         name={'ios-add'}
@@ -144,7 +147,8 @@ class TaskLogPage extends Component {
 const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
-    task: state.task
+    task: state.task,
+    taskLog: state.taskLog
 })
 
 export default connect(mapStateToProps)(TaskLogPage)

@@ -12,6 +12,7 @@ import {
     searchTeam
 } from "./team";
 import {createTask, getTaskByTaskId, grabTask, listBiddingTasks, listMyTasks} from "./task";
+import {createTaskLog} from "./taskLog";
 
 export default {
     loadLanguage,
@@ -32,5 +33,6 @@ export default {
     listBiddingTasks,
     getTaskByTaskId,
     listMyTasks,
-    grabTask
+    grabTask,
+    createTaskLog
 }
