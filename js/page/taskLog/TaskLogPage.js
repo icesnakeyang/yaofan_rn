@@ -40,11 +40,8 @@ class TaskLogPage extends Component {
             taskId: this.props.task.task.taskId,
             token: this.props.user.userInfo.token
         }
-        console.log(params)
         listTaskLog(params, (result) => {
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     taskLogs: this.props.taskLog.taskLogs
                 })

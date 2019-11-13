@@ -36,20 +36,15 @@ class NewTaskLog extends Component {
     }
 
     _saveLog() {
-        console.log(this.state)
-        console.log(this.props)
         if (!(this.props.user.userInfo && this.props.user.userInfo.token)) {
-            console.log(1)
             this.refs.toast.show(I18nJs.t('common.tipSaveError'))
             return
         }
         if (!(this.props.task.task && this.props.task.task.taskId)) {
-            console.log(2)
             this.refs.toast.show(I18nJs.t('common.tipSaveError'))
             return
         }
         if (!this.state.logContent) {
-            console.log('没有内容')
             this.refs.toast.show(I18nJs.t('taskLog.tipNoContent'))
             return
         }
@@ -61,8 +56,6 @@ class NewTaskLog extends Component {
             content: this.state.logContent
         }
         createTaskLog(params, (result) => {
-            console.log(result)
-            console.log(this.props)
             if (result) {
                 this.refs.toast.show(I18nJs.t('taskLog.tipSaveSuccess'))
                 DeviceEventEmitter.emit('Refresh_TaskLogPage')

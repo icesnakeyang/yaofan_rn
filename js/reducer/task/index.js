@@ -24,7 +24,7 @@ export default function onAction(state = defaultState, action) {
         case Tyeps.TASK_GET_SUCCESS:
             return {
                 ...state,
-                task: action.task
+                data: action.data
             }
         case Tyeps.TASK_GET_FAIL:
             return {

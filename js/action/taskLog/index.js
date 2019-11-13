@@ -39,7 +39,6 @@ export function createTaskLog(params, callback) {
 export function listTaskLog(params, callback) {
     return dispatch => {
         let url = API.apiListTaskLog
-        console.log(params)
         let body = {
             taskId: params.taskId
         }
@@ -48,7 +47,6 @@ export function listTaskLog(params, callback) {
         dataStore.fetchPostData(url, body, token)
             .then((response) => {
                 if (response.code === 0) {
-                    console.log(response)
                     dispatch({
                         type: Types.TASKLOG_LIST_SUCCESS,
                         taskLogs: response.data.taskLogs

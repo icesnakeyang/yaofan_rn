@@ -20,11 +20,11 @@ class TaskDetail extends Component {
         super(props);
         const {height, width} = Dimensions.get('window')
         this.state = {
-            task: {},
+            data: null,
             height: height,
             width: width,
             grab: false,
-            feedback: false
+            feedback: false,
         }
     }
 
@@ -33,6 +33,7 @@ class TaskDetail extends Component {
     }
 
     _loadAllData() {
+        console.log('load data')
         if (this.props.navigation.state.params.taskId) {
             const {getTaskByTaskId} = this.props
             let params = {
@@ -42,16 +43,17 @@ class TaskDetail extends Component {
             getTaskByTaskId(params, (result) => {
                 if (result) {
                     this.setState({
-                        task: this.props.task.task
+                        data: this.props.task.data,
+
                     })
-                    if (this.state.task.status === 'BIDDING') {
-                        if (this.state.task.createUserId !== this.props.user.userInfo.userId) {
+                    if (this.state.data.task.status === 'BIDDING') {
+                        if (this.state.data.task.createUserId !== this.props.user.userInfo.userId) {
                             this.setState({
                                 grab: true
                             })
                         }
                     }
-                    if (this.state.task.status === 'PROGRESS') {
+                    if (this.state.data.task.status === 'PROGRESS') {
                         this.setState({
                             feedback: true
                         })
@@ -77,7 +79,7 @@ class TaskDetail extends Component {
         const {grabTask} = this.props
         let params = {
             token: this.props.user.userInfo.token,
-            taskId: this.state.task.taskId
+            taskId: this.state.data.task.taskId
         }
         grabTask(params, (result) => {
             if (result) {
@@ -90,23 +92,43 @@ class TaskDetail extends Component {
     }
 
     _showData() {
-        console.log(this.state)
         let showData = {
+            taskId: null,
+            title: '',
             createTime: '',
             endTime: '',
-            contractTime: ''
+            contractTime: '',
+            createUserName: '',
+            partyBName: '',
+            status: '',
+            point: '',
+            detail: ''
+
         }
-        if (this.state.task) {
-            if (this.state.task.createTime) {
-                showData.createTime = moment(this.state.task.createTime).format('YYYY-MM-DD HH:mm')
-            }
-            if (this.state.task.endTime) {
-                showData.endTime = moment(this.state.task.endTime).format('YYYY-MM-DD HH:mm')
-            }
-            if (this.state.task.contractTime) {
-                showData.contractTime = moment(this.state.task.contractTime).format('YYYY-MM-DD HH:mm')
+        console.log(this.state)
+        console.log(1)
+        if (this.state.data) {
+            if (this.state.data.task) {
+                console.log(this.state.data.task)
+                showData.taskId = this.state.data.task.taskId
+                if (this.state.data.task.createTime) {
+                    showData.createTime = moment(this.state.data.task.createTime).format('YYYY-MM-DD HH:mm')
+                }
+                if (this.state.data.task.endTime) {
+                    showData.endTime = moment(this.state.data.task.endTime).format('YYYY-MM-DD HH:mm')
+                }
+                if (this.state.data.task.contractTime) {
+                    showData.contractTime = moment(this.state.data.task.contractTime).format('YYYY-MM-DD HH:mm')
+                }
+                if (this.state.data.task.createUserName) {
+                    showData.createUserName = this.state.data.task.createUserName
+                }
+                if(this.state.data.task.detail){}
+
             }
         }
+        console.log(showData)
+        console.log(3)
         return showData
     }
 
@@ -127,7 +149,7 @@ class TaskDetail extends Component {
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 {navigationBar}
-                {this.state.task.taskId ?
+                {showData.taskId ?
                     <View>
                         <View style={{
                             backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
@@ -136,7 +158,7 @@ class TaskDetail extends Component {
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>
-                            <Text style={{fontSize: 20}}>{this.state.task.title}</Text>
+                            <Text style={{fontSize: 20}}>{showData.title}</Text>
                         </View>
 
                         <View style={{
@@ -187,7 +209,7 @@ class TaskDetail extends Component {
                             <View style={{
                                 flex: 1
                             }}>
-                                <Text>{this.state.task.createUserName}</Text>
+                                <Text>{showData.createUserName}</Text>
                             </View>
                         </View>
 
@@ -208,7 +230,7 @@ class TaskDetail extends Component {
                             <View style={{
                                 flex: 1
                             }}>
-                                <Text>{this.state.task.partyBName}</Text>
+                                <Text>{showData.partyBName}</Text>
                             </View>
                         </View>
 
@@ -240,7 +262,7 @@ class TaskDetail extends Component {
                                 <Text>{I18nJs.t('tasks.status')}：</Text>
                             </View>
                             <View style={{flex: 1}}>
-                                <Text>{this.state.task.status}</Text>
+                                <Text>{showData.status}</Text>
                             </View>
                         </View>
 
@@ -256,7 +278,7 @@ class TaskDetail extends Component {
                                 <Text>积分：</Text>
                             </View>
                             <View style={{flex: 1}}>
-                                <Text>{this.state.task.point}</Text>
+                                <Text>{showData.point}</Text>
                             </View>
                         </View>
 
@@ -266,7 +288,7 @@ class TaskDetail extends Component {
                             backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
                             padding: 20
                         }}>
-                            <Text>{this.state.task.detail}</Text>
+                            <Text>{showData.detail}</Text>
                         </View>
                         {/*抢单按钮*/}
                         {this.state.grab ?
@@ -285,7 +307,7 @@ class TaskDetail extends Component {
                             <View>
                                 <TouchButton
                                     touchFunction={() => {
-                                        NavigationUtil.goPage({taskId: this.state.task.taskId}, 'TaskLogPage')
+                                        NavigationUtil.goPage({taskId: showData.taskId}, 'TaskLogPage')
                                     }}
                                     style={{height: 50}}
                                     label={I18nJs.t('tasks.btFeedback')}

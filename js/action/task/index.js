@@ -84,7 +84,7 @@ export function getTaskByTaskId(params, callback) {
                 if (response.code === 0) {
                     dispatch({
                         type: Types.TASK_GET_SUCCESS,
-                        task: response.data.task
+                        data: response.data
                     })
                     setTimeout(() => {
                         callback(true)
