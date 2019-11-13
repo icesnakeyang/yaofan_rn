@@ -2,18 +2,60 @@ import React, {Component} from 'react'
 import {
     View,
     Text,
-    TouchableOpacity
+    Dimensions,
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
+import actions from "../../action";
+import Textarea from "react-native-textarea";
+import Toast from "react-native-easy-toast";
+import TouchButton from "../../common/component/TouchButton";
+import {create} from "react-native/jest/renderer";
 
 class NewTaskLog extends Component {
+    constructor(props) {
+        super(props);
+        const {width, height} = Dimensions.get('window')
+        this.state = {
+            width: width,
+            height: height,
+            logContent: ''
+        }
+
+
+    }
+
     getLeftButton() {
         return (
             <GetLeftButton {...this.props}/>
         )
+    }
+
+    _saveLog() {
+        console.log(this.state)
+        console.log(this.props)
+        if (!(this.props.user.userInfo && this.props.user.userInfo.token)) {
+            this.refs.toast.show(I18nJs.t('common.tipSaveError'))
+            return
+        }
+        if (!(this.props.task.task && this.props.task.task.taskId)) {
+            return
+        }
+        const {createTaskLog} = this.props
+        let params = {
+            token: this.props.user.userInfo.token,
+            taskId: this.props.task.task.taskId
+        }
+        createTaskLog(params, (result) => {
+            console.log(result)
+            if (result) {
+                this.refs.toast.show(I18nJs.t('taskLog.tipSaveSuccess'))
+            } else {
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.taskLog.error))
+            }
+        })
     }
 
     render() {
@@ -31,11 +73,47 @@ class NewTaskLog extends Component {
 
         return (
             <View style={{
-                flex:1,
+                flex: 1,
                 backgroundColor: this.props.theme.color.THEME_BACK_COLOR
             }}>
                 {navigationBar}
-                <Text>create task log</Text>
+                <View style={{
+                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                    marginTop: 20,
+                    padding: 10
+                }}>
+                    <View>
+                        <Text style={{fontSize: 18}}>
+                            {I18nJs.t('taskLog.logContent')}:
+                        </Text>
+                    </View>
+                    <View style={{
+                        marginTop: 10,
+                        borderWidth: 0.5,
+                        borderColor: '#b4a7a3',
+                        padding: 10,
+                        height: this.state.height - 300
+                    }}>
+                        <Textarea
+                            placeholder={I18nJs.t('taskLog.logContentHolder')}
+                            onChangeText={(logContent) => this.setState({logContent})}
+                        />
+                    </View>
+                </View>
+
+                <View>
+                    <TouchButton
+                        label={I18nJs.t('taskLog.btSaveLog')}
+                        touchFunction={() => {
+                            this._saveLog()
+                        }}
+                    />
+                </View>
+
+                <Toast
+                    ref={'toast'}
+                    position={'center'}
+                />
             </View>
         )
     }
@@ -44,7 +122,12 @@ class NewTaskLog extends Component {
 const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
-    taskLog: state.taskLog
+    taskLog: state.taskLog,
+    task: state.task
 })
 
-export default connect(mapStateToProps)(NewTaskLog)
+const mapDispatchToProps = dispatch => ({
+    createTaskLog: (params, callback) => dispatch(actions.createTaskLog(params, callback))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewTaskLog)

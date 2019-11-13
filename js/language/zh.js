@@ -26,7 +26,8 @@ export default {
     common: {
         dialogTitleOk: '确认',
         cancel: '取消',
-        delete: '删除'
+        delete: '删除',
+        tipSaveError:'保存失败'
     },
     settings: {
         language: '语言',
@@ -82,7 +83,11 @@ export default {
     },
     taskLog:{
         title:'任务日志',
-        createTaskLog:'创建任务日志'
+        createTaskLog:'创建任务日志',
+        logContent:'日志内容',
+        logContentHolder:'请输入日志内容',
+        btSaveLog:'保存日志',
+        tipSaveSuccess:'保存日志成功'
     },
     team:{
         teamTask:'团队任务',

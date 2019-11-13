@@ -26,7 +26,8 @@ export default {
     common: {
         dialogTitleOk: 'Confirm',
         cancel: 'Cancel',
-        delete: 'Delete'
+        delete: 'Delete',
+        tipSaveError:'Save failed'
     },
     settings: {
         language: 'Language',
@@ -82,7 +83,11 @@ export default {
     },
     taskLog:{
         title:'Task Log',
-        createTaskLog:'Create Task Log'
+        createTaskLog:'Create Task Log',
+        logContent:'Log content',
+        logContentHolder:'Please input log here',
+        btSaveLog:'Save Log',
+        tipSaveSuccess:'Save log successful'
     },
     team: {
         teamTask: 'Team Tasks',
