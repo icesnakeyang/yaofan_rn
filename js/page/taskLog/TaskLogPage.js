@@ -3,7 +3,8 @@ import {
     View,
     Text,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
@@ -11,6 +12,8 @@ import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import NavigationUtil from "../../navigator/NavigationUtil";
+import actions from "../../action";
+import moment from "moment";
 
 
 class TaskLogPage extends Component {
@@ -23,10 +26,30 @@ class TaskLogPage extends Component {
 
     componentDidMount() {
         this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_TaskLogPage', (params) => {
+            this._loadAllData()
+        })
     }
 
     _loadAllData() {
-        console.log(this.props)
+        if (!this.props.task.task) {
+            return
+        }
+        const {listTaskLog} = this.props
+        let params = {
+            taskId: this.props.task.task.taskId,
+            token: this.props.user.userInfo.token
+        }
+        console.log(params)
+        listTaskLog(params, (result) => {
+            console.log(result)
+            if (result) {
+                console.log(this.props)
+                this.setState({
+                    taskLogs: this.props.taskLog.taskLogs
+                })
+            }
+        })
     }
 
     getLeftButton() {
@@ -55,6 +78,20 @@ class TaskLogPage extends Component {
     }
 
     _renderItem(item) {
+        let logTime = ''
+        let createUser = ''
+        let readTime = ''
+        if (item.createTime) {
+            logTime = moment(item.createTime).format('YYYY-MM-DD HH:mm')
+        }
+        if (item.createUserName) {
+            createUser = item.createUserName
+        }
+        if (item.readTime) {
+            readTime = moment(item.readTime).format('YYYY-MM-DD HH:mm')
+        } else {
+            readTime = I18nJs.t('status.unRead')
+        }
         return (
             <View>
                 <View style={{
@@ -65,29 +102,29 @@ class TaskLogPage extends Component {
                     <View
                         style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text> 日志日期 </Text>
+                            <Text>{I18nJs.t('taskLog.logTime')} </Text>
                         </View>
                         <View style={{marginLeft: 10}}>
-                            <Text>2019-11-12 11:24</Text>
+                            <Text>{logTime}</Text>
                         </View>
                     </View>
                     <View style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text>创建人</Text>
+                            <Text>{I18nJs.t('taskLog.createUser')}</Text>
                         </View>
                         <View style={{marginLeft: 10}}>
-                            <Text>gogoyang</Text>
+                            <Text>{createUser}</Text>
                         </View>
                     </View>
                     <View style={{flexDirection: 'row', borderWidth: 0.5, margin: 10, padding: 10}}>
-                        <Text>日志内容</Text>
+                        <Text>{item.content}</Text>
                     </View>
                     <View style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text>阅读时间</Text>
+                            <Text>{I18nJs.t('taskLog.readTime')}</Text>
                         </View>
                         <View style={{marginLeft: 10}}>
-                            <Text>2018-1-12</Text>
+                            <Text>{readTime}</Text>
                         </View>
                     </View>
                 </View>
@@ -151,4 +188,9 @@ const mapStateToProps = state => ({
     taskLog: state.taskLog
 })
 
-export default connect(mapStateToProps)(TaskLogPage)
+const mapDispatchToProps = dispatch => ({
+    listTaskLog: (params, callback) => dispatch(actions.listTaskLog(params, callback))
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskLogPage)

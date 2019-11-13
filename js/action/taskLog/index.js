@@ -35,3 +35,39 @@ export function createTaskLog(params, callback) {
             })
     }
 }
+
+export function listTaskLog(params, callback) {
+    return dispatch => {
+        let url = API.apiListTaskLog
+        console.log(params)
+        let body = {
+            taskId: params.taskId
+        }
+        let token = params.token
+        let dataStore = new DataStore()
+        dataStore.fetchPostData(url, body, token)
+            .then((response) => {
+                if (response.code === 0) {
+                    console.log(response)
+                    dispatch({
+                        type: Types.TASKLOG_LIST_SUCCESS,
+                        taskLogs: response.data.taskLogs
+                    })
+                    setTimeout(() => {
+                        callback(true)
+                    }, 100)
+                } else {
+                    throw new Error(response.code)
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: Types.TASKLOG_LIST_FAIL,
+                    error: error.message
+                })
+                setTimeout(() => {
+                    callback(false)
+                }, 100)
+            })
+    }
+}

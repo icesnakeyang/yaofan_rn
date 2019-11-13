@@ -3,6 +3,7 @@ import {
     View,
     Text,
     Dimensions,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
@@ -13,6 +14,7 @@ import Textarea from "react-native-textarea";
 import Toast from "react-native-easy-toast";
 import TouchButton from "../../common/component/TouchButton";
 import {create} from "react-native/jest/renderer";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class NewTaskLog extends Component {
     constructor(props) {
@@ -37,21 +39,34 @@ class NewTaskLog extends Component {
         console.log(this.state)
         console.log(this.props)
         if (!(this.props.user.userInfo && this.props.user.userInfo.token)) {
+            console.log(1)
             this.refs.toast.show(I18nJs.t('common.tipSaveError'))
             return
         }
         if (!(this.props.task.task && this.props.task.task.taskId)) {
+            console.log(2)
+            this.refs.toast.show(I18nJs.t('common.tipSaveError'))
             return
         }
+        if (!this.state.logContent) {
+            console.log('没有内容')
+            this.refs.toast.show(I18nJs.t('taskLog.tipNoContent'))
+            return
+        }
+
         const {createTaskLog} = this.props
         let params = {
             token: this.props.user.userInfo.token,
-            taskId: this.props.task.task.taskId
+            taskId: this.props.task.task.taskId,
+            content: this.state.logContent
         }
         createTaskLog(params, (result) => {
             console.log(result)
+            console.log(this.props)
             if (result) {
                 this.refs.toast.show(I18nJs.t('taskLog.tipSaveSuccess'))
+                DeviceEventEmitter.emit('Refresh_TaskLogPage')
+                NavigationUtil.goPage({}, 'TaskLogPage')
             } else {
                 this.refs.toast.show(I18nJs.t('syserr.' + this.props.taskLog.error))
             }

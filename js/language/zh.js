@@ -87,7 +87,12 @@ export default {
         logContent:'日志内容',
         logContentHolder:'请输入日志内容',
         btSaveLog:'保存日志',
-        tipSaveSuccess:'保存日志成功'
+        tipSaveSuccess:'保存日志成功',
+        tipNoContent:'请输入日志内容',
+        logTime:'日志时间',
+        createUser:'创建人',
+        readTime:'阅读时间'
+
     },
     team:{
         teamTask:'团队任务',

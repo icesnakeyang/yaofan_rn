@@ -27,7 +27,7 @@ export default {
         dialogTitleOk: 'Confirm',
         cancel: 'Cancel',
         delete: 'Delete',
-        tipSaveError:'Save failed'
+        tipSaveError: 'Save failed'
     },
     settings: {
         language: 'Language',
@@ -78,16 +78,20 @@ export default {
         status: 'Status',
         btBid: 'Bid',
         tipBidSuccess: 'Congratulation! Grab this task successful.',
-        btFeedback:'Task log',
-        grabTime:'Contract time'
+        btFeedback: 'Task log',
+        grabTime: 'Contract time'
     },
-    taskLog:{
-        title:'Task Log',
-        createTaskLog:'Create Task Log',
-        logContent:'Log content',
-        logContentHolder:'Please input log here',
-        btSaveLog:'Save Log',
-        tipSaveSuccess:'Save log successful'
+    taskLog: {
+        title: 'Task Log',
+        createTaskLog: 'Create Task Log',
+        logContent: 'Log content',
+        logContentHolder: 'Please input log here',
+        btSaveLog: 'Save Log',
+        tipSaveSuccess: 'Save log successful',
+        tipNoContent: 'Please input log content',
+        logTime: 'Create time',
+        createUser: 'Create user',
+        readTime: 'Read time'
     },
     team: {
         teamTask: 'Team Tasks',
