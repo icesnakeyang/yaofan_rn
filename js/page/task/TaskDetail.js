@@ -3,7 +3,8 @@ import {
     View,
     Text,
     DeviceEventEmitter,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -33,7 +34,6 @@ class TaskDetail extends Component {
     }
 
     _loadAllData() {
-        console.log('load data')
         if (this.props.navigation.state.params.taskId) {
             const {getTaskByTaskId} = this.props
             let params = {
@@ -102,14 +102,12 @@ class TaskDetail extends Component {
             partyBName: '',
             status: '',
             point: '',
-            detail: ''
-
+            detail: '',
+            totalTaskLog: '',
+            totalUnreadTaskLog: ''
         }
-        console.log(this.state)
-        console.log(1)
         if (this.state.data) {
             if (this.state.data.task) {
-                console.log(this.state.data.task)
                 showData.taskId = this.state.data.task.taskId
                 if (this.state.data.task.createTime) {
                     showData.createTime = moment(this.state.data.task.createTime).format('YYYY-MM-DD HH:mm')
@@ -123,8 +121,28 @@ class TaskDetail extends Component {
                 if (this.state.data.task.createUserName) {
                     showData.createUserName = this.state.data.task.createUserName
                 }
-                if(this.state.data.task.detail){}
-
+                if (this.state.data.task.detail) {
+                    showData.detail = this.state.data.task.detail
+                }
+                if (this.state.data.task.partyBName) {
+                    showData.partyBName = this.state.data.task.partyBName
+                }
+                if (this.state.data.task.point) {
+                    showData.point = this.state.data.task.point
+                }
+                if (this.state.data.task.title) {
+                    showData.title = this.state.data.task.title
+                }
+                if (this.state.data.task.status) {
+                    showData.status = this.state.data.task.status
+                }
+                console.log(this.state.data)
+                if (this.state.data.totalTaskLog) {
+                    showData.totalTaskLog = this.state.data.totalTaskLog
+                }
+                if (this.state.data.totalUnreadTaskLog) {
+                    showData.totalUnreadTaskLog = this.state.data.totalUnreadTaskLog
+                }
             }
         }
         console.log(showData)
@@ -159,6 +177,23 @@ class TaskDetail extends Component {
                             alignItems: 'center'
                         }}>
                             <Text style={{fontSize: 20}}>{showData.title}</Text>
+                        </View>
+
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 10,
+                            padding: 10
+                        }}>
+                            <View>
+                                <TouchableOpacity
+                                    style={{
+                                        backgroundColor: '#359b4f',
+                                        padding:5
+                                    }}
+                                >
+                                    <Text style={{color:'#f4f6ff'}}>{'日志：' + showData.totalTaskLog}</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
 
                         <View style={{
@@ -310,7 +345,7 @@ class TaskDetail extends Component {
                                         NavigationUtil.goPage({taskId: showData.taskId}, 'TaskLogPage')
                                     }}
                                     style={{height: 50}}
-                                    label={I18nJs.t('tasks.btFeedback')}
+                                    label={I18nJs.t('tasks.btFeedback') + `(${showData.totalTaskLog})`}
                                 />
                             </View>
                             : null
