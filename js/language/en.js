@@ -91,7 +91,18 @@ export default {
         tipNoContent: 'Please input log content',
         logTime: 'Create time',
         createUser: 'Create user',
-        readTime: 'Read time'
+        readTime: 'Read time',
+        log: 'Log',
+        complete: 'Complete'
+    },
+    taskComplete: {
+        title: 'Complete',
+        createTaskComplete: 'Complete Task',
+        content: 'Description',
+        contentHolder: 'Please describe the task completion',
+        btSaveComplete: 'Confirm Complete',
+        tipSaveSuccess: 'Task accomplished',
+        tipNoContent: 'Please describe the task completion',
     },
     team: {
         teamTask: 'Team Tasks',

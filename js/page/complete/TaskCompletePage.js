@@ -16,17 +16,17 @@ import actions from "../../action";
 import moment from "moment";
 
 
-class TaskLogPage extends Component {
+class TaskCompletePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            taskLogs: []
+            taskCompleteLogs: []
         }
     }
 
     componentDidMount() {
         this._loadAllData()
-        this.listener = DeviceEventEmitter.addListener('Refresh_TaskLogPage', (params) => {
+        this.listener = DeviceEventEmitter.addListener('Refresh_TaskCompletePage', (params) => {
             this._loadAllData()
         })
     }
@@ -61,7 +61,7 @@ class TaskLogPage extends Component {
                 <TouchableOpacity
                     style={{margin: 5, marginRight: 8}}
                     onPress={() => {
-                        NavigationUtil.goPage({}, 'NewTaskLog')
+                        NavigationUtil.goPage({}, 'NewTaskComplete')
                     }}
                 >
                     <Ionicons
@@ -146,7 +146,7 @@ class TaskLogPage extends Component {
         let statusBar = {backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}
         let navigationBar = (
             <NavigationBar
-                title={I18nJs.t('taskLog.title')}
+                title={I18nJs.t('taskComplete.title')}
                 statusBar={statusBar}
                 style={{backgroundColor: this.props.theme.color.THEME_HEAD_COLOR}}
                 leftButton={this.getLeftButton()}
@@ -191,4 +191,4 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TaskLogPage)
+export default connect(mapStateToProps, mapDispatchToProps)(TaskCompletePage)

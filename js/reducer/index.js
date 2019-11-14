@@ -5,6 +5,7 @@ import user from './user'
 import team from './team'
 import task from './task'
 import taskLog from './taskLog'
+import complete from './complete'
 
 const navState = RootNavigator.router.getStateForAction(
     RootNavigator.router.getActionForPathAndParams(rootCam)
@@ -21,7 +22,8 @@ const index = combineReducers({
     user,
     team,
     task,
-    taskLog
+    taskLog,
+    complete
 })
 
 export default index

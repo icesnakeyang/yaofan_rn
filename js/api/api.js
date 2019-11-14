@@ -1,8 +1,8 @@
 // const host = 'http://192.168.0.105:8089'
-// const host = 'http://192.168.1.247:8089'
+const host = 'http://192.168.1.247:8089'
 // const host = 'http://192.168.1.214:8089'
 // const host = 'http://192.168.43.29:8089'
-const host = 'http://192.168.0.106:8089'
+// const host = 'http://192.168.0.106:8089'
 // const host = 'http://192.168.0.107:8089'
 
 export const API = {
@@ -24,5 +24,6 @@ export const API = {
     apiListMyTasks: `${host}/task/listMyTasks`,
     apiGrab: `${host}/task/grab`,
     apiCreateTaskLog: `${host}/tasklog/createTaskLog`,
-    apiListTaskLog: `${host}/tasklog/listTaskLog`
+    apiListTaskLog: `${host}/tasklog/listTaskLog`,
+    apiCreateComplete: `${host}/complete/createComplete`
 }

@@ -77,7 +77,6 @@ class MyTasks extends Component {
     }
 
     _renderItem(item) {
-        console.log(item)
         let endTime = ''
         if (item.task.endTime) {
             endTime = moment(item.task.endTime).format('YYYY-MM-DD H:mm')
