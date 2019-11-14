@@ -53,6 +53,7 @@ class MyTasks extends Component {
                 this.setState({
                     loading: false
                 })
+                console.log(this.state)
             }
         })
     }
@@ -91,7 +92,7 @@ class MyTasks extends Component {
                     point={item.task.point}
                     endTime={endTime}
                     status={item.task.status}
-                    unRead={item.totalUnreadTaskLog}
+                    unRead={item.totalUnreadTaskLog + item.totalUnreadTaskComplete}
                 />
             </View>
         )

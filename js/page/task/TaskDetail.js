@@ -135,7 +135,7 @@ class TaskDetail extends Component {
                     showData.title = this.state.data.task.title
                 }
                 if (this.state.data.task.status) {
-                    showData.status = this.state.data.task.status
+                    showData.status = I18nJs.t('status.' + this.state.data.task.status)
                 }
                 if (this.state.data.totalTaskLog) {
                     showData.totalTaskLog = this.state.data.totalTaskLog

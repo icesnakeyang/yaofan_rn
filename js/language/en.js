@@ -7,7 +7,8 @@ export default {
         agree: 'Agreed',
         unRead: 'Un-Read',
         BIDDING: 'Bidding',
-        PROGRESS: 'Progress'
+        PROGRESS: 'Progress',
+        COMPLETE: 'Complete'
     },
     bottomBar: {
         plaza: 'Plaza',

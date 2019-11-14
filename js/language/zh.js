@@ -7,7 +7,8 @@ export default {
         agree: '已同意',
         unRead: '未阅读',
         BIDDING: '等待抢单',
-        PROGRESS: '进行中'
+        PROGRESS: '进行中',
+        COMPLETE:'已完成'
     },
     bottomBar: {
         plaza: '任务广场',
