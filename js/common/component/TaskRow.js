@@ -25,7 +25,8 @@ class TaskRow extends Component {
         title: PropTypes.string,
         endTime: PropTypes.string,
         point: PropTypes.number,
-        status: PropTypes.string
+        status: PropTypes.string,
+        unRead: PropTypes.number
     }
 
     render() {
@@ -44,8 +45,31 @@ class TaskRow extends Component {
                     onPress={this.props.touchFunction}
                 >
                     <View>
-                        <View>
-                            <Text style={{marginLeft: 10, fontSize: 20}}>{this.props.title}</Text>
+                        <View style={{flexDirection:'row'}}>
+                            <View>
+                                {this.props.unRead ?
+                                    <View style={{
+                                        width: 15,
+                                        height: 15,
+                                        backgroundColor: '#f90c04',
+                                        borderRadius: 100,
+                                        marginLeft: 5,
+                                        marginTop: 0
+                                    }}>
+                                        <Text style={{
+                                            marginLeft:3,
+                                            marginTop:-1,
+                                            color:'#ffffff'
+                                        }}>{this.props.unRead}</Text>
+                                    </View>
+                                    : null}
+                            </View>
+                            <View>
+                                <Text style={{
+                                    marginLeft: 10,
+                                    fontSize: 20
+                                }}>{this.props.title}</Text>
+                            </View>
                         </View>
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <View style={{marginLeft: 10,}}>
@@ -59,7 +83,6 @@ class TaskRow extends Component {
                             </View>
                         </View>
                     </View>
-
 
                     <View
                         style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end'}}>

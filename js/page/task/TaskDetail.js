@@ -103,8 +103,8 @@ class TaskDetail extends Component {
             status: '',
             point: '',
             detail: '',
-            totalTaskLog: '',
-            totalUnreadTaskLog: ''
+            totalTaskLog: 0,
+            totalUnreadTaskLog: 0
         }
         if (this.state.data) {
             if (this.state.data.task) {
@@ -136,7 +136,6 @@ class TaskDetail extends Component {
                 if (this.state.data.task.status) {
                     showData.status = this.state.data.task.status
                 }
-                console.log(this.state.data)
                 if (this.state.data.totalTaskLog) {
                     showData.totalTaskLog = this.state.data.totalTaskLog
                 }
@@ -145,8 +144,6 @@ class TaskDetail extends Component {
                 }
             }
         }
-        console.log(showData)
-        console.log(3)
         return showData
     }
 
@@ -184,15 +181,34 @@ class TaskDetail extends Component {
                             marginTop: 10,
                             padding: 10
                         }}>
-                            <View>
+                            <View style={{flexDirection: 'row'}}>
                                 <TouchableOpacity
                                     style={{
                                         backgroundColor: '#359b4f',
-                                        padding:5
+                                        padding: 5
+                                    }}
+                                    onPress={() => {
+                                        NavigationUtil.goPage({taskId: showData.taskId}, 'TaskLogPage')
                                     }}
                                 >
-                                    <Text style={{color:'#f4f6ff'}}>{'日志：' + showData.totalTaskLog}</Text>
+                                    <Text style={{color: '#f4f6ff'}}>{'日志：' + showData.totalTaskLog}</Text>
                                 </TouchableOpacity>
+                                {showData.totalUnreadTaskLog ?
+                                    <View style={{
+                                        width: 15,
+                                        height: 15,
+                                        backgroundColor: '#f90c04',
+                                        borderRadius: 100,
+                                        marginLeft: -6,
+                                        marginTop: -8
+                                    }}>
+                                        <Text style={{
+                                            fontSize: 12,
+                                            color: '#ffffff',
+                                            marginLeft: 4
+                                        }}>{showData.totalUnreadTaskLog}</Text>
+                                    </View>
+                                    : null}
                             </View>
                         </View>
 
@@ -334,18 +350,6 @@ class TaskDetail extends Component {
                                     }}
                                     style={{height: 50}}
                                     label={I18nJs.t('tasks.btBid')}
-                                />
-                            </View>
-                            : null
-                        }
-                        {this.state.feedback ?
-                            <View>
-                                <TouchButton
-                                    touchFunction={() => {
-                                        NavigationUtil.goPage({taskId: showData.taskId}, 'TaskLogPage')
-                                    }}
-                                    style={{height: 50}}
-                                    label={I18nJs.t('tasks.btFeedback') + `(${showData.totalTaskLog})`}
                                 />
                             </View>
                             : null

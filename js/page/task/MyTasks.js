@@ -21,7 +21,7 @@ class MyTasks extends Component {
         super(props);
         const {height, width} = Dimensions.get('window')
         this.state = {
-            tasks: [],
+            tasks: null,
             height: height,
             width: width,
             loading: true
@@ -77,20 +77,24 @@ class MyTasks extends Component {
     }
 
     _renderItem(item) {
+        console.log(item)
         let endTime = ''
-        if (item.endTime) {
-            endTime = moment(item.endTime).format('YYYY-MM-DD H:mm')
+        if (item.task.endTime) {
+            endTime = moment(item.task.endTime).format('YYYY-MM-DD H:mm')
         }
         return (
-            <TaskRow
-                touchFunction={() => {
-                    NavigationUtil.goPage({taskId: item.taskId}, 'TaskDetail')
-                }}
-                title={item.title}
-                point={item.point}
-                endTime={endTime}
-                status={item.status}
-            />
+            <View>
+                <TaskRow
+                    touchFunction={() => {
+                        NavigationUtil.goPage({taskId: item.task.taskId}, 'TaskDetail')
+                    }}
+                    title={item.task.title}
+                    point={item.task.point}
+                    endTime={endTime}
+                    status={item.task.status}
+                    unRead={item.totalUnreadTaskLog}
+                />
+            </View>
         )
     }
 
@@ -117,6 +121,7 @@ class MyTasks extends Component {
                         <Text>{I18nJs.t('loading')}</Text>
                     </View> :
                     <FlatList
+                        keyExtractor={(item, index) => index.toString()}
                         data={this.state.tasks}
                         renderItem={({item}) => this._renderItem(item)}
                     />
