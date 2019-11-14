@@ -14,6 +14,16 @@ export default function onAction(state = defaultState, action) {
                 ...state,
                 error: action.error
             }
+        case Types.TASKCOMPLETE_LIST_SUCCESS:
+            return {
+                ...state,
+                taskCompletes: action.taskCompletes
+            }
+        case Types.TASKCOMPLETE_LIST_FAIL:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return {
                 ...state

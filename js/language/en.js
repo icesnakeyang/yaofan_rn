@@ -103,6 +103,9 @@ export default {
         btSaveComplete: 'Confirm Complete',
         tipSaveSuccess: 'Task accomplished',
         tipNoContent: 'Please describe the task completion',
+        createTime: 'Complete time',
+        createUser: 'User',
+        readTime: 'Read time'
     },
     team: {
         teamTask: 'Team Tasks',

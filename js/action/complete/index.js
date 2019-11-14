@@ -38,7 +38,7 @@ export function createComplete(params, callback) {
 
 export function listTaskComplete(params, callback) {
     return dispatch => {
-        let url = API.apiListTaskLog
+        let url = API.apiListTaskComplete
         let body = {
             taskId: params.taskId
         }
@@ -48,8 +48,8 @@ export function listTaskComplete(params, callback) {
             .then((response) => {
                 if (response.code === 0) {
                     dispatch({
-                        type: Types.TASKLOG_LIST_SUCCESS,
-                        taskLogs: response.data.taskLogs
+                        type: Types.TASKCOMPLETE_LIST_SUCCESS,
+                        taskCompletes: response.data.taskCompletes
                     })
                     setTimeout(() => {
                         callback(true)
@@ -60,7 +60,7 @@ export function listTaskComplete(params, callback) {
             })
             .catch((error) => {
                 dispatch({
-                    type: Types.TASKLOG_LIST_FAIL,
+                    type: Types.TASKCOMPLETE_LIST_FAIL,
                     error: error.message
                 })
                 setTimeout(() => {

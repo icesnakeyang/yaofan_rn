@@ -13,7 +13,7 @@ import {
 } from "./team";
 import {createTask, getTaskByTaskId, grabTask, listBiddingTasks, listMyTasks} from "./task";
 import {createTaskLog, listTaskLog} from "./taskLog";
-import {createComplete} from "./complete";
+import {createComplete, listTaskComplete} from "./complete";
 
 export default {
     loadLanguage,
@@ -37,5 +37,6 @@ export default {
     grabTask,
     createTaskLog,
     listTaskLog,
-    createComplete
+    createComplete,
+    listTaskComplete
 }

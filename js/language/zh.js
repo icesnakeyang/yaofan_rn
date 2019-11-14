@@ -104,6 +104,9 @@ export default {
         btSaveComplete:'确认完成',
         tipSaveSuccess: '任务已设置为完成',
         tipNoContent: '请输入任务完成说明',
+        createTime:'完成时间',
+        createUser:'完成人',
+        readTime:'阅读时间'
     },
     team: {
         teamTask: '团队任务',

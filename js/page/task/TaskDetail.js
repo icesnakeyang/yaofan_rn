@@ -44,7 +44,6 @@ class TaskDetail extends Component {
                 if (result) {
                     this.setState({
                         data: this.props.task.data,
-
                     })
                     if (this.state.data.task.status === 'BIDDING') {
                         if (this.state.data.task.createUserId !== this.props.user.userInfo.userId) {
@@ -57,8 +56,8 @@ class TaskDetail extends Component {
                         this.setState({
                             feedback: true
                         })
-
                     }
+                    console.log(this.state)
                 } else {
                     this.refs.toast.show(I18nJs.t('syserr.' + this.props.task.error))
                 }
@@ -104,7 +103,9 @@ class TaskDetail extends Component {
             point: '',
             detail: '',
             totalTaskLog: 0,
-            totalUnreadTaskLog: 0
+            totalUnreadTaskLog: 0,
+            totalTaskComplete: 0,
+            totalUnreadTaskComplete: 0
         }
         if (this.state.data) {
             if (this.state.data.task) {
@@ -142,8 +143,15 @@ class TaskDetail extends Component {
                 if (this.state.data.totalUnreadTaskLog) {
                     showData.totalUnreadTaskLog = this.state.data.totalUnreadTaskLog
                 }
+                if (this.state.data.totalTaskComplete) {
+                    showData.totalTaskComplete = this.state.data.totalTaskComplete
+                }
+                if (this.state.data.totalUnreadTaskComplete) {
+                    showData.totalUnreadTaskComplete = this.state.data.totalUnreadTaskComplete
+                }
             }
         }
+        console.log(showData)
         return showData
     }
 
@@ -221,9 +229,9 @@ class TaskDetail extends Component {
                                     }}
                                 >
                                     <Text
-                                        style={{color: '#f4f6ff'}}>{I18nJs.t('taskLog.complete') + '：' + showData.totalTaskLog}</Text>
+                                        style={{color: '#f4f6ff'}}>{I18nJs.t('taskLog.complete') + '：' + showData.totalTaskComplete}</Text>
                                 </TouchableOpacity>
-                                {showData.totalUnreadTaskLog ?
+                                {showData.totalUnreadTaskComplete ?
                                     <View style={{
                                         width: 15,
                                         height: 15,
@@ -236,7 +244,7 @@ class TaskDetail extends Component {
                                             fontSize: 12,
                                             color: '#ffffff',
                                             marginLeft: 4
-                                        }}>{showData.totalUnreadTaskLog}</Text>
+                                        }}>{showData.totalUnreadTaskComplete}</Text>
                                     </View>
                                     : null}
                             </View>

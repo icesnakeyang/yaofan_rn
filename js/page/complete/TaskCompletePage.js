@@ -35,15 +35,16 @@ class TaskCompletePage extends Component {
         if (!this.props.task.data.task) {
             return
         }
-        const {listTaskLog} = this.props
+        const {listTaskComplete} = this.props
         let params = {
             taskId: this.props.task.data.task.taskId,
             token: this.props.user.userInfo.token
         }
-        listTaskLog(params, (result) => {
+        listTaskComplete(params, (result) => {
             if (result) {
+                console.log(this.props)
                 this.setState({
-                    taskLogs: this.props.taskLog.taskLogs
+                    taskCompleteLogs: this.props.complete.taskCompletes
                 })
             }
         })
@@ -75,6 +76,7 @@ class TaskCompletePage extends Component {
     }
 
     _renderItem(item) {
+        console.log(item)
         let logTime = ''
         let createUser = ''
         let readTime = ''
@@ -99,7 +101,7 @@ class TaskCompletePage extends Component {
                     <View
                         style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text>{I18nJs.t('taskLog.logTime')} </Text>
+                            <Text>{I18nJs.t('taskComplete.createTime')} </Text>
                         </View>
                         <View style={{marginLeft: 10}}>
                             <Text>{logTime}</Text>
@@ -107,7 +109,7 @@ class TaskCompletePage extends Component {
                     </View>
                     <View style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text>{I18nJs.t('taskLog.createUser')}</Text>
+                            <Text>{I18nJs.t('taskComplete.createUser')}</Text>
                         </View>
                         <View style={{marginLeft: 10}}>
                             <Text>{createUser}</Text>
@@ -118,7 +120,7 @@ class TaskCompletePage extends Component {
                     </View>
                     <View style={{flexDirection: 'row', margin: 10}}>
                         <View>
-                            <Text>{I18nJs.t('taskLog.readTime')}</Text>
+                            <Text>{I18nJs.t('taskComplete.readTime')}</Text>
                         </View>
                         <View style={{marginLeft: 10}}>
                             <Text>{readTime}</Text>
@@ -171,7 +173,7 @@ class TaskCompletePage extends Component {
                 </View>
                 <FlatList
                     keyExtractor={(item, index) => index.toString()}
-                    data={this.state.taskLogs}
+                    data={this.state.taskCompleteLogs}
                     renderItem={({item}) => this._renderItem(item)}
                 />
             </View>
@@ -183,11 +185,11 @@ const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
     task: state.task,
-    taskLog: state.taskLog
+    complete: state.complete
 })
 
 const mapDispatchToProps = dispatch => ({
-    listTaskLog: (params, callback) => dispatch(actions.listTaskLog(params, callback))
+    listTaskComplete: (params, callback) => dispatch(actions.listTaskComplete(params, callback))
 
 })
 
