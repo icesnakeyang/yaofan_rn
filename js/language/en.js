@@ -135,6 +135,16 @@ export default {
         teamCreateDate: 'Create time',
         teamManager: 'Manager'
     },
+    point: {
+        title: 'Point',
+        currentPoint: 'Current Point',
+        totalPointIn: 'Total Point In',
+        totalPointOut: 'Total Point Out',
+        countTask: 'Total Tasks',
+        completeTask: 'Complete',
+        progressTask: 'Progress'
+
+    },
     syserr: {
         10001: 'Some network error',
         10002: 'Username and password error',

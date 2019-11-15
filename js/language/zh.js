@@ -8,7 +8,7 @@ export default {
         unRead: '未阅读',
         BIDDING: '等待抢单',
         PROGRESS: '进行中',
-        COMPLETE:'已完成'
+        COMPLETE: '已完成'
     },
     bottomBar: {
         plaza: '任务广场',
@@ -99,15 +99,15 @@ export default {
     },
     taskComplete: {
         title: '完成日志',
-        createTaskComplete:'任务完成',
-        content:'完成说明',
-        contentHolder:'请对任务完成情况进行说明',
-        btSaveComplete:'确认完成',
+        createTaskComplete: '任务完成',
+        content: '完成说明',
+        contentHolder: '请对任务完成情况进行说明',
+        btSaveComplete: '确认完成',
         tipSaveSuccess: '任务已设置为完成',
         tipNoContent: '请输入任务完成说明',
-        createTime:'完成时间',
-        createUser:'完成人',
-        readTime:'阅读时间'
+        createTime: '完成时间',
+        createUser: '完成人',
+        readTime: '阅读时间'
     },
     team: {
         teamTask: '团队任务',
@@ -135,6 +135,15 @@ export default {
         teamDetail: '团队详情',
         teamCreateDate: '团队创建时间',
         teamManager: '团队管理员'
+    },
+    point: {
+        title: '我的积分',
+        currentPoint: '当前积分',
+        totalPointIn: '总积分收入',
+        totalPointOut: '总积分支出',
+        countTask: '任务总数',
+        completeTask: '完成任务',
+        progressTask: '当前任务'
     },
     syserr: {
         10001: '网络错误',

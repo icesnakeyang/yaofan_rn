@@ -14,6 +14,7 @@ import {
 import {createTask, getTaskByTaskId, grabTask, listBiddingTasks, listMyTasks} from "./task";
 import {createTaskLog, listTaskLog} from "./taskLog";
 import {createComplete, listTaskComplete} from "./complete";
+import {loadDashboard} from "./statistic";
 
 export default {
     loadLanguage,
@@ -38,5 +39,6 @@ export default {
     createTaskLog,
     listTaskLog,
     createComplete,
-    listTaskComplete
+    listTaskComplete,
+    loadDashboard
 }
