@@ -143,7 +143,9 @@ export default {
         totalPointOut: '总积分支出',
         countTask: '任务总数',
         completeTask: '完成任务',
-        progressTask: '当前任务'
+        progressTask: '当前任务',
+        monthPointIn:'本月积分收入',
+        monthPointOut:'本月积分支出'
     },
     syserr: {
         10001: '网络错误',

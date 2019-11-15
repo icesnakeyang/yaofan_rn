@@ -35,7 +35,11 @@ class Dashboard extends Component {
                         currentPoint: this.props.statistic.data.currentPoint,
                         totalPointIn: this.props.statistic.data.pointIn,
                         totalPointOut: this.props.statistic.data.pointOut,
-                        countTask: this.props.statistic.data.countTask
+                        countTask: this.props.statistic.data.countTask,
+                        countTaskComplete: this.props.statistic.data.countTaskComplete,
+                        countTaskProgress: this.props.statistic.data.countTaskProgress,
+                        totalInMonth: this.props.statistic.data.totalInMonth,
+                        totalOutMonth: this.props.statistic.data.totalOutMonth
                     }
                 })
             }
@@ -91,7 +95,6 @@ class Dashboard extends Component {
                                     backgroundColor: '#bb0512',
                                     height: 60,
                                     width: 100,
-                                    padding: 10,
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>
@@ -102,7 +105,7 @@ class Dashboard extends Component {
                                                 color: '#ffffff'
                                             }}>{I18nJs.t('point.currentPoint')}</Text>
                                     </View>
-                                    <View>
+                                    <View style={{marginTop: 5}}>
                                         <Text style={{
                                             fontSize: 14,
                                             color: '#ffffff'
@@ -113,34 +116,49 @@ class Dashboard extends Component {
                                     backgroundColor: '#a1141a',
                                     height: 60,
                                     width: 100,
-                                    padding: 10,
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>
-                                    <Text
-                                        style={{fontSize: 16, color: '#ffffff'}}>{I18nJs.t('point.totalPointIn')}</Text>
-                                    <Text style={{fontSize: 14, color: '#ffffff'}}>{this.state.data.totalPointIn}</Text>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                fontSize: 16,
+                                                color: '#ffffff'
+                                            }}>{I18nJs.t('point.totalPointIn')}</Text>
+                                    </View>
+                                    <View style={{marginTop: 5}}>
+                                        <Text style={{
+                                            fontSize: 14,
+                                            color: '#ffffff'
+                                        }}>{this.state.data.totalPointIn}</Text>
+                                    </View>
                                 </View>
                                 <View style={{
                                     backgroundColor: '#ef8201',
                                     height: 60,
                                     width: 100,
-                                    padding: 10,
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>
-                                    <Text style={{
-                                        fontSize: 16,
-                                        color: '#ffffff'
-                                    }}>{I18nJs.t('point.totalPointOut')}</Text>
-                                    <Text
-                                        style={{fontSize: 14, color: '#ffffff'}}>{this.state.data.totalPointOut}</Text>
+                                    <View>
+                                        <Text style={{
+                                            fontSize: 16,
+                                            color: '#ffffff'
+                                        }}>{I18nJs.t('point.totalPointOut')}</Text>
+                                    </View>
+                                    <View style={{marginTop: 5}}>
+                                        <Text
+                                            style={{
+                                                fontSize: 14,
+                                                color: '#ffffff'
+                                            }}>{this.state.data.totalPointOut}</Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
                         <View>
                             <View style={{
-                                marginTop: 20,
+                                marginTop: 10,
                                 flexDirection: 'row',
                                 padding: 10,
                                 justifyContent: 'space-around'
@@ -160,7 +178,7 @@ class Dashboard extends Component {
                                                 color: '#ffffff'
                                             }}>{I18nJs.t('point.countTask')}</Text>
                                     </View>
-                                    <View>
+                                    <View style={{marginTop: 5}}>
                                         <Text style={{
                                             fontSize: 14,
                                             color: '#ffffff'
@@ -175,9 +193,19 @@ class Dashboard extends Component {
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>
-                                    <Text
-                                        style={{fontSize: 16, color: '#ffffff'}}>{I18nJs.t('point.completeTask')}</Text>
-                                    <Text style={{fontSize: 14, color: '#ffffff'}}>{this.state.data.totalPointIn}</Text>
+                                    <View>
+                                        <Text
+                                            style={{
+                                                fontSize: 16,
+                                                color: '#ffffff'
+                                            }}>{I18nJs.t('point.completeTask')}</Text>
+                                    </View>
+                                    <View style={{marginTop: 5}}>
+                                        <Text style={{
+                                            fontSize: 14,
+                                            color: '#ffffff'
+                                        }}>{this.state.data.countTaskComplete}</Text>
+                                    </View>
                                 </View>
                                 <View style={{
                                     backgroundColor: '#7387a2',
@@ -187,14 +215,35 @@ class Dashboard extends Component {
                                     justifyContent: 'center',
                                     alignItems: 'center'
                                 }}>
-                                    <Text style={{
-                                        fontSize: 16,
-                                        color: '#ffffff'
-                                    }}>{I18nJs.t('point.progressTask')}</Text>
-                                    <Text
-                                        style={{fontSize: 14, color: '#ffffff'}}>{this.state.data.totalPointOut}</Text>
+                                    <View>
+                                        <Text style={{
+                                            fontSize: 16,
+                                            color: '#ffffff'
+                                        }}>{I18nJs.t('point.progressTask')}</Text>
+                                    </View>
+                                    <View style={{marginTop: 5}}>
+                                        <Text
+                                            style={{
+                                                fontSize: 14,
+                                                color: '#ffffff'
+                                            }}>{this.state.data.countTaskProgress}</Text>
+                                    </View>
                                 </View>
                             </View>
+                        </View>
+                        <View style={{
+                            padding: 20,
+                            flexDirection: 'row'
+                        }}>
+                            <Text>{I18nJs.t('point.monthPointIn')}：</Text>
+                            <Text>{this.state.data.totalInMonth}</Text>
+                        </View>
+                        <View style={{
+                            padding: 20,
+                            flexDirection: 'row'
+                        }}>
+                            <Text>{I18nJs.t('point.monthPointOut')}：</Text>
+                            <Text>{this.state.data.totalOutMonth}</Text>
                         </View>
                     </View>
                 }

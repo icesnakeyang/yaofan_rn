@@ -142,8 +142,9 @@ export default {
         totalPointOut: 'Total Point Out',
         countTask: 'Total Tasks',
         completeTask: 'Complete',
-        progressTask: 'Progress'
-
+        progressTask: 'Progress',
+        monthPointIn:'Point income in this month',
+        monthPointOut:'Point outgoing in this month'
     },
     syserr: {
         10001: 'Some network error',
