@@ -143,13 +143,18 @@ export default {
         countTask: 'Total Tasks',
         completeTask: 'Complete',
         progressTask: 'Progress',
-        monthPointIn:'Point income in this month',
-        monthPointOut:'Point outgoing in this month',
-        exchangePoint:'Point exchange to money',
-        exchange:{
-            title:'Point Exchange',
-            btWithdraw:'Withdraw',
-            takeAll:'Withdraw all'
+        monthPointIn: 'Point income in this month',
+        monthPointOut: 'Point outgoing in this month',
+        exchangePoint: 'Point exchange to money',
+        exchange: {
+            title: 'Point Exchange',
+            btWithdraw: 'Withdraw',
+            takeAll: 'Withdraw all',
+            pointWithdraw: 'Point to withdraw',
+            withdrawRemark: 'Remark',
+            noPoint: 'Please input point to exchange',
+            noRemark: 'Please describe your exchange',
+            tipApplySuccess: 'Apply exchange point successful, please waite for manger to process.'
         }
     },
     syserr: {
@@ -159,6 +164,7 @@ export default {
         10011: 'This application has been processed already',
         10012: 'You are in the team already',
         10013: 'The task duplicated',
-        10017: 'You are not the team member'
+        10017: 'You are not the team member',
+        10022: 'Your point is not enough to exchange'
     }
 }

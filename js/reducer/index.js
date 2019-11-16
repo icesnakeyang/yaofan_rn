@@ -7,6 +7,7 @@ import task from './task'
 import taskLog from './taskLog'
 import complete from './complete'
 import statistic from './statistic'
+import point from './point'
 
 const navState = RootNavigator.router.getStateForAction(
     RootNavigator.router.getActionForPathAndParams(rootCam)
@@ -25,7 +26,8 @@ const index = combineReducers({
     task,
     taskLog,
     complete,
-    statistic
+    statistic,
+    point
 })
 
 export default index

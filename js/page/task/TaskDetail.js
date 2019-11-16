@@ -57,7 +57,6 @@ class TaskDetail extends Component {
                             feedback: true
                         })
                     }
-                    console.log(this.state)
                 } else {
                     this.refs.toast.show(I18nJs.t('syserr.' + this.props.task.error))
                 }
@@ -151,7 +150,6 @@ class TaskDetail extends Component {
                 }
             }
         }
-        console.log(showData)
         return showData
     }
 

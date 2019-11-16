@@ -144,13 +144,18 @@ export default {
         countTask: '任务总数',
         completeTask: '完成任务',
         progressTask: '当前任务',
-        monthPointIn:'本月积分收入',
-        monthPointOut:'本月积分支出',
-        exchangePoint:'积分兑换',
-        exchange:{
-            title:'积分兑换',
-            btWithdraw:'兑换',
-            takeAll:'全部提取'
+        monthPointIn: '本月积分收入',
+        monthPointOut: '本月积分支出',
+        exchangePoint: '积分兑换',
+        exchange: {
+            title: '积分兑换',
+            btWithdraw: '兑换',
+            takeAll: '全部提取',
+            pointWithdraw: '要兑换的积分',
+            withdrawRemark: '兑换说明',
+            noPoint: '请输入要兑换的积分额度',
+            noRemark: '请输入兑换说明',
+            tipApplySuccess: '兑换申请成功，请等待管理员处理'
         }
     },
     syserr: {
@@ -160,7 +165,8 @@ export default {
         10011: '当前处理的申请已经被处理过了',
         10012: '您已经是该团队成员了',
         10013: '任务重复',
-        10017: '用户不是团队成员'
+        10017: '抱歉，您不是该团队成员',
+        10022: '抱歉，您当前的积分不足！'
 
     }
 }

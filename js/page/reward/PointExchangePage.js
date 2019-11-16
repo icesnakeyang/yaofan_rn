@@ -3,20 +3,29 @@ import {
     View,
     Text,
     TextInput,
-    TouchableOpacity
+    Dimensions,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
 import TouchButton from "../../common/component/TouchButton";
+import actions from "../../action";
+import Textarea from 'react-native-textarea'
+import Toast from 'react-native-easy-toast'
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class PointExchangePage extends Component {
     constructor(props) {
         super(props);
+        const {height, width} = Dimensions.get('window')
         this.state = {
+            height: height,
+            width: width,
             pointBalance: 0,
-            withdraw: 0
+            withdraw: 0,
+            remark: ''
         }
     }
 
@@ -25,6 +34,7 @@ class PointExchangePage extends Component {
     }
 
     _loadAllData() {
+        console.log(this.props)
         if (this.props.statistic) {
             if (this.props.statistic.data.currentPoint) {
                 this.setState({
@@ -41,12 +51,34 @@ class PointExchangePage extends Component {
     }
 
     _withdraw() {
-        console.log(this.state.withdraw)
-        console.log(this.props)
         if (!this.props.user.userInfo) {
             return
         }
-        console.log(this.props.user.userInfo.token)
+        if (!this.state.withdraw) {
+            this.refs.toast.show(I18nJs.t('point.exchange.noPoint'))
+            return;
+        }
+        if (!this.state.remark) {
+            this.refs.toast.show(I18nJs.t('point.exchange.noRemark'))
+            return;
+        }
+
+        const {applyPointWithdraw} = this.props
+        let params = {
+            token: this.props.user.userInfo.token,
+            point: this.state.withdraw,
+            remark: this.state.remark
+        }
+        applyPointWithdraw(params, (result) => {
+            if (result) {
+                this.refs.toast.show(I18nJs.t('point.exchange.tipApplySuccess'))
+                DeviceEventEmitter.emit('Refresh_Dashboard')
+                NavigationUtil.goPage({}, 'Dashboard')
+            } else {
+                console.log(this.props)
+                this.refs.toast.show(I18nJs.t('syserr.' + this.props.point.error))
+            }
+        })
     }
 
     render() {
@@ -89,7 +121,7 @@ class PointExchangePage extends Component {
                     <View style={{
                         justifyContent: 'flex-end'
                     }}>
-                        <Text style={{fontSize: 18}}>兑换积分</Text>
+                        <Text style={{fontSize: 18}}>{I18nJs.t('point.exchange.pointWithdraw')}</Text>
                     </View>
                     <View style={{
                         flex: 1,
@@ -125,11 +157,36 @@ class PointExchangePage extends Component {
                         />
                     </View>
                 </View>
+                <View style={{
+                    backgroundColor: this.props.theme.color.THEME_ROW_COLOR,
+                    flexDirection: 'row',
+                    padding: 10,
+                    marginTop: 20
+                }}>
+                    <View style={{
+                        flex: 1,
+                        height: this.state.height - 450
+                    }}>
+                        <Textarea
+                            style={{
+                                borderWidth: 0.5,
+                                fontSize: 18,
+                                height: this.state.height - 450,
+                                padding: 10
+                            }}
+                            placeholder={I18nJs.t('point.exchange.withdrawRemark')}
+                            onChangeText={(remark) => this.setState({remark})}
+                        />
+                    </View>
+                </View>
                 <TouchButton
                     label={I18nJs.t('point.exchange.btWithdraw')}
                     touchFunction={() => {
                         this._withdraw()
                     }}
+                />
+                <Toast ref={'toast'}
+                       position={'center'}
                 />
             </View>
         )
@@ -139,9 +196,12 @@ class PointExchangePage extends Component {
 const mapStateToProps = state => ({
     theme: state.theme,
     user: state.user,
-    statistic: state.statistic
+    statistic: state.statistic,
+    point: state.point
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+    applyPointWithdraw: (params, callback) => dispatch(actions.applyPointWithdraw(params, callback))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(PointExchangePage)

@@ -35,7 +35,6 @@ class NewTaskComplete extends Component {
     }
 
     _saveTaskComplete() {
-        console.log('save begin')
         if (!(this.props.user.userInfo && this.props.user.userInfo.token)) {
             this.refs.toast.show(I18nJs.t('common.tipSaveError'))
             return
@@ -49,16 +48,13 @@ class NewTaskComplete extends Component {
             return
         }
 
-        console.log('save 2')
         const {createComplete} = this.props
         let params = {
             token: this.props.user.userInfo.token,
             taskId: this.props.task.data.task.taskId,
             content: this.state.content
         }
-        console.log(1)
         createComplete(params, (result) => {
-            console.log(result)
             if (result) {
                 this.refs.toast.show(I18nJs.t('taskComplete.tipSaveSuccess'))
                 DeviceEventEmitter.emit('Refresh_TaskCompletePage')

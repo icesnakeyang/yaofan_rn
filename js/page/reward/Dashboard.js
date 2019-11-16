@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {
     View,
-    Text
+    Text,
+    DeviceEventEmitter
 } from 'react-native'
 import {connect} from "react-redux";
 import actions from "../../action";
@@ -21,7 +22,15 @@ class Dashboard extends Component {
 
     componentDidMount() {
         this._loadAllData()
+        this.listener = DeviceEventEmitter.addListener('Refresh_Dashboard', (params) => {
+            this._loadAllData()
+        })
     }
+
+    componentWillUnmount() {
+        this.listener.remove()
+    }
+
 
     _loadAllData() {
         const {loadDashboard} = this.props
@@ -29,9 +38,7 @@ class Dashboard extends Component {
             token: this.props.user.userInfo.token
         }
         loadDashboard(params, (result) => {
-            console.log(result)
             if (result) {
-                console.log(this.props)
                 this.setState({
                     data: {
                         currentPoint: this.props.statistic.data.currentPoint,
@@ -61,7 +68,6 @@ class Dashboard extends Component {
 
         if (this.state.data) {
             showData.isLoading = false
-            console.log(this.state)
         }
         return showData
     }

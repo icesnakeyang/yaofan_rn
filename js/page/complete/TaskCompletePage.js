@@ -42,7 +42,6 @@ class TaskCompletePage extends Component {
         }
         listTaskComplete(params, (result) => {
             if (result) {
-                console.log(this.props)
                 this.setState({
                     taskCompleteLogs: this.props.complete.taskCompletes
                 })
@@ -76,7 +75,6 @@ class TaskCompletePage extends Component {
     }
 
     _renderItem(item) {
-        console.log(item)
         let logTime = ''
         let createUser = ''
         let readTime = ''

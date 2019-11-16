@@ -53,7 +53,6 @@ class MyTasks extends Component {
                 this.setState({
                     loading: false
                 })
-                console.log(this.state)
             }
         })
     }
