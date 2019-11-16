@@ -31,6 +31,7 @@ import TaskLogPage from "../page/taskLog/TaskLogPage";
 import NewTaskLog from "../page/taskLog/NewTaskLog";
 import TaskCompletePage from "../page/complete/TaskCompletePage";
 import NewTaskComplete from "../page/complete/NewTaskComplete";
+import PointExchangePage from "../page/reward/PointExchangePage";
 
 export const rootCam = 'Init'
 
@@ -185,6 +186,12 @@ const MainNavigator = createStackNavigator({
     },
     NewTaskComplete: {
         screen: NewTaskComplete,
+        navigationOptions: {
+            header: null
+        }
+    },
+    PointExchangePage: {
+        screen: PointExchangePage,
         navigationOptions: {
             header: null
         }

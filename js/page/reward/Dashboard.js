@@ -8,6 +8,8 @@ import actions from "../../action";
 import GetLeftButton from "../../common/component/GetLeftButton";
 import NavigationBar from "../../common/component/NavigationBar";
 import {I18nJs} from "../../language/I18n";
+import TouchButton from "../../common/component/TouchButton";
+import NavigationUtil from "../../navigator/NavigationUtil";
 
 class Dashboard extends Component {
     constructor(props) {
@@ -244,6 +246,17 @@ class Dashboard extends Component {
                         }}>
                             <Text>{I18nJs.t('point.monthPointOut')}：</Text>
                             <Text>{this.state.data.totalOutMonth}</Text>
+                        </View>
+                        <View style={{
+                            margin: 10,
+                            height: 50
+                        }}>
+                            <TouchButton
+                                label={I18nJs.t('point.exchangePoint')}
+                                touchFunction={() => {
+                                    NavigationUtil.goPage({}, 'PointExchangePage')
+                                }}
+                            />
                         </View>
                     </View>
                 }

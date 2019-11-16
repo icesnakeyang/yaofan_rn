@@ -144,7 +144,13 @@ export default {
         completeTask: 'Complete',
         progressTask: 'Progress',
         monthPointIn:'Point income in this month',
-        monthPointOut:'Point outgoing in this month'
+        monthPointOut:'Point outgoing in this month',
+        exchangePoint:'Point exchange to money',
+        exchange:{
+            title:'Point Exchange',
+            btWithdraw:'Withdraw',
+            takeAll:'Withdraw all'
+        }
     },
     syserr: {
         10001: 'Some network error',

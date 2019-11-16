@@ -145,7 +145,13 @@ export default {
         completeTask: '完成任务',
         progressTask: '当前任务',
         monthPointIn:'本月积分收入',
-        monthPointOut:'本月积分支出'
+        monthPointOut:'本月积分支出',
+        exchangePoint:'积分兑换',
+        exchange:{
+            title:'积分兑换',
+            btWithdraw:'兑换',
+            takeAll:'全部提取'
+        }
     },
     syserr: {
         10001: '网络错误',
