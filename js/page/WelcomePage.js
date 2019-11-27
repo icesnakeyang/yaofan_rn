@@ -39,11 +39,11 @@ class WelcomePage extends Component {
             if (result) {
                 this.timer = setTimeout(() => {
                     NavigationUtil.goPage({}, 'HomePage')
-                }, 100)
+                }, 5000)
             } else {
                 this.timer = setTimeout(() => {
                     NavigationUtil.goPage({}, 'Login')
-                }, 100)
+                }, 5000)
             }
         })
     }
